@@ -1,0 +1,24 @@
+{
+  "trained_at_utc": "2026-10-17T18:48:40.417008+00:00",
+  "total_samples": 121,
+  "real_count": 61,
+  "ai_count": 60,
+  "epochs": 200,
+  "test_accuracy": 0.8399999737739563,
+  "overall_accuracy": 1.0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1_score": 1.0,
+  "confusion_matrix": {
+    "tp": 60,
+    "fp": 0,
+    "tn": 61,
+    "fn": 0
+  },
+  "user_selfie_result": {
+    "label": "REAL_CAMERA",
+    "real_probability": 88.78282410709288,
+    "ai_probability": 11.217175892907132
+  },
+  "weights_file": "backend\\models\\weights\\custom_fc_weights.pth"
+}

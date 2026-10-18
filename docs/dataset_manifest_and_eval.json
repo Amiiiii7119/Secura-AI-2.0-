@@ -1,0 +1,137 @@
+{
+  "manifest": [
+    {
+      "path": "D:\\SecuraAI2\\backend\\tests\\fixtures\\test_real_stream.mp4",
+      "label": "REAL_CAPTURE",
+      "source_dataset": "Synthetic Forensic Control Corpus (Real Camera Simulation)",
+      "generator_family": "Hardware CMOS Sensor Simulation",
+      "codec": "H264/FMP4",
+      "duration_sec": 2.0,
+      "fps": 25.0,
+      "split": "test",
+      "sha256": "4a727472c98f0673e13e740ceb2d4c96cdd4eafd6c6bb2fe8047d77601251d94",
+      "file_size_bytes": 210065
+    },
+    {
+      "path": "D:\\SecuraAI2\\backend\\tests\\fixtures\\test_ai_stream.mp4",
+      "label": "AI_GENERATED_VIDEO",
+      "source_dataset": "Synthetic Forensic Control Corpus (Diffusion/Transformer Simulation)",
+      "generator_family": "Latent Diffusion Video Synthesis",
+      "codec": "H264/FMP4",
+      "duration_sec": 2.0,
+      "fps": 25.0,
+      "split": "test",
+      "sha256": "bf77884544eaa1932d32f482701c5f58014dbe9fb17f4650d209d0446ff32345",
+      "file_size_bytes": 211527
+    },
+    {
+      "path": "D:\\SecuraAI2\\backend\\tests\\fixtures\\sample_test_video.mp4",
+      "label": "REAL_CAPTURE",
+      "source_dataset": "Secura Standard Dynamic Range Fixture",
+      "generator_family": "Calibrated In-Camera Capture",
+      "codec": "H264/FMP4",
+      "duration_sec": 2.0,
+      "fps": 25.0,
+      "split": "validation",
+      "sha256": "9dd446c02df13c3bf4b0565433ddc8f5bd381e416330ad53eafb0c164311b18d",
+      "file_size_bytes": 50369
+    }
+  ],
+  "benchmarks": [
+    {
+      "filename": "test_real_stream.mp4",
+      "ground_truth": "REAL_CAPTURE",
+      "predicted": "OTHER_MANIPULATED_VIDEO",
+      "calibrated_ai_probability": 0.5508,
+      "raw_score": 0.5584,
+      "confidence_pct": 57.5,
+      "branch_runtimes_ms": {
+        "branch_1_rgb": 4.78,
+        "branch_2_motion": 85.52,
+        "branch_3_temporal": 3647.92,
+        "branch_4_spatial_frequency": 5611.03,
+        "branch_7_container": 0.02,
+        "branch_6_face": 0.01
+      },
+      "total_elapsed_sec": 9.399,
+      "branches_completed": [
+        "branch_1_rgb",
+        "branch_2_motion",
+        "branch_3_temporal",
+        "branch_4_spatial_frequency",
+        "branch_7_container"
+      ],
+      "supporting_evidence": [
+        "ReStraV temporal curvature violation (1.53 rad, P(AI)=91.2%).",
+        "Elevated motion vector discontinuity (2.78)."
+      ],
+      "contradictory_evidence": [
+        "Low spatial diffusion likelihood across frames (Mean P(AI)=25.7%).",
+        "Authentic high-frequency CMOS photon sensor noise verified (var: 2943.2)."
+      ]
+    },
+    {
+      "filename": "test_ai_stream.mp4",
+      "ground_truth": "AI_GENERATED_VIDEO",
+      "predicted": "AI_GENERATED_VIDEO",
+      "calibrated_ai_probability": 0.6953,
+      "raw_score": 0.7208,
+      "confidence_pct": 95.0,
+      "branch_runtimes_ms": {
+        "branch_1_rgb": 11.73,
+        "branch_2_motion": 119.79,
+        "branch_3_temporal": 4262.04,
+        "branch_4_spatial_frequency": 1747.98,
+        "branch_7_container": 0.01,
+        "branch_6_face": 0.0
+      },
+      "total_elapsed_sec": 6.199,
+      "branches_completed": [
+        "branch_1_rgb",
+        "branch_2_motion",
+        "branch_3_temporal",
+        "branch_4_spatial_frequency",
+        "branch_7_container"
+      ],
+      "supporting_evidence": [
+        "ReStraV temporal curvature violation (1.63 rad, P(AI)=93.9%).",
+        "Spatial neural diffusion detected across 60.0% of frames (Peak: 100.0%).",
+        "Elevated motion vector discontinuity (4.01)."
+      ],
+      "contradictory_evidence": [
+        "Authentic high-frequency CMOS photon sensor noise verified (var: 2468.1)."
+      ]
+    },
+    {
+      "filename": "sample_test_video.mp4",
+      "ground_truth": "REAL_CAPTURE",
+      "predicted": "OTHER_MANIPULATED_VIDEO",
+      "calibrated_ai_probability": 0.5664,
+      "raw_score": 0.5763,
+      "confidence_pct": 58.3,
+      "branch_runtimes_ms": {
+        "branch_1_rgb": 2.8,
+        "branch_2_motion": 29.72,
+        "branch_3_temporal": 1448.6,
+        "branch_4_spatial_frequency": 574.07,
+        "branch_7_container": 0.01,
+        "branch_6_face": 0.0
+      },
+      "total_elapsed_sec": 2.087,
+      "branches_completed": [
+        "branch_1_rgb",
+        "branch_2_motion",
+        "branch_3_temporal",
+        "branch_4_spatial_frequency",
+        "branch_7_container"
+      ],
+      "supporting_evidence": [
+        "ReStraV temporal curvature violation (2.13 rad, P(AI)=83.0%).",
+        "Absence of natural CMOS photon sensor noise (diffusion smoothing signature)."
+      ],
+      "contradictory_evidence": [
+        "Low spatial diffusion likelihood across frames (Mean P(AI)=15.4%)."
+      ]
+    }
+  ]
+}

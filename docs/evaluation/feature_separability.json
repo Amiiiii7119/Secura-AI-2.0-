@@ -1,0 +1,50 @@
+{
+  "limitation_disclaimer": "STATISTICAL LIMITATION NOTICE: Descriptive metrics across synthetic test fixtures or small convenience sets demonstrate numerical behavior under controlled conditions. They do not establish classification separability, open-world accuracy, or AI detection capabilities. No machine learning model or binary decision boundary has been evaluated.",
+  "groups": {
+    "synthetic_controlled": {
+      "sample_count": 19,
+      "ela_mean_difference": {
+        "count": 19,
+        "mean": 2.8459,
+        "std": 10.3605,
+        "min": 0.0,
+        "max": 46.6967
+      },
+      "dct_blocking_artifact_ratio": {
+        "count": 18,
+        "mean": 111.5178,
+        "std": 314.1262,
+        "min": 0.0,
+        "max": 999.9999
+      },
+      "dct_mean_block_energy": {
+        "count": 18,
+        "mean": 857.2651,
+        "std": 1989.1037,
+        "min": 0.0,
+        "max": 8522.8271
+      },
+      "noise_mean_absolute_residual": {
+        "count": 19,
+        "mean": 5.1096,
+        "std": 11.8309,
+        "min": 0.0,
+        "max": 46.2596
+      },
+      "noise_energy": {
+        "count": 19,
+        "mean": 304.1057,
+        "std": 781.9853,
+        "min": 0.0,
+        "max": 3169.175
+      },
+      "noise_snr_proxy_db": {
+        "count": 11,
+        "mean": 28.7927,
+        "std": 19.7477,
+        "min": -1.12,
+        "max": 60.16
+      }
+    }
+  }
+}

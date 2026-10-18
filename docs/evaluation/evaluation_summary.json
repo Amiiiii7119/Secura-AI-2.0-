@@ -1,0 +1,1330 @@
+{
+  "metadata": {
+    "generated_utc": "2026-10-17T05:18:47.800244+00:00",
+    "total_samples": 20,
+    "successful_evaluations": 19,
+    "controlled_rejections": 1
+  },
+  "records": [
+    {
+      "fixture_id": "FIX-01-UNIFORM-RGB",
+      "name": "Uniform RGB Flat Field",
+      "description": "Completely uniform neutral gray flat field canvas.",
+      "construction_method": "Image.new('RGB', (64, 64), color=(128, 128, 128))",
+      "intended_test_property": "Zero spatial variance, zero Laplacian residual, minimal ELA diff.",
+      "format": "RAW_PIL",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.728890+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "ela": 0.63,
+        "dct": 0.56,
+        "noise": 0.18,
+        "fusion": 1.27
+      },
+      "validation": {},
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.0,
+        "max_absolute_difference": 0.0,
+        "std_absolute_difference": 0.0,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 0.0,
+        "boundary_discontinuity": 0.0,
+        "internal_discontinuity": 0.0,
+        "total_blocks": 64,
+        "mean_block_energy": 0.0,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 0.0000 (boundary: 0.00, internal: 0.00). Ratio below 1.0 indicates absence of primary 8x8 grid alignment, common in uncompressed, rescaled, or non-JPEG imagery. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.0,
+        "std_residual": 0.0,
+        "max_residual": 0.0,
+        "noise_energy": 0.0,
+        "snr_estimate_db": null,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 0.0000 with standard deviation 0.0000 (residual energy: 0.00). Low residual magnitude suggests strong smoothing, heavy bilateral filtering, or synthetic flat generation. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {},
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "fusion": {
+        "status": "PARTIAL_SUCCESS",
+        "total_findings": 7,
+        "evidence_observed_count": 1,
+        "no_anomaly_count": 2,
+        "inconclusive_count": 0
+      }
+    },
+    {
+      "fixture_id": "FIX-02-SMOOTH-GRADIENT",
+      "name": "Smooth Horizontal Gradient",
+      "description": "Continuous linear luminance ramp across horizontal axis.",
+      "construction_method": "np.linspace(0, 255, 64) tiled vertically across 64 rows",
+      "intended_test_property": "Smooth continuous spatial transition without abrupt grid boundaries.",
+      "format": "RAW_PIL",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.730945+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "ela": 0.48,
+        "dct": 0.43,
+        "noise": 0.16,
+        "fusion": 0.05
+      },
+      "validation": {},
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.1719,
+        "max_absolute_difference": 1.0,
+        "std_absolute_difference": 0.3773,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 1.0,
+        "boundary_discontinuity": 2.0,
+        "internal_discontinuity": 2.0,
+        "total_blocks": 64,
+        "mean_block_energy": 86.1914,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 1.0000 (boundary: 2.00, internal: 2.00). Ratio near 1.0 indicates uniform continuity between block boundaries and internal pixels. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.0202,
+        "std_residual": 0.0709,
+        "max_residual": 0.25,
+        "noise_energy": 0.005,
+        "snr_estimate_db": 60.16,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 0.0202 with standard deviation 0.0709 (residual energy: 0.01). Spatial high-pass SNR proxy is 60.2 dB. Low residual magnitude suggests strong smoothing, heavy bilateral filtering, or synthetic flat generation. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {},
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "fusion": {
+        "status": "PARTIAL_SUCCESS",
+        "total_findings": 7,
+        "evidence_observed_count": 0,
+        "no_anomaly_count": 3,
+        "inconclusive_count": 0
+      }
+    },
+    {
+      "fixture_id": "FIX-03-TEXTURED-PROCEDURAL",
+      "name": "Procedural Sinusoidal Texture",
+      "description": "Continuous 2D wave surface generating predictable periodic texture.",
+      "construction_method": "sin(x) * cos(y) evaluated on 64x64 grid mapped to [0, 255]",
+      "intended_test_property": "Non-zero AC frequency energy and continuous non-zero residual.",
+      "format": "RAW_PIL",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.731979+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "ela": 0.45,
+        "dct": 0.54,
+        "noise": 0.21,
+        "fusion": 0.04
+      },
+      "validation": {},
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.7593,
+        "max_absolute_difference": 4.0,
+        "std_absolute_difference": 0.7079,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 0.7331,
+        "boundary_discontinuity": 8.3304,
+        "internal_discontinuity": 11.3633,
+        "total_blocks": 64,
+        "mean_block_energy": 1413.9265,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 0.7331 (boundary: 8.33, internal: 11.36). Ratio below 1.0 indicates absence of primary 8x8 grid alignment, common in uncompressed, rescaled, or non-JPEG imagery. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 1.0606,
+        "std_residual": 1.3024,
+        "max_residual": 3.0,
+        "noise_energy": 1.6962,
+        "snr_estimate_db": 33.79,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 1.0606 with standard deviation 1.3024 (residual energy: 1.70). Spatial high-pass SNR proxy is 33.8 dB. Residual magnitude falls within standard photographic ranges. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {},
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "fusion": {
+        "status": "PARTIAL_SUCCESS",
+        "total_findings": 7,
+        "evidence_observed_count": 1,
+        "no_anomaly_count": 2,
+        "inconclusive_count": 0
+      }
+    },
+    {
+      "fixture_id": "FIX-04-HF-NOISE",
+      "name": "Deterministic High-Frequency Noise",
+      "description": "Seeded pseudo-random uniform noise with maximum spatial entropy.",
+      "construction_method": "np.random.RandomState(42).randint(0, 256, (64, 64, 3))",
+      "intended_test_property": "Elevated Laplacian noise residual magnitude and high AC block energy.",
+      "format": "RAW_PIL",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.733118+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "ela": 0.49,
+        "dct": 0.58,
+        "noise": 0.23,
+        "fusion": 0.04
+      },
+      "validation": {},
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 46.6967,
+        "max_absolute_difference": 224.0,
+        "std_absolute_difference": 36.7141,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 0.9815,
+        "boundary_discontinuity": 56.2355,
+        "internal_discontinuity": 57.2979,
+        "total_blocks": 64,
+        "mean_block_energy": 2408.0254,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 0.9815 (boundary: 56.24, internal: 57.30). Ratio near 1.0 indicates uniform continuity between block boundaries and internal pixels. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 46.2596,
+        "std_residual": 56.2954,
+        "max_residual": 165.75,
+        "noise_energy": 3169.175,
+        "snr_estimate_db": -1.12,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 46.2596 with standard deviation 56.2954 (residual energy: 3169.18). Spatial high-pass SNR proxy is -1.1 dB. Elevated residual magnitude reflects pronounced high-frequency textures, sharpening, or grain. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {},
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "fusion": {
+        "status": "PARTIAL_SUCCESS",
+        "total_findings": 7,
+        "evidence_observed_count": 2,
+        "no_anomaly_count": 1,
+        "inconclusive_count": 0
+      }
+    },
+    {
+      "fixture_id": "FIX-05-ALIGNED-8X8-BLOCKS",
+      "name": "8x8 Grid-Aligned Checkerboard",
+      "description": "Step discontinuities situated strictly at lines x=8k and y=8k.",
+      "construction_method": "64x64 canvas tiled with alternating 8x8 constant blocks (220 vs 35)",
+      "intended_test_property": "Pronounced step discontinuity across boundary with 0 internal step (high BAR).",
+      "format": "RAW_PIL",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.734422+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "ela": 0.21,
+        "dct": 0.67,
+        "noise": 0.19,
+        "fusion": 0.05
+      },
+      "validation": {},
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.0,
+        "max_absolute_difference": 0.0,
+        "std_absolute_difference": 0.0,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 999.9999,
+        "boundary_discontinuity": 185.0,
+        "internal_discontinuity": 0.0,
+        "total_blocks": 64,
+        "mean_block_energy": 0.0,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 999.9999 (boundary: 185.00, internal: 0.00). Elevated ratio indicates pronounced 8x8 grid boundary steps consistent with lossy JPEG quantization or recompression. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 20.8871,
+        "std_residual": 34.4117,
+        "max_residual": 92.5,
+        "noise_energy": 1184.1636,
+        "snr_estimate_db": 8.59,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 20.8871 with standard deviation 34.4117 (residual energy: 1184.16). Spatial high-pass SNR proxy is 8.6 dB. Elevated residual magnitude reflects pronounced high-frequency textures, sharpening, or grain. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {},
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "fusion": {
+        "status": "PARTIAL_SUCCESS",
+        "total_findings": 7,
+        "evidence_observed_count": 2,
+        "no_anomaly_count": 1,
+        "inconclusive_count": 0
+      }
+    },
+    {
+      "fixture_id": "FIX-06-NON-ALIGNED-DISCONTINUITY",
+      "name": "Shifted Block Discontinuities",
+      "description": "Step discontinuities shifted by 3 pixels away from 8x8 boundary grid.",
+      "construction_method": "np.roll(aligned_grid, (3, 3)) displacing discontinuities to x=8k+3",
+      "intended_test_property": "Internal discontinuity exceeds boundary discontinuity (low BAR < 1.0).",
+      "format": "RAW_PIL",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.735780+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "ela": 0.38,
+        "dct": 0.43,
+        "noise": 0.15,
+        "fusion": 0.05
+      },
+      "validation": {},
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 3.1328,
+        "max_absolute_difference": 12.0,
+        "std_absolute_difference": 2.572,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 0.0,
+        "boundary_discontinuity": 0.0,
+        "internal_discontinuity": 0.0,
+        "total_blocks": 64,
+        "mean_block_energy": 8522.8271,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 0.0000 (boundary: 0.00, internal: 0.00). Ratio below 1.0 indicates absence of primary 8x8 grid alignment, common in uncompressed, rescaled, or non-JPEG imagery. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 23.871,
+        "std_residual": 37.2685,
+        "max_residual": 92.5,
+        "noise_energy": 1388.9438,
+        "snr_estimate_db": 7.9,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 23.8710 with standard deviation 37.2685 (residual energy: 1388.94). Spatial high-pass SNR proxy is 7.9 dB. Elevated residual magnitude reflects pronounced high-frequency textures, sharpening, or grain. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {},
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "fusion": {
+        "status": "PARTIAL_SUCCESS",
+        "total_findings": 7,
+        "evidence_observed_count": 2,
+        "no_anomaly_count": 1,
+        "inconclusive_count": 0
+      }
+    },
+    {
+      "fixture_id": "FIX-07-DIVISIBLE-BY-8",
+      "name": "Dimensions Exact Multiple of 8",
+      "description": "64x64 image where width and height are exact multiples of 8.",
+      "construction_method": "Image.new('RGB', (64, 64))",
+      "intended_test_property": "Analyzed grid dimensions equal full canvas dimensions with 0 remainder.",
+      "format": "RAW_PIL",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.737093+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "ela": 0.3,
+        "dct": 0.38,
+        "noise": 0.12,
+        "fusion": 0.05
+      },
+      "validation": {},
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.6667,
+        "max_absolute_difference": 1.0,
+        "std_absolute_difference": 0.4714,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 0.0,
+        "boundary_discontinuity": 0.0,
+        "internal_discontinuity": 0.0,
+        "total_blocks": 64,
+        "mean_block_energy": 0.0,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 0.0000 (boundary: 0.00, internal: 0.00). Ratio below 1.0 indicates absence of primary 8x8 grid alignment, common in uncompressed, rescaled, or non-JPEG imagery. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.0,
+        "std_residual": 0.0,
+        "max_residual": 0.0,
+        "noise_energy": 0.0,
+        "snr_estimate_db": null,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 0.0000 with standard deviation 0.0000 (residual energy: 0.00). Low residual magnitude suggests strong smoothing, heavy bilateral filtering, or synthetic flat generation. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {},
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "fusion": {
+        "status": "PARTIAL_SUCCESS",
+        "total_findings": 7,
+        "evidence_observed_count": 1,
+        "no_anomaly_count": 2,
+        "inconclusive_count": 0
+      }
+    },
+    {
+      "fixture_id": "FIX-08-NON-DIVISIBLE-BY-8",
+      "name": "Dimensions Non-Divisible by 8",
+      "description": "67x73 image with 3 remainder pixels in X and 1 remainder pixel in Y.",
+      "construction_method": "Image.new('RGB', (67, 73))",
+      "intended_test_property": "Analyzed grid truncates safely to 64x72 (8x9 blocks) with documented remainder.",
+      "format": "RAW_PIL",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.738426+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "ela": 0.31,
+        "dct": 0.43,
+        "noise": 0.12,
+        "fusion": 0.05
+      },
+      "validation": {},
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.6667,
+        "max_absolute_difference": 1.0,
+        "std_absolute_difference": 0.4714,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 0.0,
+        "boundary_discontinuity": 0.0,
+        "internal_discontinuity": 0.0,
+        "total_blocks": 72,
+        "mean_block_energy": 0.0,
+        "notes": "Analyzed 72 8x8 spatial blocks across 64x72 px. Blocking Artifact Ratio is 0.0000 (boundary: 0.00, internal: 0.00). Remainder pixels (3x, 1y) beyond 8x8 multiples were omitted from block statistics. Ratio below 1.0 indicates absence of primary 8x8 grid alignment, common in uncompressed, rescaled, or non-JPEG imagery. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.0,
+        "std_residual": 0.0,
+        "max_residual": 0.0,
+        "noise_energy": 0.0,
+        "snr_estimate_db": null,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 67x73 px. Mean absolute residual is 0.0000 with standard deviation 0.0000 (residual energy: 0.00). Low residual magnitude suggests strong smoothing, heavy bilateral filtering, or synthetic flat generation. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {},
+      "errors": [],
+      "dimensions": {
+        "width": 67,
+        "height": 73,
+        "pixel_count": 4891
+      },
+      "fusion": {
+        "status": "PARTIAL_SUCCESS",
+        "total_findings": 7,
+        "evidence_observed_count": 1,
+        "no_anomaly_count": 2,
+        "inconclusive_count": 0
+      }
+    },
+    {
+      "fixture_id": "FIX-09-GRAYSCALE",
+      "name": "Single-Channel Grayscale (Mode L)",
+      "description": "64x64 single-channel 8-bit luminance image.",
+      "construction_method": "Image.new('L', (64, 64), color=150)",
+      "intended_test_property": "Handles 2D single channel cleanly across ELA, DCT, and Noise without dimension error.",
+      "format": "RAW_PIL",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.738426+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "ela": 0.2,
+        "dct": 0.37,
+        "noise": 0.11,
+        "fusion": 0.04
+      },
+      "validation": {},
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.0,
+        "max_absolute_difference": 0.0,
+        "std_absolute_difference": 0.0,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 0.0,
+        "boundary_discontinuity": 0.0,
+        "internal_discontinuity": 0.0,
+        "total_blocks": 64,
+        "mean_block_energy": 0.0,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 0.0000 (boundary: 0.00, internal: 0.00). Ratio below 1.0 indicates absence of primary 8x8 grid alignment, common in uncompressed, rescaled, or non-JPEG imagery. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.0,
+        "std_residual": 0.0,
+        "max_residual": 0.0,
+        "noise_energy": 0.0,
+        "snr_estimate_db": null,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 0.0000 with standard deviation 0.0000 (residual energy: 0.00). Low residual magnitude suggests strong smoothing, heavy bilateral filtering, or synthetic flat generation. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {},
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "fusion": {
+        "status": "PARTIAL_SUCCESS",
+        "total_findings": 7,
+        "evidence_observed_count": 1,
+        "no_anomaly_count": 2,
+        "inconclusive_count": 0
+      }
+    },
+    {
+      "fixture_id": "FIX-10-RGBA-TRANSPARENCY",
+      "name": "RGBA with Transparency",
+      "description": "64x64 RGBA canvas with 50% fully transparent pixels and 50% opaque pixels.",
+      "construction_method": "Constructed array with alpha=0 on left half and alpha=255 on right half",
+      "intended_test_property": "Composites alpha=0 onto opaque background rather than processing hidden RGB values.",
+      "format": "RAW_PIL",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.739741+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "ela": 0.28,
+        "dct": 0.4,
+        "noise": 0.14,
+        "fusion": 0.04
+      },
+      "validation": {},
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 1.0833,
+        "max_absolute_difference": 38.0,
+        "std_absolute_difference": 5.6746,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 999.9999,
+        "boundary_discontinuity": 7.5,
+        "internal_discontinuity": 0.0,
+        "total_blocks": 64,
+        "mean_block_energy": 0.0,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 999.9999 (boundary: 7.50, internal: 0.00). Elevated ratio indicates pronounced 8x8 grid boundary steps consistent with lossy JPEG quantization or recompression. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.8468,
+        "std_residual": 4.7146,
+        "max_residual": 26.25,
+        "noise_energy": 22.2278,
+        "snr_estimate_db": 20.93,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 0.8468 with standard deviation 4.7146 (residual energy: 22.23). Spatial high-pass SNR proxy is 20.9 dB. Residual magnitude falls within standard photographic ranges. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {},
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "fusion": {
+        "status": "PARTIAL_SUCCESS",
+        "total_findings": 7,
+        "evidence_observed_count": 1,
+        "no_anomaly_count": 2,
+        "inconclusive_count": 0
+      }
+    },
+    {
+      "fixture_id": "FIX-11-VALID-JPEG",
+      "name": "Encoded Valid JPEG",
+      "description": "Standard valid JPEG compressed at quality factor 90.",
+      "construction_method": "In-memory save to JPEG with PIL quality=90",
+      "intended_test_property": "Validates magic bytes (FF D8 FF), decodes, and measures standard baseline.",
+      "format": "JPEG",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.739741+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "validation": 0.06,
+        "ela": 0.24,
+        "dct": 0.38,
+        "noise": 0.12,
+        "c2pa": 0.73,
+        "metadata": 2.57,
+        "fusion": 0.08
+      },
+      "validation": {
+        "is_valid": true,
+        "detected_format": "JPEG",
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096,
+        "file_size_bytes": 969
+      },
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.0469,
+        "max_absolute_difference": 1.0,
+        "std_absolute_difference": 0.2114,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 1.0691,
+        "boundary_discontinuity": 2.0714,
+        "internal_discontinuity": 1.9375,
+        "total_blocks": 64,
+        "mean_block_energy": 88.6699,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 1.0691 (boundary: 2.07, internal: 1.94). Ratio near 1.0 indicates uniform continuity between block boundaries and internal pixels. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.1653,
+        "std_residual": 0.2479,
+        "max_residual": 0.5,
+        "noise_energy": 0.0615,
+        "snr_estimate_db": 49.3,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 0.1653 with standard deviation 0.2479 (residual energy: 0.06). Spatial high-pass SNR proxy is 49.3 dB. Low residual magnitude suggests strong smoothing, heavy bilateral filtering, or synthetic flat generation. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {
+        "status": "C2PA_MISSING",
+        "manifest_present": false,
+        "notes": "No C2PA provenance manifest or JUMBF metadata found in asset. This is expected for standard web imagery and does not indicate whether the media is authentic, manipulated, or AI-generated."
+      },
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "metadata": {
+        "inventory_status": "ABSENT",
+        "detected_structures": [],
+        "gps_present": false,
+        "thumbnail_status": "NO_THUMBNAIL",
+        "thumbnail_similarity_score": null,
+        "consistency_status": "CONSISTENT",
+        "observation_count": 0
+      },
+      "fusion": {
+        "status": "COMPLETE",
+        "total_findings": 7,
+        "evidence_observed_count": 1,
+        "no_anomaly_count": 3,
+        "inconclusive_count": 3
+      }
+    },
+    {
+      "fixture_id": "FIX-12-LOSSLESS-PNG",
+      "name": "Encoded Lossless PNG",
+      "description": "Lossless PNG encoding of identical gradient image.",
+      "construction_method": "In-memory save to PNG format",
+      "intended_test_property": "Validates PNG magic bytes, documents absence of initial JPEG compression.",
+      "format": "PNG",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.744957+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "validation": 0.15,
+        "ela": 0.45,
+        "dct": 0.44,
+        "noise": 0.15,
+        "c2pa": 0.24,
+        "metadata": 0.04,
+        "fusion": 0.06
+      },
+      "validation": {
+        "is_valid": true,
+        "detected_format": "PNG",
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096,
+        "file_size_bytes": 186
+      },
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.1719,
+        "max_absolute_difference": 1.0,
+        "std_absolute_difference": 0.3773,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Input was a lossless PNG; initial lossy JPEG quantization noise was introduced uniformly during analysis. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 1.0,
+        "boundary_discontinuity": 2.0,
+        "internal_discontinuity": 2.0,
+        "total_blocks": 64,
+        "mean_block_energy": 86.1914,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 1.0000 (boundary: 2.00, internal: 2.00). Ratio near 1.0 indicates uniform continuity between block boundaries and internal pixels. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.0202,
+        "std_residual": 0.0709,
+        "max_residual": 0.25,
+        "noise_energy": 0.005,
+        "snr_estimate_db": 60.16,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 0.0202 with standard deviation 0.0709 (residual energy: 0.01). Spatial high-pass SNR proxy is 60.2 dB. Low residual magnitude suggests strong smoothing, heavy bilateral filtering, or synthetic flat generation. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {
+        "status": "C2PA_MISSING",
+        "manifest_present": false,
+        "notes": "No C2PA provenance manifest or JUMBF metadata found in asset. This is expected for standard web imagery and does not indicate whether the media is authentic, manipulated, or AI-generated."
+      },
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "metadata": {
+        "inventory_status": "ABSENT",
+        "detected_structures": [],
+        "gps_present": false,
+        "thumbnail_status": "NO_THUMBNAIL",
+        "thumbnail_similarity_score": null,
+        "consistency_status": "CONSISTENT",
+        "observation_count": 0
+      },
+      "fusion": {
+        "status": "COMPLETE",
+        "total_findings": 7,
+        "evidence_observed_count": 0,
+        "no_anomaly_count": 4,
+        "inconclusive_count": 3
+      }
+    },
+    {
+      "fixture_id": "FIX-13-RECOMPRESSED-JPEG",
+      "name": "Recompressed Dual-Quality JPEG",
+      "description": "Image compressed first at low quality (Q50), then re-encoded at Q90.",
+      "construction_method": "Encode Q50 -> decode -> encode Q90 in memory",
+      "intended_test_property": "Exhibits dual-quantization error characteristics under ELA.",
+      "format": "JPEG",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.747033+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "validation": 0.08,
+        "ela": 0.23,
+        "dct": 0.55,
+        "noise": 0.22,
+        "c2pa": 0.15,
+        "metadata": 0.04,
+        "fusion": 0.05
+      },
+      "validation": {
+        "is_valid": true,
+        "detected_format": "JPEG",
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096,
+        "file_size_bytes": 1457
+      },
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.0,
+        "max_absolute_difference": 0.0,
+        "std_absolute_difference": 0.0,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 1.0822,
+        "boundary_discontinuity": 11.5491,
+        "internal_discontinuity": 10.6719,
+        "total_blocks": 64,
+        "mean_block_energy": 1412.0801,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 1.0822 (boundary: 11.55, internal: 10.67). Ratio near 1.0 indicates uniform continuity between block boundaries and internal pixels. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 1.9428,
+        "std_residual": 2.412,
+        "max_residual": 13.0,
+        "noise_energy": 5.818,
+        "snr_estimate_db": 28.45,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 1.9428 with standard deviation 2.4120 (residual energy: 5.82). Spatial high-pass SNR proxy is 28.4 dB. Residual magnitude falls within standard photographic ranges. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {
+        "status": "C2PA_MISSING",
+        "manifest_present": false,
+        "notes": "No C2PA provenance manifest or JUMBF metadata found in asset. This is expected for standard web imagery and does not indicate whether the media is authentic, manipulated, or AI-generated."
+      },
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "metadata": {
+        "inventory_status": "ABSENT",
+        "detected_structures": [],
+        "gps_present": false,
+        "thumbnail_status": "NO_THUMBNAIL",
+        "thumbnail_similarity_score": null,
+        "consistency_status": "CONSISTENT",
+        "observation_count": 0
+      },
+      "fusion": {
+        "status": "COMPLETE",
+        "total_findings": 7,
+        "evidence_observed_count": 1,
+        "no_anomaly_count": 3,
+        "inconclusive_count": 3
+      }
+    },
+    {
+      "fixture_id": "FIX-14-PNG-FROM-JPEG",
+      "name": "PNG with Inherited JPEG Artifacts",
+      "description": "Lossy JPEG Q50 saved into lossless PNG container.",
+      "construction_method": "Encode Q50 JPEG -> decode -> save as PNG bytes",
+      "intended_test_property": "Demonstrates that PNG container can carry inherited 8x8 JPEG blocking artifacts.",
+      "format": "PNG",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.748067+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "validation": 0.13,
+        "ela": 0.43,
+        "dct": 0.55,
+        "noise": 0.21,
+        "c2pa": 0.12,
+        "metadata": 0.03,
+        "fusion": 0.05
+      },
+      "validation": {
+        "is_valid": true,
+        "detected_format": "PNG",
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096,
+        "file_size_bytes": 3551
+      },
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.2378,
+        "max_absolute_difference": 2.0,
+        "std_absolute_difference": 0.4269,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Input was a lossless PNG; initial lossy JPEG quantization noise was introduced uniformly during analysis. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 1.0859,
+        "boundary_discontinuity": 11.5714,
+        "internal_discontinuity": 10.6562,
+        "total_blocks": 64,
+        "mean_block_energy": 1411.6704,
+        "notes": "Analyzed 64 8x8 spatial blocks across 64x64 px. Blocking Artifact Ratio is 1.0859 (boundary: 11.57, internal: 10.66). Ratio near 1.0 indicates uniform continuity between block boundaries and internal pixels. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 1.9488,
+        "std_residual": 2.4199,
+        "max_residual": 13.25,
+        "noise_energy": 5.8558,
+        "snr_estimate_db": 28.42,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 64x64 px. Mean absolute residual is 1.9488 with standard deviation 2.4199 (residual energy: 5.86). Spatial high-pass SNR proxy is 28.4 dB. Residual magnitude falls within standard photographic ranges. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {
+        "status": "C2PA_MISSING",
+        "manifest_present": false,
+        "notes": "No C2PA provenance manifest or JUMBF metadata found in asset. This is expected for standard web imagery and does not indicate whether the media is authentic, manipulated, or AI-generated."
+      },
+      "errors": [],
+      "dimensions": {
+        "width": 64,
+        "height": 64,
+        "pixel_count": 4096
+      },
+      "metadata": {
+        "inventory_status": "ABSENT",
+        "detected_structures": [],
+        "gps_present": false,
+        "thumbnail_status": "NO_THUMBNAIL",
+        "thumbnail_similarity_score": null,
+        "consistency_status": "CONSISTENT",
+        "observation_count": 0
+      },
+      "fusion": {
+        "status": "COMPLETE",
+        "total_findings": 7,
+        "evidence_observed_count": 1,
+        "no_anomaly_count": 3,
+        "inconclusive_count": 3
+      }
+    },
+    {
+      "fixture_id": "FIX-15-TINY-IMAGE",
+      "name": "Sub-Block Tiny Dimensions (4x4)",
+      "description": "Valid 4x4 image smaller than standard 8x8 block size.",
+      "construction_method": "Image.new('RGB', (4, 4), color=(200, 100, 50))",
+      "intended_test_property": "DCT analysis returns documented UNAVAILABLE status gracefully.",
+      "format": "RAW_PIL",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.749548+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "ela": 0.18,
+        "dct": 0.0,
+        "noise": 0.1,
+        "fusion": 0.04
+      },
+      "validation": {},
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.0,
+        "max_absolute_difference": 0.0,
+        "std_absolute_difference": 0.0,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "UNAVAILABLE",
+        "blocking_artifact_ratio": null,
+        "boundary_discontinuity": null,
+        "internal_discontinuity": null,
+        "total_blocks": null,
+        "mean_block_energy": null,
+        "notes": "Image dimensions (4x4) are smaller than the minimum 8x8 pixel block grid required for discrete cosine transform and block-boundary discontinuity analysis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.0,
+        "std_residual": 0.0,
+        "max_residual": 0.0,
+        "noise_energy": 0.0,
+        "snr_estimate_db": null,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 4x4 px. Mean absolute residual is 0.0000 with standard deviation 0.0000 (residual energy: 0.00). Low residual magnitude suggests strong smoothing, heavy bilateral filtering, or synthetic flat generation. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {},
+      "errors": [],
+      "dimensions": {
+        "width": 4,
+        "height": 4,
+        "pixel_count": 16
+      },
+      "fusion": {
+        "status": "PARTIAL_SUCCESS",
+        "total_findings": 7,
+        "evidence_observed_count": 0,
+        "no_anomaly_count": 2,
+        "inconclusive_count": 0
+      }
+    },
+    {
+      "fixture_id": "FIX-16-MALFORMED-PAYLOAD",
+      "name": "Truncated/Corrupted JPEG Payload",
+      "description": "Starts with valid JPEG magic bytes but contains broken truncated stream.",
+      "construction_method": "JPEG header prefix concatenated with truncated invalid byte sequence",
+      "intended_test_property": "Image validation rejects with HTTP 400 without crashing or unhandled exception.",
+      "format": "CORRUPT",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.749548+00:00",
+      "status": "REJECTED_AS_EXPECTED",
+      "timings_ms": {
+        "validation": 38.9
+      },
+      "validation": {
+        "is_valid": false,
+        "error_code": "CORRUPT_OR_MALFORMED_IMAGE",
+        "message": "Image is corrupted, malformed, or cannot be decoded: cannot identify image file <_io.BytesIO object at 0x000001EC496044A0>"
+      },
+      "ela": {},
+      "dct": {},
+      "noise": {},
+      "c2pa": {},
+      "errors": [
+        "Validation: Image is corrupted, malformed, or cannot be decoded: cannot identify image file <_io.BytesIO object at 0x000001EC496044A0>"
+      ]
+    },
+    {
+      "fixture_id": "FIX-17-JPEG-WITH-EXIF-THUMBNAIL",
+      "name": "JPEG with Embedded IFD1 Thumbnail",
+      "description": "JPEG container containing standard EXIF and concordant IFD1 thumbnail stream.",
+      "construction_method": "Synthesized 128x128 image with bilinear downsampled 32x32 IFD1 thumbnail",
+      "intended_test_property": "Thumbnail analysis extracts thumbnail and confirms visual concordance (COMPARABLE).",
+      "format": "JPEG",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.789144+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "validation": 0.2,
+        "ela": 1.05,
+        "dct": 1.02,
+        "noise": 0.28,
+        "c2pa": 0.25,
+        "metadata": 0.26,
+        "fusion": 0.08
+      },
+      "validation": {
+        "is_valid": true,
+        "detected_format": "JPEG",
+        "width": 128,
+        "height": 128,
+        "pixel_count": 16384,
+        "file_size_bytes": 1881
+      },
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.4378,
+        "max_absolute_difference": 22.0,
+        "std_absolute_difference": 1.7932,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 0.3685,
+        "boundary_discontinuity": 0.0792,
+        "internal_discontinuity": 0.2148,
+        "total_blocks": 256,
+        "mean_block_energy": 1.189,
+        "notes": "Analyzed 256 8x8 spatial blocks across 128x128 px. Blocking Artifact Ratio is 0.3685 (boundary: 0.08, internal: 0.21). Ratio below 1.0 indicates absence of primary 8x8 grid alignment, common in uncompressed, rescaled, or non-JPEG imagery. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.0603,
+        "std_residual": 0.2366,
+        "max_residual": 2.75,
+        "noise_energy": 0.056,
+        "snr_estimate_db": 20.14,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 128x128 px. Mean absolute residual is 0.0603 with standard deviation 0.2366 (residual energy: 0.06). Spatial high-pass SNR proxy is 20.1 dB. Low residual magnitude suggests strong smoothing, heavy bilateral filtering, or synthetic flat generation. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {
+        "status": "C2PA_MISSING",
+        "manifest_present": false,
+        "notes": "No C2PA provenance manifest or JUMBF metadata found in asset. This is expected for standard web imagery and does not indicate whether the media is authentic, manipulated, or AI-generated."
+      },
+      "errors": [],
+      "dimensions": {
+        "width": 128,
+        "height": 128,
+        "pixel_count": 16384
+      },
+      "metadata": {
+        "inventory_status": "PRESENT",
+        "detected_structures": [
+          "EXIF"
+        ],
+        "gps_present": false,
+        "thumbnail_status": "COMPARABLE",
+        "thumbnail_similarity_score": 0.9914,
+        "consistency_status": "CONSISTENT",
+        "observation_count": 0
+      },
+      "fusion": {
+        "status": "COMPLETE",
+        "total_findings": 7,
+        "evidence_observed_count": 2,
+        "no_anomaly_count": 4,
+        "inconclusive_count": 1
+      }
+    },
+    {
+      "fixture_id": "FIX-18-JPEG-THUMBNAIL-MISMATCH",
+      "name": "JPEG with Contrasting Embedded Thumbnail",
+      "description": "JPEG container where thumbnail content diverges significantly from primary image.",
+      "construction_method": "Green primary image paired with synthetic red thumbnail stream in IFD1",
+      "intended_test_property": "Thumbnail analysis accurately detects divergence (MISMATCH_OBSERVED).",
+      "format": "JPEG",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.792099+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "validation": 0.09,
+        "ela": 0.56,
+        "dct": 0.87,
+        "noise": 0.21,
+        "c2pa": 0.11,
+        "metadata": 0.19,
+        "fusion": 0.05
+      },
+      "validation": {
+        "is_valid": true,
+        "detected_format": "JPEG",
+        "width": 128,
+        "height": 128,
+        "pixel_count": 16384,
+        "file_size_bytes": 1596
+      },
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.0,
+        "max_absolute_difference": 0.0,
+        "std_absolute_difference": 0.0,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 0.0,
+        "boundary_discontinuity": 0.0,
+        "internal_discontinuity": 0.0,
+        "total_blocks": 256,
+        "mean_block_energy": 0.0,
+        "notes": "Analyzed 256 8x8 spatial blocks across 128x128 px. Blocking Artifact Ratio is 0.0000 (boundary: 0.00, internal: 0.00). Ratio below 1.0 indicates absence of primary 8x8 grid alignment, common in uncompressed, rescaled, or non-JPEG imagery. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.0,
+        "std_residual": 0.0,
+        "max_residual": 0.0,
+        "noise_energy": 0.0,
+        "snr_estimate_db": null,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 128x128 px. Mean absolute residual is 0.0000 with standard deviation 0.0000 (residual energy: 0.00). Low residual magnitude suggests strong smoothing, heavy bilateral filtering, or synthetic flat generation. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {
+        "status": "C2PA_MISSING",
+        "manifest_present": false,
+        "notes": "No C2PA provenance manifest or JUMBF metadata found in asset. This is expected for standard web imagery and does not indicate whether the media is authentic, manipulated, or AI-generated."
+      },
+      "errors": [],
+      "dimensions": {
+        "width": 128,
+        "height": 128,
+        "pixel_count": 16384
+      },
+      "metadata": {
+        "inventory_status": "PRESENT",
+        "detected_structures": [
+          "EXIF"
+        ],
+        "gps_present": false,
+        "thumbnail_status": "MISMATCH_OBSERVED",
+        "thumbnail_similarity_score": 0.5948,
+        "consistency_status": "CONSISTENT",
+        "observation_count": 0
+      },
+      "fusion": {
+        "status": "COMPLETE",
+        "total_findings": 7,
+        "evidence_observed_count": 3,
+        "no_anomaly_count": 3,
+        "inconclusive_count": 1
+      }
+    },
+    {
+      "fixture_id": "FIX-19-METADATA-DIM-MISMATCH",
+      "name": "JPEG with Conflicting EXIF Dimension Tags",
+      "description": "JPEG with ExifImageWidth/Height declaring dimensions differing from actual raster.",
+      "construction_method": "120x80 image tagged with 240x160 in ExifImageWidth/ExifImageHeight tags",
+      "intended_test_property": "Container consistency check detects dimension mismatch with benign crop explanation.",
+      "format": "JPEG",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.794543+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "validation": 0.08,
+        "ela": 1.41,
+        "dct": 1.07,
+        "noise": 0.22,
+        "c2pa": 0.18,
+        "metadata": 0.15,
+        "fusion": 0.07
+      },
+      "validation": {
+        "is_valid": true,
+        "detected_format": "JPEG",
+        "width": 120,
+        "height": 80,
+        "pixel_count": 9600,
+        "file_size_bytes": 854
+      },
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.0,
+        "max_absolute_difference": 0.0,
+        "std_absolute_difference": 0.0,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 0.0,
+        "boundary_discontinuity": 0.0,
+        "internal_discontinuity": 0.0,
+        "total_blocks": 150,
+        "mean_block_energy": 0.0,
+        "notes": "Analyzed 150 8x8 spatial blocks across 120x80 px. Blocking Artifact Ratio is 0.0000 (boundary: 0.00, internal: 0.00). Ratio below 1.0 indicates absence of primary 8x8 grid alignment, common in uncompressed, rescaled, or non-JPEG imagery. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.0,
+        "std_residual": 0.0,
+        "max_residual": 0.0,
+        "noise_energy": 0.0,
+        "snr_estimate_db": null,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 120x80 px. Mean absolute residual is 0.0000 with standard deviation 0.0000 (residual energy: 0.00). Low residual magnitude suggests strong smoothing, heavy bilateral filtering, or synthetic flat generation. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {
+        "status": "C2PA_MISSING",
+        "manifest_present": false,
+        "notes": "No C2PA provenance manifest or JUMBF metadata found in asset. This is expected for standard web imagery and does not indicate whether the media is authentic, manipulated, or AI-generated."
+      },
+      "errors": [],
+      "dimensions": {
+        "width": 120,
+        "height": 80,
+        "pixel_count": 9600
+      },
+      "metadata": {
+        "inventory_status": "PRESENT",
+        "detected_structures": [
+          "EXIF"
+        ],
+        "gps_present": false,
+        "thumbnail_status": "NO_THUMBNAIL",
+        "thumbnail_similarity_score": null,
+        "consistency_status": "DISCREPANCIES_OBSERVED",
+        "observation_count": 1
+      },
+      "fusion": {
+        "status": "COMPLETE",
+        "total_findings": 7,
+        "evidence_observed_count": 3,
+        "no_anomaly_count": 2,
+        "inconclusive_count": 2
+      }
+    },
+    {
+      "fixture_id": "FIX-20-PNG-TEXT-CHUNKS",
+      "name": "PNG Container with Text Metadata Chunks",
+      "description": "Lossless PNG carrying standard text chunk metadata headers.",
+      "construction_method": "96x96 PNG image saved with PngInfo text chunks (Software, Description)",
+      "intended_test_property": "Metadata inspector extracts PNG text chunks and identifies software tags.",
+      "format": "PNG",
+      "category": "synthetic_controlled",
+      "timestamp_utc": "2026-10-17T05:18:47.797031+00:00",
+      "status": "PROCESSED",
+      "timings_ms": {
+        "validation": 0.1,
+        "ela": 0.45,
+        "dct": 1.34,
+        "noise": 0.21,
+        "c2pa": 0.14,
+        "metadata": 0.05,
+        "fusion": 0.05
+      },
+      "validation": {
+        "is_valid": true,
+        "detected_format": "PNG",
+        "width": 96,
+        "height": 96,
+        "pixel_count": 9216,
+        "file_size_bytes": 368
+      },
+      "ela": {
+        "status": "SUCCESS",
+        "mean_absolute_difference": 0.0,
+        "max_absolute_difference": 0.0,
+        "std_absolute_difference": 0.0,
+        "quality": 90,
+        "notes": "Analyzed with JPEG recompression quality 90 and visual scale multiplier 15.0x. Input was a lossless PNG; initial lossy JPEG quantization noise was introduced uniformly during analysis. Higher error brightness highlights regions susceptible to lossy quantization or compression discontinuities; it is an analytical heuristic and does not prove artificial synthesis or localized editing."
+      },
+      "dct": {
+        "status": "SUCCESS",
+        "blocking_artifact_ratio": 0.0,
+        "boundary_discontinuity": 0.0,
+        "internal_discontinuity": 0.0,
+        "total_blocks": 144,
+        "mean_block_energy": 0.0,
+        "notes": "Analyzed 144 8x8 spatial blocks across 96x96 px. Blocking Artifact Ratio is 0.0000 (boundary: 0.00, internal: 0.00). Ratio below 1.0 indicates absence of primary 8x8 grid alignment, common in uncompressed, rescaled, or non-JPEG imagery. This signal measures compression grid alignment and does not constitute proof of origin or artificial synthesis."
+      },
+      "noise": {
+        "status": "SUCCESS",
+        "mean_absolute_residual": 0.0,
+        "std_residual": 0.0,
+        "max_residual": 0.0,
+        "noise_energy": 0.0,
+        "snr_estimate_db": null,
+        "notes": "Extracted high-frequency spatial residual using 3x3 local prediction filter across 96x96 px. Mean absolute residual is 0.0000 with standard deviation 0.0000 (residual energy: 0.00). Low residual magnitude suggests strong smoothing, heavy bilateral filtering, or synthetic flat generation. This metric is a mathematical proxy of high-frequency variance, not a calibrated physical sensor PRNU measurement; texture, lighting, and compression strongly influence residuals."
+      },
+      "c2pa": {
+        "status": "C2PA_MISSING",
+        "manifest_present": false,
+        "notes": "No C2PA provenance manifest or JUMBF metadata found in asset. This is expected for standard web imagery and does not indicate whether the media is authentic, manipulated, or AI-generated."
+      },
+      "errors": [],
+      "dimensions": {
+        "width": 96,
+        "height": 96,
+        "pixel_count": 9216
+      },
+      "metadata": {
+        "inventory_status": "PRESENT",
+        "detected_structures": [
+          "PNG_TEXT"
+        ],
+        "gps_present": false,
+        "thumbnail_status": "NO_THUMBNAIL",
+        "thumbnail_similarity_score": null,
+        "consistency_status": "CONSISTENT",
+        "observation_count": 1
+      },
+      "fusion": {
+        "status": "COMPLETE",
+        "total_findings": 7,
+        "evidence_observed_count": 2,
+        "no_anomaly_count": 3,
+        "inconclusive_count": 2
+      }
+    }
+  ]
+}

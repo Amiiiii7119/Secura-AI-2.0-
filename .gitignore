@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+env/
+venv/
+ENV/
+.pytest_cache/
+.coverage
+htmlcov/
+*.sqlite3
+*.db
+
+# Node / Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Environment & Credentials (NEVER COMMIT REAL SECRETS)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Heavy Model Weights & Pre-trained Checkpoints (Exceed GitHub 100MB file limit)
+backend/models/weights/**
+models/weights/**
+*.safetensors
+*.bin
+*.onnx
+
+# Large Media & Benchmark Recordings
+data/
+uploads/
+*.mp4
+*.webm
+*.avi
+*.mov
+
+# Backups & Scratch
+.backup_*
+*.bak
+scratch/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

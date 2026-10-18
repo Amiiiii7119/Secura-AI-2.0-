@@ -1,0 +1,153 @@
+{
+  "evaluation_timestamp_utc": "2026-10-17T09:02:12.888732+00:00",
+  "evaluation_harness_version": "2.0.0",
+  "held_out_test_set_size": 14,
+  "models_evaluated": {
+    "UniversalFakeDetect_CVPR2023": {
+      "model_name": "UniversalFakeDetect (CVPR 2023)",
+      "weights_file": "backend/models/weights/fc_weights.pth",
+      "evaluation": {
+        "overall_metrics": {
+          "sample_count": 14,
+          "accuracy": 0.2857,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "fpr_on_reals": 0.0,
+          "roc_auc": 0.0,
+          "confusion_matrix": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 4,
+            "fn": 10
+          }
+        },
+        "per_generator_performance": {
+          "Real": {
+            "sample_count": 4,
+            "accuracy": 1.0,
+            "mean_logit": -0.6787,
+            "mean_margin": 0.3366
+          },
+          "Diffusion": {
+            "sample_count": 10,
+            "accuracy": 0.0,
+            "mean_logit": -0.794,
+            "mean_margin": 0.3113
+          }
+        },
+        "weight_norm": 6.2001,
+        "bias": -0.5167,
+        "decision_counts": {
+          "REAL_IMAGE_CLASS": 14
+        }
+      }
+    },
+    "Secura_Custom_Regularized_Head": {
+      "model_name": "Secura AI Custom Regularized Head",
+      "weights_file": "backend/models/weights/custom_fc_weights.pth",
+      "evaluation": {
+        "overall_metrics": {
+          "sample_count": 14,
+          "accuracy": 0.2857,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "fpr_on_reals": 0.0,
+          "roc_auc": 1.0,
+          "confusion_matrix": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 4,
+            "fn": 10
+          }
+        },
+        "per_generator_performance": {
+          "Real": {
+            "sample_count": 4,
+            "accuracy": 1.0,
+            "mean_logit": -1.0431,
+            "mean_margin": 0.2606
+          },
+          "Diffusion": {
+            "sample_count": 10,
+            "accuracy": 0.0,
+            "mean_logit": -0.5225,
+            "mean_margin": 0.3724
+          }
+        },
+        "weight_norm": 3.7296,
+        "bias": -0.043117,
+        "decision_counts": {
+          "REAL_IMAGE_CLASS": 14
+        }
+      }
+    }
+  },
+  "synthetic_fixtures_evaluation": {
+    "count": 20,
+    "results": [
+      {
+        "fixture_id": "FIX-01-UNIFORM-RGB",
+        "status": "UNAVAILABLE",
+        "decision": "UNAVAILABLE",
+        "error_code": "BACKBONE_WEIGHTS_UNAVAILABLE"
+      },
+      {
+        "fixture_id": "FIX-02-SMOOTH-GRADIENT",
+        "status": "UNAVAILABLE",
+        "decision": "UNAVAILABLE",
+        "error_code": "BACKBONE_WEIGHTS_UNAVAILABLE"
+      },
+      {
+        "fixture_id": "FIX-03-TEXTURED-PROCEDURAL",
+        "status": "UNAVAILABLE",
+        "decision": "UNAVAILABLE",
+        "error_code": "BACKBONE_WEIGHTS_UNAVAILABLE"
+      },
+      {
+        "fixture_id": "FIX-04-HF-NOISE",
+        "status": "UNAVAILABLE",
+        "decision": "UNAVAILABLE",
+        "error_code": "BACKBONE_WEIGHTS_UNAVAILABLE"
+      },
+      {
+        "fixture_id": "FIX-05-ALIGNED-8X8-BLOCKS",
+        "status": "UNAVAILABLE",
+        "decision": "UNAVAILABLE",
+        "error_code": "BACKBONE_WEIGHTS_UNAVAILABLE"
+      },
+      {
+        "fixture_id": "FIX-06-NON-ALIGNED-DISCONTINUITY",
+        "status": "UNAVAILABLE",
+        "decision": "UNAVAILABLE",
+        "error_code": "BACKBONE_WEIGHTS_UNAVAILABLE"
+      },
+      {
+        "fixture_id": "FIX-07-DIVISIBLE-BY-8",
+        "status": "UNAVAILABLE",
+        "decision": "UNAVAILABLE",
+        "error_code": "BACKBONE_WEIGHTS_UNAVAILABLE"
+      },
+      {
+        "fixture_id": "FIX-08-NON-DIVISIBLE-BY-8",
+        "status": "UNAVAILABLE",
+        "decision": "UNAVAILABLE",
+        "error_code": "BACKBONE_WEIGHTS_UNAVAILABLE"
+      },
+      {
+        "fixture_id": "FIX-09-GRAYSCALE",
+        "status": "UNAVAILABLE",
+        "decision": "UNAVAILABLE",
+        "error_code": "BACKBONE_WEIGHTS_UNAVAILABLE"
+      },
+      {
+        "fixture_id": "FIX-10-RGBA-TRANSPARENCY",
+        "status": "UNAVAILABLE",
+        "decision": "UNAVAILABLE",
+        "error_code": "BACKBONE_WEIGHTS_UNAVAILABLE"
+      }
+    ]
+  },
+  "scientific_disclaimer": "Classification scores are linear projection margins and do not constitute posterior probabilities. Performance on held-out generator-disjoint test sets reflects domain transfer capability across distinct architectures (GAN -> Diffusion)."
+}

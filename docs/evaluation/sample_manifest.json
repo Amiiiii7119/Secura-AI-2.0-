@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Secura AI 2.0 Evaluation Manifest Schema",
+  "description": "Controlled evaluation manifest for real-world or licensed benchmark images.",
+  "type": "object",
+  "properties": {
+    "manifest_version": { "type": "string", "default": "1.0.0" },
+    "created_utc": { "type": "string" },
+    "dataset_description": { "type": "string" },
+    "samples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sample_id", "file_path", "ground_truth_category"],
+        "properties": {
+          "sample_id": { "type": "string", "description": "Unique stable sample identifier" },
+          "file_path": { "type": "string", "description": "Path relative to manifest or project root" },
+          "ground_truth_category": {
+            "type": "string",
+            "enum": ["known_ai_generated", "known_camera_photo", "known_edited_photo", "unknown_origin"]
+          },
+          "origin_description": { "type": "string", "description": "Verified source or provenance description" },
+          "generator_model": { "type": "string", "description": "Model identifier if AI generated (e.g. Midjourney v6, SDXL, DALL-E 3)" },
+          "camera_hardware": { "type": "string", "description": "Camera/sensor model if authentic capture (e.g. Sony A7 IV)" },
+          "original_format": { "type": "string", "enum": ["JPEG", "PNG"] },
+          "dimensions": { "type": "string" },
+          "transformation_history": { "type": "string", "description": "Known processing (e.g. uncompressed, resized, social media recompressed)" },
+          "label_confidence": { "type": "string", "enum": ["high_verified", "medium_plausible", "unverified"] }
+        }
+      }
+    }
+  },
+  "samples": [
+    {
+      "sample_id": "SAMPLE-TEMPLATE-01",
+      "file_path": "path/to/camera_raw.jpg",
+      "ground_truth_category": "known_camera_photo",
+      "origin_description": "Author-captured raw camera image exported directly to JPEG",
+      "camera_hardware": "Sony Alpha 7 IV",
+      "original_format": "JPEG",
+      "dimensions": "3840x2160",
+      "transformation_history": "Direct single-generation JPEG export at Q95",
+      "label_confidence": "high_verified"
+    },
+    {
+      "sample_id": "SAMPLE-TEMPLATE-02",
+      "file_path": "path/to/ai_gen.png",
+      "ground_truth_category": "known_ai_generated",
+      "origin_description": "Locally generated output using documented open-weights diffusion model",
+      "generator_model": "Stable Diffusion XL 1.0 Base",
+      "original_format": "PNG",
+      "dimensions": "1024x1024",
+      "transformation_history": "Direct lossless PNG generation from model output pipeline",
+      "label_confidence": "high_verified"
+    }
+  ]
+}

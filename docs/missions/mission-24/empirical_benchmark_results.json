@@ -1,0 +1,33 @@
+{
+  "device": "CPU (PyTorch CPU Build - No CUDA Runtime)",
+  "cuda_available": false,
+  "cold_start_model_load_ms": 3372.13,
+  "cold_first_inference_ms": 595.89,
+  "warm_median_latency_ms": 440.85,
+  "warm_p95_latency_ms": 494.4,
+  "mean_decoding_time_ms": 1.31,
+  "mean_model_only_ms": 447.61,
+  "peak_ram_allocated_mb": 1167.8,
+  "jpeg_compression_robustness": {
+    "Q_95": {
+      "score": 0.3446,
+      "prediction": "LIKELY_REAL",
+      "latency_ms": 430.51
+    },
+    "Q_75": {
+      "score": 0.3446,
+      "prediction": "LIKELY_REAL",
+      "latency_ms": 437.9
+    },
+    "Q_50": {
+      "score": 0.3435,
+      "prediction": "LIKELY_REAL",
+      "latency_ms": 436.83
+    },
+    "Q_30": {
+      "score": 0.3446,
+      "prediction": "LIKELY_REAL",
+      "latency_ms": 438.67
+    }
+  }
+}
