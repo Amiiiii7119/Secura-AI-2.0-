@@ -40,10 +40,22 @@ def create_application() -> FastAPI:
     application.add_middleware(
         CORSMiddleware,
         allow_origins=settings.CORS_ORIGINS,
+        allow_origin_regex=r"^https://.*\.vercel\.app$",
         allow_credentials=True,
         allow_methods=["GET", "POST", "OPTIONS"],
         allow_headers=["*"],
     )
+
+    @application.middleware("http")
+    async def add_cors_and_private_network(request: Request, call_next):
+        response = await call_next(request)
+        origin = request.headers.get("origin")
+        if origin and ("vercel.app" in origin or "localhost" in origin or "127.0.0.1" in origin):
+            response.headers["Access-Control-Allow-Origin"] = origin
+            response.headers["Access-Control-Allow-Credentials"] = "true"
+        if "access-control-request-private-network" in request.headers:
+            response.headers["Access-Control-Allow-Private-Network"] = "true"
+        return response
 
     application.include_router(auth_router, prefix="/api/v1")
     application.include_router(social_router, prefix="/api/v1")

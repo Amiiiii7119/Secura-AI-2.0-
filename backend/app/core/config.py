@@ -32,6 +32,10 @@ class Settings(BaseModel):
         "http://127.0.0.1:5173",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+        "https://frontend-nu-olive-40.vercel.app",
+        "https://frontend-n5yu6pyi5-amiiiii7119s-projects.vercel.app",
         "https://secura-ai.vercel.app",
         "*"
     ]
