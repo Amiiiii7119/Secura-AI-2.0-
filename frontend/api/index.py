@@ -59,6 +59,22 @@ def hash_pw(pw: str) -> str:
     return hashlib.pbkdf2_hmac("sha256", pw.encode(), b"secura_salt_2026", 100000).hex()
 
 # --- Auth Routes ---
+@app.get("/api/v1/session/new")
+async def new_session():
+    tok = str(uuid.uuid4())
+    SESSION_DB[tok] = {
+        "user_id": f"anon_{tok[:8]}",
+        "email": f"analyst_{tok[:6]}@secura.ai",
+        "expires_at": datetime.now(timezone.utc).isoformat()
+    }
+    return {
+        "status": "ok",
+        "session_id": tok,
+        "session_token": tok,
+        "role": "Forensic Analyst",
+        "timestamp_utc": datetime.now(timezone.utc).isoformat()
+    }
+
 @app.get("/api/v1/auth/session")
 async def get_session(request: Request):
     token = request.headers.get("x-session-token") or request.headers.get("authorization", "").replace("Bearer ", "").strip()
