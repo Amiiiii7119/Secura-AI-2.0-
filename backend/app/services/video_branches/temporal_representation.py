@@ -62,8 +62,8 @@ class TemporalRepresentationBranch(BaseVideoBranch):
             self._backbone = AutoModel.from_pretrained("facebook/dinov2-small")
             self._backbone.eval()
 
-            # 2. Load trained ReStraV MLP & calibration parameters
-            weights_dir = Path("D:/SecuraAI2/backend/models/weights/restrav_temporal")
+            # 2. Load trained ReStraV MLP & calibration parameters (portable path — works on any host)
+            weights_dir = Path(__file__).resolve().parent.parent.parent.parent / "models" / "weights" / "restrav_temporal"
             model_path = weights_dir / "restrav_mlp.pt"
             mean_path = weights_dir / "mean.npy"
             std_path = weights_dir / "std.npy"

@@ -2,15 +2,18 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   Milestone1Response,
   UserSession,
+  ModelRegistryStatusResponse,
 } from "./types/api";
 import {
   analyzeImageFile,
   ApiServiceError,
   checkSession,
+  fetchModelRegistryStatus,
   loginUser,
   registerUser,
   logoutUser,
 } from "./services/api";
+import { API_BASE_URL } from "./services/env";
 import RGBHeartVisualization from "./components/RGBHeartVisualization";
 import VideoForensicsWorkspace from "./components/VideoForensicsWorkspace";
 import SecuraSocialSuite from "./components/social/SecuraSocialSuite";
@@ -49,8 +52,8 @@ export function App() {
   // Authentication & Session State
   const [session, setSession] = useState<UserSession | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authEmail, setAuthEmail] = useState("rajesh.security@delhi.gov.in");
-  const [authPassword, setAuthPassword] = useState("sec123");
+  const [authEmail, setAuthEmail] = useState("");
+  const [authPassword, setAuthPassword] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
   const [authMode, setAuthMode] = useState<"login" | "register">("login");
@@ -58,6 +61,11 @@ export function App() {
   const [regEmail, setRegEmail] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const [regRole, setRegRole] = useState("Forensic Analyst");
+
+  // Live backend telemetry for the Overview dashboard (REAL API data — never mocked)
+  const [engineHealth, setEngineHealth] = useState<{ status: string; version: string; latencyMs: number | null } | null>(null);
+  const [engineError, setEngineError] = useState<string | null>(null);
+  const [modelRegistry, setModelRegistry] = useState<ModelRegistryStatusResponse | null>(null);
 
   // Image Analysis State
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -172,6 +180,33 @@ export function App() {
       .catch(() => {});
   }, []);
 
+  // Fetch real engine health + model registry status for the dashboard
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const started = performance.now();
+        const res = await fetch(`${API_BASE_URL}/api/v1/health`);
+        const data = await res.json();
+        const latency = Math.round(performance.now() - started);
+        if (!cancelled) {
+          setEngineHealth({ status: data.status ?? "unknown", version: data.version ?? "", latencyMs: latency });
+        }
+      } catch {
+        if (!cancelled) setEngineError("Backend unreachable");
+      }
+      try {
+        const reg = await fetchModelRegistryStatus();
+        if (!cancelled) setModelRegistry(reg);
+      } catch {
+        if (!cancelled) setEngineError((prev) => prev ?? "Model registry unavailable");
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const addToast = (title: string, message: string, type: ToastNotification["type"] = "info") => {
     const id = Math.random().toString(36).substring(2, 9);
     setToasts((prev) => [...prev, { id, title, message, type }]);
@@ -262,7 +297,92 @@ export function App() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+    <div style={{ display: "flex", minHeight: "100vh" }}>
+      {/* ==================================================================== */}
+      {/* STITCH RECREATION — SIDEBAR APPLICATION SHELL                        */}
+      {/* ==================================================================== */}
+      <aside className="app-sidebar">
+        <div className="sidebar-brand" onClick={() => setWorkspaceMode("landing")}>
+          <div className="sidebar-brand-mark">
+            <span className="material-symbols-outlined">shield_lock</span>
+          </div>
+          <span className="sidebar-brand-name">
+            Secura <span>AI</span>
+          </span>
+          <span className="sidebar-chip">STUDIO</span>
+        </div>
+
+        <div className="sidebar-scroll">
+          <div>
+            <div className="sidebar-group-label">Core Forensics</div>
+            <nav className="side-nav" style={{ marginTop: 6 }}>
+              <button
+                className={`side-nav-item ${workspaceMode === "landing" ? "active" : ""}`}
+                onClick={() => setWorkspaceMode("landing")}
+              >
+                <span className="material-symbols-outlined">dashboard</span> Overview
+              </button>
+              <button
+                className={`side-nav-item ${workspaceMode === "image_workspace" ? "active" : ""}`}
+                onClick={() => {
+                  setWorkspaceMode("image_workspace");
+                  if (!imageFile) imageFileInputRef.current?.click();
+                }}
+              >
+                <span className="material-symbols-outlined">document_scanner</span> Image Forensics
+              </button>
+              <button
+                className={`side-nav-item ${workspaceMode === "video_workspace" ? "active" : ""}`}
+                onClick={() => setWorkspaceMode("video_workspace")}
+              >
+                <span className="material-symbols-outlined">motion_photos</span> Video &amp; RGB-Heart
+              </button>
+            </nav>
+          </div>
+
+          <div>
+            <div className="sidebar-group-label">Trust &amp; Safety</div>
+            <nav className="side-nav" style={{ marginTop: 6 }}>
+              <button
+                className={`side-nav-item accent ${workspaceMode === "secura_social" ? "active" : ""}`}
+                onClick={() => setWorkspaceMode("secura_social")}
+              >
+                <span className="material-symbols-outlined">shield_person</span> Secura Social Suite
+              </button>
+            </nav>
+          </div>
+        </div>
+
+        <div className="sidebar-footer">
+          <button
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            className="btn-subtle"
+            title={`Switch to ${theme === "light" ? "Dark" : "Light"} theme`}
+            style={{ padding: "8px 12px", fontSize: 12.5 }}
+          >
+            {theme === "light" ? "☾ Dark" : "☼ Cream"}
+          </button>
+          {session ? (
+            <div className="sidebar-session">
+              <b>{session.username || "Analyst"}</b>
+              <span>{session.role || "Officer"}</span>
+              <button onClick={handleLogout} className="btn-subtle" style={{ marginTop: 6, fontSize: 12 }}>
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setIsAuthModalOpen(true)}
+              className="btn-primary"
+              style={{ padding: "9px 14px", fontSize: 13 }}
+            >
+              Analyst Login
+            </button>
+          )}
+        </div>
+      </aside>
+
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
       {/* Toast Notification Container */}
       <div
         style={{
@@ -300,94 +420,7 @@ export function App() {
         ))}
       </div>
 
-      {/* ========================================================================= */}
-      {/* APPLICATION SHELL NAVIGATION HEADER                                      */}
-      {/* ========================================================================= */}
-      <header className="app-header">
-        <div className="header-container">
-          {/* Brand Wordmark */}
-          <div className="brand-logo" onClick={() => setWorkspaceMode("landing")} style={{ cursor: "pointer", display: "flex", alignItems: "center" }}>
-            <span className="brand-name" style={{ fontFamily: "var(--font-serif)", fontSize: 20, fontWeight: 700, letterSpacing: "-0.02em", color: "var(--text-primary)" }}>
-              Secura AI
-            </span>
-          </div>
-
-          {/* Center Navigation Links */}
-          <nav className="nav-links">
-            <button
-              onClick={() => setWorkspaceMode("landing")}
-              className={`nav-item ${workspaceMode === "landing" ? "active" : ""}`}
-            >
-              Overview
-            </button>
-            <button
-              onClick={() => {
-                setWorkspaceMode("image_workspace");
-                if (!imageFile) imageFileInputRef.current?.click();
-              }}
-              className={`nav-item ${workspaceMode === "image_workspace" ? "active" : ""}`}
-            >
-              Image Forensics
-            </button>
-            <button
-              onClick={() => setWorkspaceMode("video_workspace")}
-              className={`nav-item ${workspaceMode === "video_workspace" ? "active" : ""}`}
-            >
-              Video &amp; RGB-Heart
-            </button>
-            <button
-              onClick={() => setWorkspaceMode("secura_social")}
-              className={`nav-item ${workspaceMode === "secura_social" ? "active" : ""}`}
-              style={{ color: "#D96B35", fontWeight: 700 }}
-            >
-              Secura Social (Mission 26)
-            </button>
-          </nav>
-
-          {/* Right Header Actions */}
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            {/* Theme Toggle Button */}
-            <button
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              className="btn-subtle"
-              title={`Switch to ${theme === "light" ? "Dark" : "Light"} theme`}
-              style={{ padding: "8px 12px" }}
-            >
-              {theme === "light" ? "☾ Dark" : "☼ Cream"}
-            </button>
-
-            {/* Analyst Auth Control */}
-            {session ? (
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 600,
-                    color: "var(--text-primary)",
-                    backgroundColor: "var(--bg-surface-secondary)",
-                    padding: "4px 10px",
-                    borderRadius: 8,
-                    border: "1px solid var(--border-subtle)",
-                  }}
-                >
-                  {session.username || "Analyst"} ({session.role || "Officer"})
-                </span>
-                <button onClick={handleLogout} className="btn-subtle" style={{ fontSize: 12 }}>
-                  Sign Out
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={() => setIsAuthModalOpen(true)}
-                className="btn-secondary"
-                style={{ padding: "8px 14px", fontSize: 13 }}
-              >
-                Analyst Login
-              </button>
-            )}
-          </div>
-        </div>
-      </header>
+      {/* Top header replaced by the Stitch sidebar application shell (see above) */}
 
       {/* Hidden File Input for Global Image Trigger */}
       <input
@@ -407,21 +440,42 @@ export function App() {
       {/* ========================================================================= */}
       {workspaceMode === "landing" && (
         <div style={{ flex: 1, display: "flex", flexDirection: "column" }} className="animate-fade-in">
-          {/* Hero Section */}
-          <section className="hero-section">
-            {/* Hero Left Content */}
-            <div className="hero-content">
-              <span className="eyebrow">MULTI-LAYER DIGITAL FORENSICS</span>
-              <h1 className="hero-title">
-                Look closer.<br />
-                Know what the <em>evidence</em> says.
-              </h1>
-              <p className="hero-lead">
-                Investigate images and video through layered visual analysis, temporal representation signals, and
-                provenance evidence—without confusing an anomaly with proof.
+          {/* ==================================================================== */}
+          {/* OVERVIEW DASHBOARD — recreated from Stitch "Main Overview Dashboard"  */}
+          {/* ==================================================================== */}
+          <main className="dash-shell">
+            {/* Welcome header & live backend telemetry (real API values, never mocked) */}
+            <div className="dash-welcome">
+              <div className="dash-chips">
+                <span className={`dash-chip ${engineError ? "err" : ""}`}>
+                  <span className="dot" />
+                  {engineHealth
+                    ? `ENGINE ${engineHealth.status.toUpperCase()} • v${engineHealth.version}`
+                    : engineError
+                      ? "ENGINE UNREACHABLE"
+                      : "ENGINE • CHECKING…"}
+                </span>
+                <span className={`dash-chip ${engineHealth?.latencyMs == null ? "warn" : ""}`}>
+                  <span className="dot" />
+                  {engineHealth?.latencyMs != null ? `LATENCY ${engineHealth.latencyMs}MS` : "LATENCY —"}
+                </span>
+                <span className={`dash-chip ${modelRegistry ? (modelRegistry.inference_ready ? "" : "warn") : "warn"}`}>
+                  <span className="material-symbols-outlined">memory</span>
+                  {modelRegistry ? (modelRegistry.inference_ready ? "MODELS READY" : "MODELS PARTIAL") : "MODEL REGISTRY …"}
+                </span>
+                <span className="dash-chip">
+                  <span className="material-symbols-outlined">hub</span>
+                  CLIP ViT-L/14 • SWIN • ELA/DCT
+                </span>
+              </div>
+
+              <h1 className="dash-title">Your Digital Trust Workspace</h1>
+              <p className="dash-sub">
+                Verify media, review evidence, and keep shared content safer across the organization — layered
+                forensics with an honest abstention policy.
               </p>
 
-              <div className="hero-ctas">
+              <div className="hero-ctas" style={{ marginBottom: 0 }}>
                 <button
                   onClick={() => {
                     setWorkspaceMode("image_workspace");
@@ -439,46 +493,229 @@ export function App() {
                 >
                   Analyze a Video →
                 </button>
-              </div>
-
-              {/* Credibility Strip */}
-              <div className="credibility-strip">
-                <div className="credibility-item">
-                  <span className="credibility-value">CLIP ViT-L/14</span>
-                  <span className="credibility-label">Ordered Latent Curvature</span>
-                </div>
-                <div className="credibility-item">
-                  <span className="credibility-value">Swin + ELA/DCT</span>
-                  <span className="credibility-label">Spatial &amp; Residual Spectrum</span>
-                </div>
-                <div className="credibility-item">
-                  <span className="credibility-value">C2PA / JUMBF</span>
-                  <span className="credibility-label">Cryptographic Manifests</span>
-                </div>
-                <div className="credibility-item">
-                  <span className="credibility-value">Zero-Hallucination</span>
-                  <span className="credibility-label">Honest Abstention Policy</span>
-                </div>
+                {!session && (
+                  <button
+                    onClick={() => setIsAuthModalOpen(true)}
+                    className="btn-secondary"
+                    style={{ fontSize: 15, padding: "12px 24px" }}
+                  >
+                    Analyst Login
+                  </button>
+                )}
               </div>
             </div>
 
-            {/* Hero Right Signature RGB-Heart Canvas */}
-            <div className="hero-visual-card">
-              <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-                <span className="eyebrow" style={{ margin: 0 }}>SIGNATURE VISUALIZATION</span>
-                <span className="badge badge-mustard">Cardioid Signal Coherence</span>
+            {/* Quick action cards grid (Stitch layout, wired to real application views) */}
+            <div className="qa-grid">
+              <button
+                type="button"
+                className="qa-card"
+                onClick={() => {
+                  setWorkspaceMode("image_workspace");
+                  if (!imageFile) imageFileInputRef.current?.click();
+                }}
+              >
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  <div className="qa-icon" style={{ backgroundColor: "var(--color-terracotta-subtle)", color: "var(--color-terracotta)" }}>
+                    <span className="material-symbols-outlined">image_search</span>
+                  </div>
+                  <div>
+                    <span className="qa-kicker">Forensic Core</span>
+                    <div className="qa-title">Analyze an Image</div>
+                    <div className="qa-desc">Inspect forensic noise signatures, ELA maps, and DCT residuals.</div>
+                  </div>
+                </div>
+                <div className="qa-foot">
+                  <span>DIRECT INGESTION</span>
+                  <span className="material-symbols-outlined">arrow_forward</span>
+                </div>
+              </button>
+
+              <button type="button" className="qa-card" onClick={() => setWorkspaceMode("video_workspace")}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  <div className="qa-icon" style={{ backgroundColor: "var(--color-botanical-subtle)", color: "var(--color-botanical-green)" }}>
+                    <span className="material-symbols-outlined">motion_sensor_active</span>
+                  </div>
+                  <div>
+                    <span className="qa-kicker">Temporal Stack</span>
+                    <div className="qa-title">Analyze a Video</div>
+                    <div className="qa-desc">Frame-by-frame temporal consistency, facial warping &amp; deepfake check.</div>
+                  </div>
+                </div>
+                <div className="qa-foot">
+                  <span>SYNC PIPELINE</span>
+                  <span className="material-symbols-outlined">arrow_forward</span>
+                </div>
+              </button>
+
+              <button type="button" className="qa-card" onClick={() => setWorkspaceMode("secura_social")}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  <div className="qa-icon" style={{ backgroundColor: "var(--bg-surface-secondary)", color: "var(--color-espresso)" }}>
+                    <span className="material-symbols-outlined">dynamic_feed</span>
+                  </div>
+                  <div>
+                    <span className="qa-kicker">Syndicated Stream</span>
+                    <div className="qa-title">Open Social Feed</div>
+                    <div className="qa-desc">Instagram-style cryptographically certified real-world media stream.</div>
+                  </div>
+                </div>
+                <div className="qa-foot">
+                  <span>FEED INSPECTOR</span>
+                  <span className="material-symbols-outlined">arrow_forward</span>
+                </div>
+              </button>
+
+              <button type="button" className="qa-card" onClick={() => setWorkspaceMode("secura_social")}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  <div className="qa-icon" style={{ backgroundColor: "var(--color-mustard-subtle)", color: "var(--color-mustard-deep)" }}>
+                    <span className="material-symbols-outlined">mark_chat_read</span>
+                  </div>
+                  <div>
+                    <span className="qa-kicker">Pre-Moderated</span>
+                    <div className="qa-title">Start Conversation</div>
+                    <div className="qa-desc">End-to-end encrypted direct messaging with inline provenance proofs.</div>
+                  </div>
+                </div>
+                <div className="qa-foot">
+                  <span>SECURE CHAT</span>
+                  <span className="material-symbols-outlined">arrow_forward</span>
+                </div>
+              </button>
+
+              <button type="button" className="qa-card" onClick={() => setWorkspaceMode("secura_social")}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  <div className="qa-icon" style={{ backgroundColor: "var(--color-terracotta-subtle)", color: "var(--color-terracotta)" }}>
+                    <span className="material-symbols-outlined">policy</span>
+                  </div>
+                  <div>
+                    <span className="qa-kicker">Regulatory RAG</span>
+                    <div className="qa-title">Policy Intelligence</div>
+                    <div className="qa-desc">Query cross-jurisdiction rules (India IT Rules, platform policy corpus).</div>
+                  </div>
+                </div>
+                <div className="qa-foot">
+                  <span>CORPUS QUERY</span>
+                  <span className="material-symbols-outlined">arrow_forward</span>
+                </div>
+              </button>
+            </div>
+
+            {/* Two-column: Detection Ledger (REAL model-registry data) + Signature RGB suite */}
+            <div className="dash-two-col">
+              <div className="panel">
+                <div className="panel-head">
+                  <div>
+                    <span className="panel-kicker">Cluster Telemetry</span>
+                    <h2 className="panel-title">Forensic Detection Ledger</h2>
+                  </div>
+                  <span className={`dash-chip ${modelRegistry ? (modelRegistry.inference_ready ? "" : "warn") : engineError ? "err" : "warn"}`}>
+                    <span className="dot" />
+                    {modelRegistry
+                      ? modelRegistry.inference_ready
+                        ? "INFERENCE READY"
+                        : "PARTIAL — SEE PROBES"
+                      : engineError
+                        ? "BACKEND UNREACHABLE"
+                        : "LOADING…"}
+                  </span>
+                </div>
+
+                {modelRegistry ? (
+                  <div className="ledger-grid">
+                    <div className="ledger-card">
+                      <span className="ledger-label">Active Probe Head</span>
+                      <span className="ledger-value">{modelRegistry.active_head_id}</span>
+                      <span className={`ledger-meta ${modelRegistry.backbone.loaded ? "ok" : "err"}`}>
+                        <span className="dot" />
+                        {modelRegistry.backbone.loaded ? "BACKBONE LOADED" : "BACKBONE OFFLINE"}
+                      </span>
+                    </div>
+                    <div className="ledger-card">
+                      <span className="ledger-label">Execution Device</span>
+                      <span className="ledger-value">{modelRegistry.device_available}</span>
+                      <span className="ledger-meta">
+                        <span className="dot" />
+                        {modelRegistry.cuda_driver_available
+                          ? `CUDA • ${modelRegistry.vram_total_mb ?? 0} MB VRAM`
+                          : "CPU INFERENCE"}
+                      </span>
+                    </div>
+                    <div className="ledger-card">
+                      <span className="ledger-label">Registered Probes</span>
+                      <span className="ledger-value">{modelRegistry.registered_heads.length} heads</span>
+                      <span className={`ledger-meta ${modelRegistry.registered_heads.some((h) => h.head_state === "READY") ? "ok" : "warn"}`}>
+                        <span className="dot" />
+                        {modelRegistry.registered_heads.filter((h) => h.head_state === "READY").length} READY
+                      </span>
+                    </div>
+                    <div className="ledger-card">
+                      <span className="ledger-label">Service Health</span>
+                      <span className="ledger-value">{engineHealth ? `v${engineHealth.version}` : "—"}</span>
+                      <span className={`ledger-meta ${engineHealth ? "ok" : "err"}`}>
+                        <span className="dot" />
+                        {engineHealth ? `HEALTHY • ${engineHealth.latencyMs ?? "?"} MS` : "NO RESPONSE"}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="ledger-grid">
+                    <div className="ledger-card">
+                      <span className="ledger-label">Model Registry</span>
+                      <span className="ledger-value">{engineError ? "Backend unreachable" : "Loading registry…"}</span>
+                    </div>
+                  </div>
+                )}
+
+                {modelRegistry && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    {modelRegistry.registered_heads.map((h) => (
+                      <div className="pipe-row" key={h.head_id}>
+                        <span className="name">
+                          <span className="material-symbols-outlined">neurology</span>
+                          {h.model_name}
+                        </span>
+                        <span className="status">
+                          {h.operational_state === "READY" ? "OPERATIONAL" : h.operational_state}
+                          {h.head_id === modelRegistry.active_head_id ? " • ACTIVE" : ""}
+                        </span>
+                      </div>
+                    ))}
+                    <div className="pipe-row">
+                      <span className="name">
+                        <span className="material-symbols-outlined">memory</span>
+                        {modelRegistry.backbone.name}
+                      </span>
+                      <span className="status">
+                        {modelRegistry.backbone.loaded
+                          ? `OPERATIONAL • ${modelRegistry.backbone.device.toUpperCase()}`
+                          : modelRegistry.backbone.state}
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
-              <RGBHeartVisualization showLabels={false} width={340} height={300} />
-              <div style={{ marginTop: 16, textAlign: "center", maxWidth: 320 }}>
-                <div style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)" }}>
-                  RGB Temporal Signal Geometry
+
+              {/* Signature RGB-Heart visualization (live, real component) */}
+              <div className="panel">
+                <div className="panel-head">
+                  <div>
+                    <span className="panel-kicker">Signature Visualization</span>
+                    <h2 className="panel-title">RGB Temporal Signal Geometry</h2>
+                  </div>
+                  <span className="dash-chip">
+                    <span className="material-symbols-outlined">favorite</span>
+                    CARDIOID COHERENCE
+                  </span>
                 </div>
-                <div style={{ fontSize: 11, color: "var(--text-secondary)", marginTop: 4 }}>
-                  Visualizes inter-frame color harmony and channel variance in real time during video decoding.
+                <div style={{ display: "flex", justifyContent: "center", padding: "4px 0" }}>
+                  <RGBHeartVisualization showLabels={false} width={300} height={260} />
                 </div>
+                <p style={{ fontSize: 12.5, color: "var(--text-secondary)", margin: 0, textAlign: "center", lineHeight: 1.6 }}>
+                  Real-time inter-frame colour harmony and channel variance computed during video decoding.
+                </p>
               </div>
             </div>
-          </section>
+          </main>
 
           {/* Section 2: The Three-Step Forensic Process */}
           <section style={{ backgroundColor: "var(--bg-surface)", borderTop: "1px solid var(--border-subtle)", padding: "64px 28px" }}>
@@ -1490,6 +1727,7 @@ export function App() {
         </div>
       )}
 
+      </div>
     </div>
   );
 }

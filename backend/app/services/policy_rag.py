@@ -209,8 +209,8 @@ class PolicyRAGEngine:
             from pathlib import Path
             local_weights = Path(__file__).resolve().parent.parent.parent / "models" / "weights" / "all-MiniLM-L6-v2"
             model_id = str(local_weights) if local_weights.exists() else "sentence-transformers/all-MiniLM-L6-v2"
-            self.tokenizer = AutoTokenizer.from_pretrained(model_id, local_files_only=True)
-            self.model = AutoModel.from_pretrained(model_id, local_files_only=True)
+            self.tokenizer = AutoTokenizer.from_pretrained(model_id, local_files_only=local_weights.exists())
+            self.model = AutoModel.from_pretrained(model_id, local_files_only=local_weights.exists())
             self.model.eval()
 
             # Precompute document embeddings

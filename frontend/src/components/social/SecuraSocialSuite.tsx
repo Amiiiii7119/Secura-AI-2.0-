@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { withBase } from "../../services/env";
 
 // ============================================================================
 // SECURA SOCIAL SUITE (MISSION 26) — ULTRA-REALISTIC SOCIAL MEDIA SIMULATION
@@ -152,7 +153,7 @@ export const SecuraSocialSuite: React.FC<{ onBackToLab?: () => void }> = ({ onBa
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch("/api/v1/social/users");
+      const res = await fetch(withBase("/api/v1/social/users"));
       if (res.ok) {
         const data = await res.json();
         setUsers(data);
@@ -167,7 +168,7 @@ export const SecuraSocialSuite: React.FC<{ onBackToLab?: () => void }> = ({ onBa
 
   const fetchPolicyConfig = async () => {
     try {
-      const res = await fetch("/api/v1/social/policy/config");
+      const res = await fetch(withBase("/api/v1/social/policy/config"));
       if (res.ok) {
         const data = await res.json();
         setDemoPolicyActive(data.block_ai_generated_media);
@@ -179,7 +180,7 @@ export const SecuraSocialSuite: React.FC<{ onBackToLab?: () => void }> = ({ onBa
 
   const toggleDemoPolicy = async () => {
     try {
-      const res = await fetch("/api/v1/social/policy/config", {
+      const res = await fetch(withBase("/api/v1/social/policy/config"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ block_ai_generated_media: !demoPolicyActive }),
@@ -202,7 +203,7 @@ export const SecuraSocialSuite: React.FC<{ onBackToLab?: () => void }> = ({ onBa
   const resetDatabase = async () => {
     if (!window.confirm("Reset sandbox database? All demo posts, messages, and audits will return to baseline state.")) return;
     try {
-      const res = await fetch("/api/v1/social/reset", { method: "POST" });
+      const res = await fetch(withBase("/api/v1/social/reset"), { method: "POST" });
       if (res.ok) {
         showNotify("Sandbox database reset to baseline.", "success");
         fetchUsers();
@@ -759,7 +760,7 @@ const RealInstagramClient: React.FC<{
     formData.append("caption", caption);
 
     try {
-      const res = await fetch("/api/v1/social/inspect-media", {
+      const res = await fetch(withBase("/api/v1/social/inspect-media"), {
         method: "POST",
         body: formData,
       });
@@ -837,7 +838,7 @@ const RealInstagramClient: React.FC<{
     formData.append("tags", tags);
 
     try {
-      const res = await fetch("/api/v1/social/instagram/posts", {
+      const res = await fetch(withBase("/api/v1/social/instagram/posts"), {
         method: "POST",
         body: formData,
       });
@@ -866,7 +867,7 @@ const RealInstagramClient: React.FC<{
   const toggleLike = async (postId: string) => {
     if (!currentUser) return;
     try {
-      const res = await fetch(`/api/v1/social/instagram/posts/${postId}/like`, {
+      const res = await fetch(withBase(`/api/v1/social/instagram/posts/${postId}/like`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: currentUser.id }),
@@ -893,7 +894,7 @@ const RealInstagramClient: React.FC<{
   const loadComments = async (postId: string) => {
     setActiveCommentPost(postId);
     try {
-      const res = await fetch(`/api/v1/social/instagram/posts/${postId}/comments`);
+      const res = await fetch(withBase(`/api/v1/social/instagram/posts/${postId}/comments`));
       if (res.ok) {
         const data = await res.json();
         setCommentsMap((prev) => ({ ...prev, [postId]: data }));
@@ -906,7 +907,7 @@ const RealInstagramClient: React.FC<{
   const submitComment = async (postId: string) => {
     if (!commentInput.trim() || !currentUser) return;
     try {
-      const res = await fetch(`/api/v1/social/instagram/posts/${postId}/comments`, {
+      const res = await fetch(withBase(`/api/v1/social/instagram/posts/${postId}/comments`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: currentUser.id, text: commentInput }),
@@ -1585,7 +1586,7 @@ const RealWhatsAppClient: React.FC<{
   const fetchConversations = async () => {
     if (!currentUser) return;
     try {
-      const res = await fetch(`/api/v1/social/whatsapp/conversations?user_id=${currentUser.id}`);
+      const res = await fetch(withBase(`/api/v1/social/whatsapp/conversations?user_id=${currentUser.id}`));
       if (res.ok) {
         const data = await res.json();
         setConversations(data);
@@ -1601,7 +1602,7 @@ const RealWhatsAppClient: React.FC<{
   const fetchMessages = async (convId: string) => {
     if (!currentUser) return;
     try {
-      const res = await fetch(`/api/v1/social/whatsapp/conversations/${convId}/messages?user_id=${currentUser.id}`);
+      const res = await fetch(withBase(`/api/v1/social/whatsapp/conversations/${convId}/messages?user_id=${currentUser.id}`));
       if (res.ok) {
         const data = await res.json();
         setMessages(data);
@@ -1615,7 +1616,7 @@ const RealWhatsAppClient: React.FC<{
     if (!messageText.trim() || !activeConvId || !currentUser) return;
     setIsSending(true);
     try {
-      const res = await fetch(`/api/v1/social/whatsapp/conversations/${activeConvId}/messages`, {
+      const res = await fetch(withBase(`/api/v1/social/whatsapp/conversations/${activeConvId}/messages`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -1648,7 +1649,7 @@ const RealWhatsAppClient: React.FC<{
     formData.append("text", "Attached media file");
 
     try {
-      const res = await fetch(`/api/v1/social/whatsapp/conversations/${activeConvId}/messages`, {
+      const res = await fetch(withBase(`/api/v1/social/whatsapp/conversations/${activeConvId}/messages`), {
         method: "POST",
         body: formData,
       });
@@ -1671,7 +1672,7 @@ const RealWhatsAppClient: React.FC<{
 
   const handleRequestOtp = async () => {
     try {
-      const res = await fetch("/api/v1/social/otp/request", {
+      const res = await fetch(withBase("/api/v1/social/otp/request"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone_number: phoneInput }),
@@ -1692,7 +1693,7 @@ const RealWhatsAppClient: React.FC<{
 
   const handleVerifyOtp = async () => {
     try {
-      const res = await fetch("/api/v1/social/otp/verify", {
+      const res = await fetch(withBase("/api/v1/social/otp/verify"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone_number: phoneInput, otp_code: otpInput }),
@@ -1712,7 +1713,7 @@ const RealWhatsAppClient: React.FC<{
   const handleCreateGroup = async () => {
     if (!groupNameInput.trim() || !currentUser) return;
     try {
-      const res = await fetch("/api/v1/social/whatsapp/groups", {
+      const res = await fetch(withBase("/api/v1/social/whatsapp/groups"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -2479,7 +2480,7 @@ const RealTelegramClient: React.FC<{
   const fetchChannels = async () => {
     if (!currentUser) return;
     try {
-      const res = await fetch(`/api/v1/social/telegram/channels?user_id=${currentUser.id}`);
+      const res = await fetch(withBase(`/api/v1/social/telegram/channels?user_id=${currentUser.id}`));
       if (res.ok) {
         const data = await res.json();
         setChannels(data);
@@ -2495,7 +2496,7 @@ const RealTelegramClient: React.FC<{
   const fetchChannelPosts = async (chId: string) => {
     if (!currentUser) return;
     try {
-      const res = await fetch(`/api/v1/social/telegram/channels/${chId}/posts?user_id=${currentUser.id}`);
+      const res = await fetch(withBase(`/api/v1/social/telegram/channels/${chId}/posts?user_id=${currentUser.id}`));
       if (res.ok) {
         const data = await res.json();
         setPosts(data);
@@ -2508,7 +2509,7 @@ const RealTelegramClient: React.FC<{
   const toggleJoin = async (chId: string) => {
     if (!currentUser) return;
     try {
-      const res = await fetch(`/api/v1/social/telegram/channels/${chId}/join`, {
+      const res = await fetch(withBase(`/api/v1/social/telegram/channels/${chId}/join`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: currentUser.id }),
@@ -2536,7 +2537,7 @@ const RealTelegramClient: React.FC<{
   const reactToPost = async (postId: string, emoji: string) => {
     if (!currentUser || !activeChannelId) return;
     try {
-      const res = await fetch(`/api/v1/social/telegram/posts/${postId}/react`, {
+      const res = await fetch(withBase(`/api/v1/social/telegram/posts/${postId}/react`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: currentUser.id, emoji }),
@@ -2552,7 +2553,7 @@ const RealTelegramClient: React.FC<{
   const togglePin = async (postId: string) => {
     if (!currentUser || !activeChannelId) return;
     try {
-      const res = await fetch(`/api/v1/social/telegram/posts/${postId}/pin`, {
+      const res = await fetch(withBase(`/api/v1/social/telegram/posts/${postId}/pin`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ channel_id: activeChannelId }),
@@ -2589,7 +2590,7 @@ const RealTelegramClient: React.FC<{
     if (broadcastFile) formData.append("file", broadcastFile);
 
     try {
-      const res = await fetch(`/api/v1/social/telegram/channels/${activeChannelId}/posts`, {
+      const res = await fetch(withBase(`/api/v1/social/telegram/channels/${activeChannelId}/posts`), {
         method: "POST",
         body: formData,
       });
@@ -2969,7 +2970,7 @@ const RealModerationDashboard: React.FC<{
 
   const fetchStats = async () => {
     try {
-      const res = await fetch("/api/v1/social/moderation/stats");
+      const res = await fetch(withBase("/api/v1/social/moderation/stats"));
       if (res.ok) {
         const data = await res.json();
         setStats(data);

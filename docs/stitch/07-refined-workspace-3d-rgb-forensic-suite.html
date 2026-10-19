@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&amp;family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-highest": "#e6e2de", "on-primary": "#ffffff", "on-error-container": "#93000a", "surface-bright": "#fdf8f5", "outline-variant": "#dbc2b2", "surface-container-low": "#f7f3ef", "tertiary-fixed-dim": "#67d3ff", "on-secondary-container": "#775b00", "inverse-on-surface": "#f4f0ec", "on-secondary": "#ffffff", "inverse-primary": "#ffb785", "on-surface-variant": "#554338", "on-primary-container": "#582900", "secondary-fixed": "#ffdf96", "secondary-container": "#ffd56e", "secondary-fixed-dim": "#eac25c", "on-surface": "#1c1b1a", "outline": "#887366", "on-primary-fixed-variant": "#713700", "surface-container-lowest": "#ffffff", "error": "#ba1a1a", "surface": "#fdf8f5", "surface-variant": "#e6e2de", "on-secondary-fixed-variant": "#5a4400", "primary-container": "#e98535", "surface-tint": "#954a00", "on-tertiary": "#ffffff", "tertiary": "#006684", "error-container": "#ffdad6", "tertiary-fixed": "#bde9ff", "on-tertiary-fixed-variant": "#004d64", "inverse-surface": "#31302e", "surface-container-high": "#ece7e4", "on-secondary-fixed": "#251a00", "surface-container": "#f1ede9", "on-background": "#1c1b1a", "background": "#fbf8f4", "on-primary-fixed": "#301400", "on-error": "#ffffff", "primary": "#954a00", "tertiary-container": "#00abda", "surface-dim": "#ddd9d6", "on-tertiary-container": "#003a4d", "on-tertiary-fixed": "#001f2a", "primary-fixed": "#ffdcc6", "primary-fixed-dim": "#ffb785", "secondary": "#765a00" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" }, "spacing": { "margin-lg": "3.5rem", "margin": "2rem", "space-xs": "0.25rem", "gutter-lg": "2rem", "space-xl": "2.5rem", "space-md": "1rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "margin-sm": "1rem", "gutter-sm": "1rem", "gutter": "1.5rem" }, "fontFamily": { "body-lg": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "mono-data": ["JetBrains Mono"], "display-lg": ["Plus Jakarta Sans"], "serif-editorial": ["Newsreader", "Georgia", "serif"], "body-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"] }, "fontSize": { "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "mono-data": ["0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "display-lg": ["3.5rem", { "lineHeight": "4.25rem", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-sm": ["0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" }], "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["0.9375rem", { "lineHeight": "1.5rem", "fontWeight": "400" }], "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.03em", "fontWeight": "600" }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-full"><aside class="fixed left-0 top-0 h-full w-72 bg-[#f8f4ee] border-r border-[#e8e2d8] z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.02)]"><div class="flex flex-col flex-1 min-h-0"><div class="h-16 px-space-lg flex items-center justify-between border-b border-[#ece5da] bg-[#f8f4ee] shrink-0"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">Secura <span class="text-primary-container font-extrabold">AI</span></span><span class="font-mono-data text-[0.625rem] px-1.5 py-0.5 rounded border border-[#dfd6c8] bg-surface-container-high/60 text-on-surface-variant font-medium tracking-wide">ENTERPRISE</span></div></div><div class="flex-1 overflow-y-auto px-space-md py-space-sm space-y-space-md"><div class="space-y-space-xs"><div class="px-space-sm py-1 font-mono-data text-[0.6875rem] uppercase tracking-wider text-outline font-semibold">Core Forensics</div><nav class="space-y-0.5" data-active-classes="bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(36,35,33,0.04)] font-semibold rounded-lg"><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2 transition-colors bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(36,35,33,0.04)] border border-[#ebdccf] font-semibold rounded-lg" data-path="overview" href="#"><span class="material-symbols-outlined text-lg leading-none text-primary-container">dashboard</span><span>Overview</span></a><div class="space-y-0.5"><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="detect-media" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-lg leading-none">document_scanner</span><span>Detect Media</span></div><span class="material-symbols-outlined text-sm leading-none text-outline">expand_more</span></a><div class="pl-8 pr-space-xs space-y-0.5"><a class="block px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="image-detection" href="#">Image Detection</a><a class="block px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="video-detection" href="#">Video Detection</a><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="rgb-rppg" href="#"><span>rPPG Biometrics</span><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span></a><a class="block px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="forensic-evidence" href="#">Forensic Evidence</a><a class="block px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="detection-history" href="#">Detection History</a></div></div></nav></div><div class="space-y-space-xs"><div class="px-space-sm py-1 font-mono-data text-[0.6875rem] uppercase tracking-wider text-outline font-semibold">Social &amp; Community</div><nav class="space-y-0.5"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="social-feed" href="#"><span class="material-symbols-outlined text-lg leading-none">dynamic_feed</span><span>Social Feed</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="messages" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-lg leading-none">chat</span><span>Messages</span></div><span class="px-1.5 py-0.2 rounded-full bg-secondary-fixed/50 text-on-secondary-fixed font-mono-data text-[0.625rem]">Verified</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="communities" href="#"><span class="material-symbols-outlined text-lg leading-none">groups</span><span>Communities</span></a></nav></div><div class="space-y-space-xs"><div class="px-space-sm py-1 font-mono-data text-[0.6875rem] uppercase tracking-wider text-outline font-semibold">Intelligence &amp; Safety</div><nav class="space-y-0.5"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="policy-intelligence" href="#"><span class="material-symbols-outlined text-lg leading-none">policy</span><span>Policy Intelligence</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="moderation-center" href="#"><span class="material-symbols-outlined text-lg leading-none">gavel</span><span>Moderation Center</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="reports-analytics" href="#"><span class="material-symbols-outlined text-lg leading-none">analytics</span><span>Reports &amp; Analytics</span></a></nav></div><div class="space-y-space-xs"><div class="flex items-center justify-between px-space-sm py-1"><span class="font-mono-data text-[0.6875rem] uppercase tracking-wider text-outline font-semibold">Administration</span><span class="px-1.5 py-0.5 rounded font-mono-data text-[0.625rem] bg-secondary-fixed text-on-secondary-fixed font-semibold">ADMIN</span></div><nav class="space-y-0.5"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="admin-overview" href="#"><span class="material-symbols-outlined text-lg leading-none">admin_panel_settings</span><span>Admin Overview</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="users-roles" href="#"><span class="material-symbols-outlined text-lg leading-none">manage_accounts</span><span>Users &amp; Roles</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="audit-logs" href="#"><span class="material-symbols-outlined text-lg leading-none">receipt_long</span><span>Audit Logs</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="system-model-health" href="#"><span class="material-symbols-outlined text-lg leading-none">monitor_heart</span><span>System &amp; Model Health</span></a></nav></div></div></div><div class="p-space-md border-t border-[#ece5da] bg-[#f8f4ee] shrink-0 space-y-space-sm"><nav><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="settings-privacy" href="#"><span class="material-symbols-outlined text-lg leading-none">settings</span><span>Settings &amp; Privacy</span></a></nav><div class="p-space-sm rounded-lg bg-surface-container-lowest border border-[#e8dfd3] shadow-[0_1px_3px_rgba(36,35,33,0.03)]"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span></span><span class="font-mono-data text-[0.6875rem] text-on-surface font-medium truncate">Cluster: Operational (v4.2)</span></div><span class="font-mono-data text-[0.625rem] text-outline">340ms</span></div></div></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 left-72 right-0 h-16 bg-[#fbf8f4]/90 backdrop-blur-md border-b border-[#e9e2d7] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-md flex-1 max-w-lg"><div class="relative w-full flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline text-lg">search</span><input class="w-full h-9 pl-10 pr-12 rounded-lg border border-[#e2d9cd] bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Search analyses, users, cases, policies..." type="text"/><kbd class="absolute right-2 font-mono-data text-[0.625rem] px-1.5 py-0.5 rounded border border-[#dfd6c8] bg-surface-container-high/60 text-on-surface-variant font-medium">⌘K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center rounded-lg border border-[#e4dcce] bg-surface-container-lowest p-0.5 shadow-sm hidden md:flex"><button class="px-3 py-1 text-xs font-semibold rounded-md bg-[#f4ede3] text-on-surface transition-colors" type="button">Overview</button><button class="px-3 py-1 text-xs font-medium text-on-surface-variant hover:text-on-surface transition-colors" type="button">Forensics</button><button class="px-3 py-1 text-xs font-medium text-on-surface-variant hover:text-on-surface transition-colors" type="button">Biometrics</button><button class="px-3 py-1 text-xs font-medium text-primary-container hover:text-primary transition-colors" type="button">Secura Social</button></div><div class="relative flex items-center"><button class="flex items-center gap-space-xs h-9 px-space-md rounded-lg bg-primary-container text-on-primary font-label-md text-label-md font-semibold hover:bg-[#d97322] transition-colors shadow-sm" type="button"><span class="material-symbols-outlined text-lg">biotech</span><span>Analyze Media</span><span class="material-symbols-outlined text-base">arrow_drop_down</span></button></div><button aria-label="Forensic Alerts" class="relative p-2 rounded-lg text-on-surface-variant hover:bg-[#f1ebe2] hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-xl leading-none">notifications</span><span class="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-error text-on-error font-mono-data text-[0.5625rem] font-bold">3</span></button><button aria-label="Documentation &amp; Help" class="p-2 rounded-lg text-on-surface-variant hover:bg-[#f1ebe2] hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-xl leading-none">help_outline</span></button><div class="flex items-center gap-space-sm pl-space-xs border-l border-[#e5dcd1]"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-[#e4dcce]" src="https://lh3.googleusercontent.com/aida/AEtjO1WKjupt0RD_z_KOE_0nTvgWlC-P1anPi9xFAYKbqn6bDPvAYnyxrtuno0NF8jomGWJPjvAWAglLYbS5w3vvFvuyuoPhyG6AZ7ApIa6lmChc2J9s-qeCgnc6Sh59QR2IGWpmxncYgzY_LEUPix3lnUGAhwk7K085QfB0rx_KVVpw_vVfGfDN_nAmeoEu22VZLdS5Yu6K5Rd4R4lYE3preOhFOOBrRVTWUYyxw9c49VcknA-Mo6Re-LCV-do"/><div class="hidden xl:flex flex-col text-left"><span class="font-label-sm text-label-sm text-on-surface font-semibold leading-tight">Dr. Elena Vance</span><span class="font-mono-data text-[0.6875rem] text-on-surface-variant leading-tight">Head of Digital Trust</span></div></div></div></header><main class="relative pt-16 bg-background flex-1 w-full"><div class="flex flex-col w-full">
+<div class="px-gutter-lg py-space-lg max-w-[1440px] w-full mx-auto space-y-space-xl">
+<!-- Refined Editorial Hero Banner inspired by reference -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md border-b border-[#e8e0d4] pb-space-lg">
+<div class="space-y-space-xs max-w-2xl">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-[#e4d8c9] bg-[#f5ede3] text-[#713700] font-mono-data text-[0.6875rem] font-semibold tracking-wide uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+            Multi-Layer Digital Forensics
+          </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-[#dfd6c7] bg-surface-container-lowest text-tertiary font-mono-data text-[0.6875rem]">
+<span class="material-symbols-outlined text-xs leading-none">memory</span>
+            Model Engine v4.2.1 • Latency 340ms
+          </span>
+</div>
+<h1 class="font-display-lg text-[2.75rem] lg:text-[3.25rem] leading-[1.12] text-on-surface tracking-tight font-bold">
+            Look closer.<br/><span class="font-serif-editorial italic font-normal text-primary-container">Know what the evidence says.</span>
+</h1>
+<p class="font-body-md text-base text-on-surface-variant max-w-xl leading-relaxed">
+            Investigate images and video through layered visual analysis, temporal representation signals, and provenance evidence—without confusing an anomaly with proof.
+          </p>
+</div>
+<div class="flex items-center gap-space-sm self-start lg:self-end shrink-0">
+<button class="flex items-center gap-space-xs px-4 py-2.5 rounded-xl border border-[#ded4c6] bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm hover:bg-[#f6efe6] transition-colors" type="button">
+<span class="material-symbols-outlined text-lg">tune</span>
+<span>Workspace Filters</span>
+</button>
+<button class="flex items-center gap-space-xs px-4 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md shadow-sm hover:bg-[#d97322] transition-colors" type="button">
+<span class="material-symbols-outlined text-lg">download</span>
+<span>Compliance Dossier</span>
+</button>
+</div>
+</div>
+<!-- High-Level Quick Action Buttons (Pill & Card Inspired) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-md">
+<!-- 1. Analyze an Image -->
+<div class="group relative flex flex-col justify-between p-space-md rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-[0_2px_8px_rgba(36,35,33,0.02)] hover:border-primary-container/60 hover:shadow-md transition-all cursor-pointer" role="button" tabindex="0">
+<div class="space-y-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary-container/10 text-primary-container flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-xl">image_search</span>
+</div>
+<div>
+<span class="font-mono-data text-[0.625rem] uppercase tracking-wider text-outline font-semibold block">CLIP ViT-L/14 &amp; ELA</span>
+<h2 class="font-headline-sm text-[1.125rem] text-on-surface group-hover:text-primary-container transition-colors mt-0.5">Analyze an Image</h2>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant line-clamp-2">Inspect forensic noise signatures, ELA maps, and DCT residuals.</p>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant group-hover:text-primary-container transition-colors">
+<span class="font-mono-data text-[0.625rem] font-bold">DIRECT INGESTION</span>
+<span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- 2. Analyze a Video -->
+<div class="group relative flex flex-col justify-between p-space-md rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-[0_2px_8px_rgba(36,35,33,0.02)] hover:border-tertiary/60 hover:shadow-md transition-all cursor-pointer" role="button" tabindex="0">
+<div class="space-y-space-sm">
+<div class="w-10 h-10 rounded-xl bg-tertiary/10 text-tertiary flex items-center justify-center group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors">
+<span class="material-symbols-outlined text-xl">motion_sensor_active</span>
+</div>
+<div>
+<span class="font-mono-data text-[0.625rem] uppercase tracking-wider text-outline font-semibold block">rPPG &amp; Warp Vectors</span>
+<h2 class="font-headline-sm text-[1.125rem] text-on-surface group-hover:text-tertiary transition-colors mt-0.5">Analyze a Video</h2>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant line-clamp-2">Frame-by-frame temporal consistency, facial warping, &amp; deepfake check.</p>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant group-hover:text-tertiary transition-colors">
+<span class="font-mono-data text-[0.625rem] font-bold">SYNC PIPELINE</span>
+<span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- 3. Open Social Feed -->
+<div class="group relative flex flex-col justify-between p-space-md rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-[0_2px_8px_rgba(36,35,33,0.02)] hover:border-on-surface hover:shadow-md transition-all cursor-pointer" role="button" tabindex="0">
+<div class="space-y-space-sm">
+<div class="w-10 h-10 rounded-xl bg-[#f2eae0] text-on-surface flex items-center justify-center group-hover:bg-on-surface group-hover:text-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-xl">dynamic_feed</span>
+</div>
+<div>
+<span class="font-mono-data text-[0.625rem] uppercase tracking-wider text-outline font-semibold block">Syndicated Stream</span>
+<h2 class="font-headline-sm text-[1.125rem] text-on-surface mt-0.5">Open Social Feed</h2>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant line-clamp-2">Instagram-style cryptographically certified real-world media stream.</p>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant group-hover:text-on-surface transition-colors">
+<span class="font-mono-data text-[0.625rem] font-bold">MISSION 26</span>
+<span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- 4. Start Conversation -->
+<div class="group relative flex flex-col justify-between p-space-md rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-[0_2px_8px_rgba(36,35,33,0.02)] hover:border-secondary/60 hover:shadow-md transition-all cursor-pointer" role="button" tabindex="0">
+<div class="space-y-space-sm">
+<div class="w-10 h-10 rounded-xl bg-secondary-container/30 text-secondary flex items-center justify-center group-hover:bg-secondary-container group-hover:text-on-secondary-container transition-colors">
+<span class="material-symbols-outlined text-xl">mark_chat_read</span>
+</div>
+<div>
+<span class="font-mono-data text-[0.625rem] uppercase tracking-wider text-outline font-semibold block">Pre-Moderated DM</span>
+<h2 class="font-headline-sm text-[1.125rem] text-on-surface mt-0.5">Start Conversation</h2>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant line-clamp-2">End-to-end encrypted direct messaging with inline provenance proofs.</p>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant group-hover:text-secondary transition-colors">
+<span class="font-mono-data text-[0.625rem] font-bold">SECURE CHAT</span>
+<span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- 5. Ask Policy Intelligence -->
+<div class="group relative flex flex-col justify-between p-space-md rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-[0_2px_8px_rgba(36,35,33,0.02)] hover:border-primary-container/60 hover:shadow-md transition-all cursor-pointer" role="button" tabindex="0">
+<div class="space-y-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-xl">policy</span>
+</div>
+<div>
+<span class="font-mono-data text-[0.625rem] uppercase tracking-wider text-outline font-semibold block">Regulatory RAG</span>
+<h2 class="font-headline-sm text-[1.125rem] text-on-surface mt-0.5">Policy Intelligence</h2>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant line-clamp-2">Query cross-jurisdiction rules (EU AI Act, FTC, India IT Rules).</p>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="font-mono-data text-[0.625rem] font-bold">CORPUS QUERY</span>
+<span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- HERO SPOTLIGHT: Interactive 3D RGB Photoplethysmography (rPPG) Heart & Signal Geometry Module -->
+<div class="p-space-lg lg:p-space-xl rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-[0_4px_20px_rgba(36,35,33,0.03)]">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<!-- Left side: Biomarker & rPPG Technical Breakdown -->
+<div class="lg:col-span-7 space-y-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-mono-data text-[0.6875rem] uppercase tracking-wider text-primary-container font-semibold">SIGNATURE VISUALIZATION • CORE MODULE</span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span class="font-mono-data text-[0.6875rem] text-outline">IEEE TRANSACTIONS COMPLIANT</span>
+</div>
+<div class="space-y-2">
+<h2 class="font-headline-lg text-2xl lg:text-3xl text-on-surface font-bold tracking-tight">
+              RGB Temporal Signal Geometry &amp; Biomarker Scanner
+            </h2>
+<p class="font-body-md text-on-surface-variant text-sm leading-relaxed">
+              Biological humans produce micro-chromatic skin fluctuations synchronous with systolic myocardial perfusion. AI-generated diffusion avatars lack authentic blood volumetric pulsatility across the RGB color space.
+            </p>
+</div>
+<!-- Real-Time Biomarker Diagnostic Indicator -->
+<div class="p-4 rounded-xl border border-red-200 bg-red-50/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0 ring-2 ring-red-200">
+<span class="material-symbols-outlined text-2xl animate-pulse">favorite</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-mono-data text-xs font-bold text-red-800 tracking-wide">NO PULSE DETECTED (SYNTHETIC)</span>
+<span class="px-1.5 py-0.5 rounded text-[0.625rem] font-mono-data bg-red-200/80 text-red-900 font-semibold">FLATLINE PROFILE</span>
+</div>
+<p class="font-body-sm text-xs text-red-700 mt-0.5">Synthetic Face Matrix • Aperiodic chromatic distribution detected</p>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-center font-mono-data text-xs font-bold text-red-800 bg-white/80 px-2.5 py-1.5 rounded-lg border border-red-200">
+<span class="material-symbols-outlined text-sm text-red-600">warning</span>
+<span>98.4% ANOMALY</span>
+</div>
+</div>
+<!-- Hemodynamic Waveform Channels -->
+<div class="space-y-2 pt-1">
+<div class="flex items-center justify-between font-mono-data text-[0.6875rem]">
+<span class="text-on-surface-variant font-medium">HEMODYNAMIC WAVEFORM DECOMPOSITION</span>
+<span class="text-error font-semibold">APERIODIC FLATLINE DETECTED</span>
+</div>
+<!-- Waveform Simulation SVG Canvas Bar -->
+<div class="h-10 w-full rounded-lg bg-surface-container-low border border-[#e5dcd0] overflow-hidden flex items-center px-3 relative">
+<svg class="w-full h-8" preserveaspectratio="none" viewbox="0 0 600 30">
+<!-- Synthetic baseline with faint noise -->
+<path d="M 0,15 L 70,15 L 75,12 L 80,18 L 85,15 L 210,15 L 215,13 L 220,17 L 225,15 L 350,15 L 355,11 L 360,19 L 365,15 L 480,15 L 485,13 L 490,17 L 495,15 L 600,15" fill="none" stroke="#e98535" stroke-dasharray="2 3" stroke-width="1.5"></path>
+<!-- Static flatline pulse marker -->
+<circle cx="495" cy="15" fill="#ba1a1a" r="3.5"></circle>
+</svg>
+<span class="absolute right-3 font-mono-data text-[0.625rem] text-outline bg-surface-container-lowest/90 px-1.5 py-0.5 rounded border border-[#dfd6c8]">0.02 BPM Variance</span>
+</div>
+<!-- Waveform 3 Channel Badges -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+<div class="p-2 rounded-lg bg-red-50/60 border border-red-100 flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-red-500 shrink-0"></span>
+<div class="truncate">
+<div class="font-mono-data text-[0.6875rem] font-bold text-red-900 truncate">Red (660nm)</div>
+<div class="font-mono-data text-[0.625rem] text-red-700/80">HbO2 Absorption</div>
+</div>
+</div>
+<div class="p-2 rounded-lg bg-emerald-50/60 border border-emerald-100 flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+<div class="truncate">
+<div class="font-mono-data text-[0.6875rem] font-bold text-emerald-900 truncate">Green (525nm)</div>
+<div class="font-mono-data text-[0.625rem] text-emerald-700/80">Hemodynamic Peak</div>
+</div>
+</div>
+<div class="p-2 rounded-lg bg-sky-50/60 border border-sky-100 flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-sky-500 shrink-0"></span>
+<div class="truncate">
+<div class="font-mono-data text-[0.6875rem] font-bold text-sky-900 truncate">Blue (470nm)</div>
+<div class="font-mono-data text-[0.625rem] text-sky-700/80">Surface Reference</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical explanation footer -->
+<div class="flex items-center justify-between pt-1 border-t border-[#ece4d8] text-xs font-mono-data text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary-container">science</span>
+<span>Zero-Hallucination Framework • C2PA / JUMBF Verified</span>
+</div>
+<span class="text-primary-container font-semibold hover:underline cursor-pointer">View rPPG Mathematical Whitepaper →</span>
+</div>
+</div>
+<!-- Right side: Dedicated 3D Interactive RGB Heart Canvas Container -->
+<div class="lg:col-span-5 flex flex-col items-center justify-center">
+<div class="w-full max-w-sm rounded-2xl bg-gradient-to-b from-[#fbf8f4] to-[#f4ede4] border border-[#e5dcd0] p-4 shadow-sm relative flex flex-col items-center">
+<!-- Card header badge -->
+<div class="w-full flex items-center justify-between pb-2 mb-1 border-b border-[#ece3d7]">
+<span class="font-mono-data text-[0.6875rem] font-semibold text-outline uppercase">Photoplethysmography</span>
+<span class="font-mono-data text-[0.625rem] font-semibold px-2 py-0.5 rounded-full bg-[#faecd8] text-[#8e4905] border border-[#ebd0ad]">Cardioid Coherence</span>
+</div>
+<!-- The 3D Scene Component -->
+<div class="w-full h-80 relative flex items-center justify-center overflow-hidden rounded-xl">
+<!-- STITCH_THREEJS_START:ANIMATION_15 class="w-full h-80 bg-transparent" -->
+<div class="w-full h-80 bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_15" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_15');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  // Interactive 3D RGB Photoplethysmography (rPPG) Heart & Waveform Component
+const width = container.clientWidth || 360;
+const height = container.clientHeight || 360;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+camera.position.set(0, 0, 14);
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+container.appendChild(renderer.domElement);
+
+// Heart 2D Shape definition for extrusion and curve piping
+const x = 0, y = 0;
+const heartShape = new THREE.Shape();
+heartShape.moveTo(x + 2.5, y + 2.5);
+heartShape.bezierCurveTo(x + 2.5, y + 2.5, x + 2.0, y, x, y);
+heartShape.bezierCurveTo(x - 3.0, y, x - 3.0, y + 3.5, x - 3.0, y + 3.5);
+heartShape.bezierCurveTo(x - 3.0, y + 5.5, x - 1.0, y + 7.7, x + 2.5, y + 9.5);
+heartShape.bezierCurveTo(x + 6.0, y + 7.7, x + 8.0, y + 5.5, x + 8.0, y + 3.5);
+heartShape.bezierCurveTo(x + 8.0, y + 3.5, x + 8.0, y, x + 5.0, y);
+heartShape.bezierCurveTo(x + 3.5, y, x + 2.5, y + 2.5, x + 2.5, y + 2.5);
+
+// Create points along the perimeter for glowing RGB multi-channel ribbons
+const points = heartShape.getSpacedPoints(180);
+// Center points around origin
+const centeredPoints = points.map(p => new THREE.Vector3((p.x - 2.5), -(p.y - 4.8), 0));
+
+// Create smooth closed 3D curves for Red, Green, and Blue temporal harmonic channels
+function createChannelTube(pointsList, offsetZ, colorHex, radius, opacity) {
+  const curvePoints = pointsList.map(p => new THREE.Vector3(p.x * 0.95, p.y * 0.95, offsetZ));
+  const curve = new THREE.CatmullRomCurve3(curvePoints, true);
+  const tubeGeo = new THREE.TubeGeometry(curve, 180, radius, 12, true);
+  const mat = new THREE.MeshPhongMaterial({
+    color: colorHex,
+    emissive: colorHex,
+    emissiveIntensity: 0.45,
+    transparent: true,
+    opacity: opacity,
+    shininess: 90
+  });
+  return new THREE.Mesh(tubeGeo, mat);
+}
+
+// Group to hold the entire cardiac model
+const heartGroup = new THREE.Group();
+scene.add(heartGroup);
+
+// Main translucent glass heart core (representing cardiac volume)
+const extrudeSettings = { depth: 1.2, bevelEnabled: true, bevelSegments: 6, steps: 2, bevelSize: 0.6, bevelThickness: 0.6 };
+const heartGeometry = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
+heartGeometry.center();
+
+const glassMaterial = new THREE.MeshPhysicalMaterial({
+  color: 0xfdfaf6,
+  metalness: 0.05,
+  roughness: 0.2,
+  transmission: 0.88,
+  thickness: 1.5,
+  transparent: true,
+  opacity: 0.82,
+  reflectivity: 0.6,
+  clearcoat: 0.8,
+  clearcoatRoughness: 0.1
+});
+const heartMesh = new THREE.Mesh(heartGeometry, glassMaterial);
+heartMesh.rotation.z = Math.PI; // Orient apex pointing down
+heartMesh.scale.set(0.72, 0.72, 0.72);
+heartGroup.add(heartMesh);
+
+// 3 RGB Spectral Bands wrapping around the heart (Channel R: warm crimson/orange, G: bio-green rPPG, B: cyan/blue)
+const redChannel = createChannelTube(centeredPoints, 0.4, 0xef4444, 0.08, 0.95);    // Red channel (HbO2 absorption)
+const greenChannel = createChannelTube(centeredPoints, 0.0, 0x10b981, 0.09, 0.98);  // Green channel (Hemodynamic peak rPPG)
+const blueChannel = createChannelTube(centeredPoints, -0.4, 0x0ea5e9, 0.08, 0.90);   // Blue channel (Surface reference)
+heartGroup.add(redChannel);
+heartGroup.add(greenChannel);
+heartGroup.add(blueChannel);
+
+// Floating optical probe particle ring (photons & latent signals)
+const particleCount = 48;
+const pGeo = new THREE.BufferGeometry();
+const pPos = new Float32Array(particleCount * 3);
+const pColors = new Float32Array(particleCount * 3);
+const channelPalette = [
+  [0.93, 0.26, 0.26], // R
+  [0.06, 0.72, 0.50], // G
+  [0.05, 0.64, 0.91]  // B
+];
+
+for(let i = 0; i < particleCount; i++) {
+  const angle = (i / particleCount) * Math.PI * 2;
+  const radius = 5.2 + (Math.random() - 0.5) * 1.2;
+  pPos[i*3] = Math.cos(angle) * radius;
+  pPos[i*3+1] = Math.sin(angle) * radius;
+  pPos[i*3+2] = (Math.random() - 0.5) * 2.0;
+
+  const col = channelPalette[i % 3];
+  pColors[i*3] = col[0];
+  pColors[i*3+1] = col[1];
+  pColors[i*3+2] = col[2];
+}
+pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+pGeo.setAttribute('color', new THREE.BufferAttribute(pColors, 3));
+
+const pMat = new THREE.PointsMaterial({
+  size: 0.18,
+  vertexColors: true,
+  transparent: true,
+  opacity: 0.75,
+  blending: THREE.AdditiveBlending
+});
+const particles = new THREE.Points(pGeo, pMat);
+heartGroup.add(particles);
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+scene.add(ambientLight);
+
+const dirLight1 = new THREE.DirectionalLight(0xffa250, 1.4);
+dirLight1.position.set(5, 8, 6);
+scene.add(dirLight1);
+
+const dirLight2 = new THREE.DirectionalLight(0x38bdf8, 1.0);
+dirLight2.position.set(-6, -4, 4);
+scene.add(dirLight2);
+
+// Mouse interaction
+let mouseX = 0, mouseY = 0;
+let targetX = 0, targetY = 0;
+
+function onMouseMove(event) {
+  const rect = container.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  mouseX = (x / (rect.width || 1) - 0.5) * 2;
+  mouseY = (y / (rect.height || 1) - 0.5) * 2;
+}
+window.addEventListener('mousemove', onMouseMove);
+
+// Animation Loop (Simulating realistic systolic-diastolic heartbeat pulsation)
+let clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const time = clock.getElapsedTime();
+
+  // Cardiac cycle: double pulse rhythm (systole + dicrotic wave)
+  const bpmRate = 1.1; // ~66 bpm
+  const cycle = (time * bpmRate) % 1.0;
+  let pulse = 0;
+  if (cycle < 0.18) {
+    pulse = Math.sin((cycle / 0.18) * Math.PI) * 0.14;
+  } else if (cycle > 0.24 && cycle < 0.40) {
+    pulse = Math.sin(((cycle - 0.24) / 0.16) * Math.PI) * 0.06;
+  }
+
+  // Smooth rotation & interactive tilt
+  targetX += (mouseX * 0.45 - targetX) * 0.05;
+  targetY += (mouseY * 0.45 - targetY) * 0.05;
+
+  heartGroup.rotation.y = Math.sin(time * 0.6) * 0.28 + targetX;
+  heartGroup.rotation.x = Math.cos(time * 0.5) * 0.15 - targetY;
+  heartGroup.rotation.z = Math.sin(time * 0.4) * 0.05;
+
+  const baseScale = 1.0 + pulse;
+  heartMesh.scale.set(0.72 * baseScale, 0.72 * baseScale, 0.72 * (1.0 + pulse * 1.4));
+  
+  // Independent channel micro-waves
+  redChannel.scale.set(1.0 + pulse * 1.1, 1.0 + pulse * 1.1, 1.0);
+  greenChannel.scale.set(1.0 + pulse * 1.3, 1.0 + pulse * 1.3, 1.0);
+  blueChannel.scale.set(1.0 + pulse * 0.9, 1.0 + pulse * 0.9, 1.0);
+
+  // Particles orbit
+  particles.rotation.z = time * 0.2;
+  particles.rotation.y = time * 0.15;
+
+  renderer.render(scene, camera);
+}
+animate();
+
+// Resize observer
+const resizeObserver = new ResizeObserver(() => {
+  const w = container.clientWidth || 360;
+  const h = container.clientHeight || 360;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+});
+resizeObserver.observe(container);
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_15 -->
+<!-- Crosshair HUD watermark -->
+<div class="absolute inset-0 pointer-events-none flex items-center justify-center opacity-30">
+<div class="w-48 h-48 border border-dashed border-[#b69a84] rounded-full"></div>
+<div class="w-64 h-64 border border-dashed border-[#d3beab] rounded-full"></div>
+</div>
+</div>
+<!-- Interactive caption under heart -->
+<div class="w-full text-center pt-2 space-y-0.5">
+<span class="font-mono-data text-xs font-semibold text-on-surface block">RGB Temporal Signal Geometry</span>
+<p class="font-body-sm text-[0.75rem] text-on-surface-variant">Visualizes inter-frame color harmony and channel variance in real time during video decoding.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detection Summary Metrics Ledger -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-[0_2px_12px_rgba(36,35,33,0.02)] space-y-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-xs gap-2">
+<div>
+<span class="font-mono-data text-[0.6875rem] uppercase tracking-wider text-outline font-semibold">Cluster Telemetry</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Forensic Detection Ledger</h2>
+</div>
+<div class="flex items-center gap-space-xs font-mono-data text-label-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>AGGREGATED ACROSS LAST 7 DAYS</span>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-space-md">
+<!-- Total Analyses -->
+<div class="p-space-sm rounded-xl bg-surface-container-low border border-[#ede5db] flex flex-col justify-between">
+<span class="font-mono-data text-[0.6875rem] text-on-surface-variant uppercase font-medium">Total Analyses</span>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-display-lg text-headline-lg text-on-surface font-bold">14,820</span>
+<span class="font-mono-data text-label-sm text-primary-container font-semibold flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span>+12.4%
+            </span>
+</div>
+<div class="mt-3 w-full bg-surface-container h-1 rounded-full overflow-hidden">
+<div class="bg-on-surface h-full w-full"></div>
+</div>
+</div>
+<!-- Image Analyses -->
+<div class="p-space-sm rounded-xl bg-surface-container-low border border-[#ede5db] flex flex-col justify-between">
+<span class="font-mono-data text-[0.6875rem] text-on-surface-variant uppercase font-medium">Image Analyses</span>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-headline-lg text-headline-lg text-on-surface font-semibold">9,410</span>
+<span class="font-mono-data text-label-sm text-on-surface-variant">63.5%</span>
+</div>
+<div class="mt-3 w-full bg-surface-container h-1 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[63.5%]"></div>
+</div>
+</div>
+<!-- Video Analyses -->
+<div class="p-space-sm rounded-xl bg-surface-container-low border border-[#ede5db] flex flex-col justify-between">
+<span class="font-mono-data text-[0.6875rem] text-on-surface-variant uppercase font-medium">Video Analyses</span>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-headline-lg text-headline-lg text-on-surface font-semibold">5,410</span>
+<span class="font-mono-data text-label-sm text-on-surface-variant">36.5%</span>
+</div>
+<div class="mt-3 w-full bg-surface-container h-1 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[36.5%]"></div>
+</div>
+</div>
+<!-- AI-Generated Verdicts -->
+<div class="p-space-sm rounded-xl bg-error-container/40 border border-red-200 flex flex-col justify-between">
+<span class="font-mono-data text-[0.6875rem] text-on-error-container uppercase font-semibold">AI-Generated</span>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-headline-lg text-headline-lg text-error font-semibold">3,124</span>
+<span class="font-mono-data text-label-sm text-error font-semibold">21.1%</span>
+</div>
+<div class="mt-3 w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
+<div class="bg-error h-full w-[21.1%]"></div>
+</div>
+</div>
+<!-- Not AI-Generated Verdicts -->
+<div class="p-space-sm rounded-xl bg-surface-container-low border border-[#ede5db] flex flex-col justify-between">
+<span class="font-mono-data text-[0.6875rem] text-on-surface-variant uppercase font-medium">Authentic Provenance</span>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-headline-lg text-headline-lg text-on-surface font-semibold">11,280</span>
+<span class="font-mono-data text-label-sm text-on-surface-variant">76.1%</span>
+</div>
+<div class="mt-3 w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
+<div class="bg-emerald-600 h-full w-[76.1%]"></div>
+</div>
+</div>
+<!-- Inconclusive / Failed -->
+<div class="p-space-sm rounded-xl bg-secondary-fixed/40 border border-[#f3d999] flex flex-col justify-between">
+<span class="font-mono-data text-[0.6875rem] text-on-secondary-fixed uppercase font-semibold">Inconclusive</span>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-headline-lg text-headline-lg text-on-secondary-container font-semibold">416</span>
+<span class="font-mono-data text-label-sm text-secondary font-semibold">2.8%</span>
+</div>
+<div class="mt-3 w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[2.8%]"></div>
+</div>
+</div>
+</div>
+<!-- Segmented Bar Ledger -->
+<div class="pt-space-xs space-y-1.5">
+<div class="flex items-center justify-between font-mono-data text-label-sm text-on-surface-variant">
+<span>CLASSIFICATION PROBABILITY DISTRIBUTION (GLOBAL RUNTIME)</span>
+<span>100% AUDIT RECONCILED</span>
+</div>
+<div class="h-2 w-full flex rounded-full overflow-hidden bg-surface-container-high gap-0.5">
+<div class="h-full bg-emerald-600" style="width: 76.1%;" title="Authentic: 76.1%"></div>
+<div class="h-full bg-error" style="width: 21.1%;" title="AI Generated: 21.1%"></div>
+<div class="h-full bg-secondary-container" style="width: 2.8%;" title="Inconclusive: 2.8%"></div>
+</div>
+</div>
+</div>
+<!-- Main 2-Column Split Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Left Column: Recent Media Analyses Table -->
+<div class="lg:col-span-7 space-y-space-md">
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-[0_2px_12px_rgba(36,35,33,0.02)] space-y-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div>
+<span class="font-mono-data text-[0.6875rem] uppercase tracking-wider text-outline font-semibold">Real-Time Ingestion</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Recent Media Analyses</h2>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-mono-data text-[0.6875rem] px-2 py-1 rounded bg-[#f5efe5] border border-[#e5dcce] text-on-surface-variant font-medium">LIVE STREAMING</span>
+<button aria-label="Refresh Table" class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-lg leading-none">refresh</span>
+</button>
+</div>
+</div>
+<!-- Interactive Responsive Media Table -->
+<div class="overflow-x-auto -mx-space-lg px-space-lg">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="font-mono-data text-label-sm text-outline border-b border-[#eee7dc]">
+<th class="py-2.5 pr-3 font-medium">MEDIA</th>
+<th class="py-2.5 px-3 font-medium">IDENTIFIER</th>
+<th class="py-2.5 px-3 font-medium">TYPE</th>
+<th class="py-2.5 px-3 font-medium">VERDICT &amp; CONFIDENCE</th>
+<th class="py-2.5 px-3 font-medium">STATUS</th>
+<th class="py-2.5 pl-3 text-right font-medium">ACTION</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface divide-y divide-surface-container-high/40">
+<!-- Row 1: campaign_speech_hd.mp4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-3 pr-3">
+<div class="relative w-12 h-10 rounded-lg bg-surface-container overflow-hidden shrink-0 border border-[#e4dcce]">
+<img class="w-full h-full object-cover" data-alt="Close up archival footage preview of political campaign speech with micro expression tracking boxes over facial features in neutral studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlqQ4dXa0uIlsY_E3yPhneCoAZSPoEz69AOuM63sOXp-lLlgYma9Mo1ThUa_wMP2i106Scb5x8FyFTLOhyExF1HpWZyet_bDrPZzAm4kc_nitae6JzUL5VayBGKZeutMlmTDqk-9lGaO-651EkTc6s2KIIagRHiYwkNl_pe_oSb-zkUFrCL0tUtvodDLXYQyIAXC2NdberDiR0eNWl6DMFr4MdwNjDNwzmVVB2ZfDckbezkczZnUIn"/>
+<span class="absolute bottom-0.5 right-0.5 bg-inverse-surface/80 text-surface-container-lowest font-mono-data text-[0.5625rem] px-0.5 rounded">0:42</span>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold group-hover:text-primary-container transition-colors truncate max-w-[150px]">campaign_speech_hd.mp4</span>
+<span class="font-mono-data text-[0.6875rem] text-outline">SHA-256: 7f8a...4b01</span>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-mono-data text-[0.6875rem] px-2 py-0.5 rounded-full bg-surface-container border border-[#e2d9cd] text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-xs">videocam</span> Video
+                    </span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full font-mono-data text-[0.6875rem] font-bold bg-error-container text-on-error-container">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                      AI GENERATED (98.4%)
+                    </span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-mono-data text-[0.6875rem] text-tertiary">
+<span class="material-symbols-outlined text-sm">check_circle</span> Complete
+                    </span>
+</td>
+<td class="py-3 pl-3 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded-lg border border-[#ded5c8] bg-surface-container hover:bg-primary-container hover:text-on-primary font-label-sm text-label-sm transition-colors text-on-surface" type="button">
+                      View Report
+                    </button>
+</td>
+</tr>
+<!-- Row 2: press_conference_photo.png -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-3 pr-3">
+<div class="w-12 h-10 rounded-lg bg-surface-container overflow-hidden shrink-0 border border-[#e4dcce]">
+<img class="w-full h-full object-cover" data-alt="High resolution press briefing photograph of ambassadors seated at an oak conference table with microphones and official heraldry in warm daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3XdIolSLcI-6qCDjyO1BXM9KHuvsKVuCWS6-uejrHCWZ5dzuimDmXhEb122amkndjLVc_cLp7Jh74L6fOvqOzBKdXg7OOPj2fu8InN36Phzn_vW3rBO8X71dbqjLEEkjzt0qkvHKChrffs9czI-mcw4ZUHsHCtosiJOUHNFxpVfobi36loj-76UGev9_Yd7zSHMAg-2lMsIQCTlsLVKfqWZisAAITanvjTzNrZw-qlMliBKNMrGJw"/>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold group-hover:text-primary-container transition-colors truncate max-w-[150px]">press_conference_photo.png</span>
+<span class="font-mono-data text-[0.6875rem] text-outline">SHA-256: 3c9e...aa92</span>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-mono-data text-[0.6875rem] px-2 py-0.5 rounded-full bg-surface-container border border-[#e2d9cd] text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-xs">image</span> Image
+                    </span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full font-mono-data text-[0.6875rem] font-bold bg-[#e8f5ec] text-emerald-800 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                      NOT AI GEN (12.1%)
+                    </span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-mono-data text-[0.6875rem] text-tertiary">
+<span class="material-symbols-outlined text-sm">check_circle</span> Complete
+                    </span>
+</td>
+<td class="py-3 pl-3 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded-lg border border-[#ded5c8] bg-surface-container hover:bg-primary-container hover:text-on-primary font-label-sm text-label-sm transition-colors text-on-surface" type="button">
+                      View Report
+                    </button>
+</td>
+</tr>
+<!-- Row 3: id_verification_scan.jpg -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-3 pr-3">
+<div class="w-12 h-10 rounded-lg bg-surface-container overflow-hidden shrink-0 border border-[#e4dcce]">
+<img class="w-full h-full object-cover" data-alt="Tactile high resolution passport verification scan with holographic security bands and optical watermarks illuminated by subtle ultraviolet forensic light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6Sa0L6iZtXQJxZZ05FJWFyJVC8baJRepa-nQgW9pN7wNYmxIcD_nv6LJWAys6o4Qk9AGsB3oAdewi_guBhebP5q9afr5ldfF3EtUTmCQ024u9cn0uweoa09e0nqvuVTaZaKCW23BFc7AHnd3rlgH6UJ6lKFuXbqzUPX7xRvrM2u8l6zTok4rdRjtUIOFCPNCBW-07dE8DCA9H-AnG-ICTtviVbhdIY6h8_BV1bnRHaGdqDpU61bUH"/>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold group-hover:text-primary-container transition-colors truncate max-w-[150px]">id_verification_scan.jpg</span>
+<span class="font-mono-data text-[0.6875rem] text-outline">SHA-256: e41b...33f8</span>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-mono-data text-[0.6875rem] px-2 py-0.5 rounded-full bg-surface-container border border-[#e2d9cd] text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-xs">badge</span> Document
+                    </span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full font-mono-data text-[0.6875rem] font-bold bg-secondary-fixed text-on-secondary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                      INCONCLUSIVE (52.0%)
+                    </span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-mono-data text-[0.6875rem] text-secondary">
+<span class="material-symbols-outlined text-sm">pending</span> Queued ELA
+                    </span>
+</td>
+<td class="py-3 pl-3 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded-lg border border-[#ded5c8] bg-surface-container hover:bg-primary-container hover:text-on-primary font-label-sm text-label-sm transition-colors text-on-surface" type="button">
+                      View Report
+                    </button>
+</td>
+</tr>
+<!-- Row 4: social_interview_clip.mov -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-3 pr-3">
+<div class="relative w-12 h-10 rounded-lg bg-surface-container overflow-hidden shrink-0 border border-[#e4dcce]">
+<img class="w-full h-full object-cover" data-alt="Dynamic broadcast journalism video frame showing news anchor holding microphone on city street with shallow depth of field and soft morning illumination" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBICRWVpXvTQQawOkZUbtdVs4lrzSjhjp4NM-QOumTCTK3fyXJQj5xaPNK75rDJFb6gbLSAxdht7szxJCeXzmOwYTIjmcHPH24gpqHVIeAvGLBX6BxxFYC_F5oUmsuOy2AXBPpzNdKZLlvMR1gr_lkBCXsa9X9izw0FfjkBvKH9sPTZ8WgyenAbVGdDyQzlXDoao_1cAFfWFt91HTMo6JP2QWHr87h7IG8Vc_Pm2Sx2c_qOB3KLft3p"/>
+<span class="absolute bottom-0.5 right-0.5 bg-inverse-surface/80 text-surface-container-lowest font-mono-data text-[0.5625rem] px-0.5 rounded">1:18</span>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold group-hover:text-primary-container transition-colors truncate max-w-[150px]">social_interview_clip.mov</span>
+<span class="font-mono-data text-[0.6875rem] text-outline">SHA-256: 91fa...194c</span>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-mono-data text-[0.6875rem] px-2 py-0.5 rounded-full bg-surface-container border border-[#e2d9cd] text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-xs">videocam</span> Video
+                    </span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full font-mono-data text-[0.6875rem] font-bold bg-[#e8f5ec] text-emerald-800 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                      NOT AI GEN (8.4%)
+                    </span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-mono-data text-[0.6875rem] text-tertiary">
+<span class="material-symbols-outlined text-sm">check_circle</span> Complete
+                    </span>
+</td>
+<td class="py-3 pl-3 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded-lg border border-[#ded5c8] bg-surface-container hover:bg-primary-container hover:text-on-primary font-label-sm text-label-sm transition-colors text-on-surface" type="button">
+                      View Report
+                    </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Auxiliary Pagination Footer -->
+<div class="pt-space-xs flex items-center justify-between text-outline font-mono-data text-label-sm">
+<span>Showing 4 of 14,820 records</span>
+<div class="flex items-center gap-1">
+<button aria-label="Previous page" class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" disabled="" type="button">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-bold text-[0.75rem]">1</span>
+<button aria-label="Next page" class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Integrated Provenance Mini-Ledger Card -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-[0_2px_8px_rgba(36,35,33,0.02)] flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface shrink-0">
+<span class="material-symbols-outlined text-xl">verified_user</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface font-semibold">C2PA Content Credentials Signer</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Autonomous cryptographic timestamping active for all exported forensic certificates.</p>
+</div>
+</div>
+<button class="px-space-md py-2 rounded-xl border border-[#ded4c6] bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm whitespace-nowrap transition-colors" type="button">
+            Configure Keys
+          </button>
+</div>
+</div>
+<!-- Right Column: Live Activity & System Health -->
+<div class="lg:col-span-5 space-y-space-md">
+<!-- Live Activity Card -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-[0_2px_12px_rgba(36,35,33,0.02)] space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div>
+<span class="font-mono-data text-[0.6875rem] uppercase tracking-wider text-outline font-semibold">Enforcement Radar</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Trust &amp; Safety Live Activity</h2>
+</div>
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span>
+</span>
+</div>
+<!-- Moderation Decision Event Items -->
+<div class="space-y-space-sm">
+<!-- Event 1: Post blocked -->
+<div class="p-space-sm rounded-xl bg-surface-container-low border border-[#ede5db] space-y-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 font-mono-data text-[0.6875rem] font-semibold text-error">
+<span class="material-symbols-outlined text-sm leading-none">block</span>
+<span>ENFORCEMENT ACTION</span>
+</div>
+<span class="font-mono-data text-[0.6875rem] text-outline">2m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">Post #8921 blocked: Manipulated media policy violation</p>
+<div class="flex items-center gap-2 font-mono-data text-[0.6875rem] text-on-surface-variant">
+<span>Model: FaceWarp-v3</span>
+<span>•</span>
+<span>Threshold: &gt;0.95</span>
+</div>
+</div>
+<!-- Event 2: Policy RAG Query -->
+<div class="p-space-sm rounded-xl bg-surface-container-low border border-[#ede5db] space-y-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 font-mono-data text-[0.6875rem] font-semibold text-tertiary">
+<span class="material-symbols-outlined text-sm leading-none">plagiarism</span>
+<span>LEGAL RAG LOOKUP</span>
+</div>
+<span class="font-mono-data text-[0.6875rem] text-outline">14m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">India IT Rules 2021 synthetic media compliance query completed</p>
+<div class="flex items-center gap-2 font-mono-data text-[0.6875rem] text-on-surface-variant">
+<span>Vector match: 0.941</span>
+<span>•</span>
+<span>Rule 3(1)(b) cited</span>
+</div>
+</div>
+<!-- Event 3: DM Image Verified -->
+<div class="p-space-sm rounded-xl bg-surface-container-low border border-[#ede5db] space-y-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 font-mono-data text-[0.6875rem] font-semibold text-on-surface-variant">
+<span class="material-symbols-outlined text-sm leading-none">lock</span>
+<span>PRE-DISPATCH DM SCAN</span>
+</div>
+<span class="font-mono-data text-[0.6875rem] text-outline">31m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">DM image encrypted payload verified &amp; permitted</p>
+<div class="flex items-center gap-2 font-mono-data text-[0.6875rem] text-on-surface-variant">
+<span>Direct thread: #TR-9941</span>
+<span>•</span>
+<span>Pass (Clean hash)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Cluster & Model Health Service Card -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-[0_2px_12px_rgba(36,35,33,0.02)] space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div>
+<span class="font-mono-data text-[0.6875rem] uppercase tracking-wider text-outline font-semibold">Distributed Infrastructure</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Cluster &amp; Model Health</h2>
+</div>
+<span class="font-mono-data text-[0.6875rem] px-2 py-0.5 rounded border border-[#dfd6c8] bg-surface-container-high text-on-surface font-semibold">ALL NOMINAL</span>
+</div>
+<div class="space-y-space-sm font-body-sm text-body-sm">
+<!-- Pipeline 1 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low border border-[#ede5db]">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+<span class="font-medium text-on-surface">Forensic Image Pipeline</span>
+</div>
+<span class="font-mono-data text-[0.6875rem] text-on-surface-variant font-medium">Operational • 98ms</span>
+</div>
+<!-- Pipeline 2 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low border border-[#ede5db]">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+<span class="font-medium text-on-surface">Video Temporal Engine</span>
+</div>
+<span class="font-mono-data text-[0.6875rem] text-on-surface-variant font-medium">Operational • 410ms</span>
+</div>
+<!-- Pipeline 3 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low border border-[#ede5db]">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+<span class="font-medium text-on-surface">Policy RAG Vector DB</span>
+</div>
+<span class="font-mono-data text-[0.6875rem] text-on-surface-variant font-medium">Operational • 44ms</span>
+</div>
+<!-- Pipeline 4 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low border border-[#ede5db]">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+<span class="font-medium text-on-surface">Content Moderation Queue</span>
+</div>
+<span class="font-mono-data text-[0.6875rem] text-on-surface-variant font-medium">Operational • 0 backlog</span>
+</div>
+</div>
+<!-- Micro Telemetry Chart -->
+<div class="pt-space-xs p-space-sm rounded-xl bg-surface-container-low border border-[#ede5db] flex items-center justify-between">
+<div class="space-y-0.5">
+<span class="font-mono-data text-xs text-on-surface-variant block font-medium">Throughput (Req/sec)</span>
+<span class="font-mono-data text-headline-sm text-on-surface font-semibold">412.8</span>
+</div>
+<!-- Lightweight SVG Sparkline Chart -->
+<svg class="w-32 h-9 text-primary-container" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 120 30">
+<path d="M 0,22 Q 15,10 30,16 T 60,8 T 90,14 T 120,4"></path>
+<path d="M 0,22 Q 15,10 30,16 T 60,8 T 90,14 T 120,4 L 120,30 L 0,30 Z" fill="currentColor" fill-opacity="0.1" stroke="none"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- Scientific Methodology Manifesto Cards (matching reference) -->
+<div class="border-t border-[#e8dfd2] pt-space-xl space-y-space-md">
+<div class="text-center max-w-xl mx-auto space-y-1">
+<span class="font-mono-data text-[0.6875rem] uppercase tracking-wider text-primary-container font-semibold">METHODOLOGICAL RIGOR</span>
+<h2 class="font-headline-lg text-2xl lg:text-3xl text-on-surface font-bold tracking-tight">How Secura AI Examines Media</h2>
+<p class="font-body-sm text-on-surface-variant text-sm">Forensic certainty cannot be obtained from a single model score. We decompose media into physical, statistical, and latent dimensions.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-sm">
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-sm space-y-2">
+<span class="font-mono-data text-2xl font-bold text-primary-container">01</span>
+<h3 class="font-headline-sm text-base text-on-surface font-bold">Multi-Modal Sampling</h3>
+<p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">Directly decodes raw frame streams, extracting chromatic moments, high-frequency residual noise, and cryptographic container manifests without lossy re-compression.</p>
+</div>
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-sm space-y-2">
+<span class="font-mono-data text-2xl font-bold text-primary-container">02</span>
+<h3 class="font-headline-sm text-base text-on-surface font-bold">Layered Decomposition</h3>
+<p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">Parallel analyzers measure representation trajectory curvature in CLIP latent space, Swin spatial diffusion probabilities, ELA re-compression artifacts, and JPEG DCT coefficients.</p>
+</div>
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest border border-[#ebdccf] shadow-sm space-y-2">
+<span class="font-mono-data text-2xl font-bold text-primary-container">03</span>
+<h3 class="font-headline-sm text-base text-on-surface font-bold">Honest Synthesis</h3>
+<p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">Synthesizes evidence using a calibrated conflict-aware policy. When temporal dynamics and spatial textures disagree, the engine transparently abstains with an INCONCLUSIVE finding.</p>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

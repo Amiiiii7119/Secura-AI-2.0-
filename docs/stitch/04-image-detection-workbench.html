@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-highest": "#e6e2de", "on-primary": "#ffffff", "on-error-container": "#93000a", "surface-bright": "#fdf8f5", "outline-variant": "#dbc2b2", "surface-container-low": "#f7f3ef", "tertiary-fixed-dim": "#67d3ff", "on-secondary-container": "#775b00", "inverse-on-surface": "#f4f0ec", "on-secondary": "#ffffff", "inverse-primary": "#ffb785", "on-surface-variant": "#554338", "on-primary-container": "#582900", "secondary-fixed": "#ffdf96", "secondary-container": "#ffd56e", "secondary-fixed-dim": "#eac25c", "on-surface": "#1c1b1a", "outline": "#887366", "on-primary-fixed-variant": "#713700", "surface-container-lowest": "#ffffff", "error": "#ba1a1a", "surface": "#fdf8f5", "surface-variant": "#e6e2de", "on-secondary-fixed-variant": "#5a4400", "primary-container": "#e98535", "surface-tint": "#954a00", "on-tertiary": "#ffffff", "tertiary": "#006684", "error-container": "#ffdad6", "tertiary-fixed": "#bde9ff", "on-tertiary-fixed-variant": "#004d64", "inverse-surface": "#31302e", "surface-container-high": "#ece7e4", "on-secondary-fixed": "#251a00", "surface-container": "#f1ede9", "on-background": "#1c1b1a", "background": "#fdf8f5", "on-primary-fixed": "#301400", "on-error": "#ffffff", "primary": "#954a00", "tertiary-container": "#00abda", "surface-dim": "#ddd9d6", "on-tertiary-container": "#003a4d", "on-tertiary-fixed": "#001f2a", "primary-fixed": "ffdcc6", "primary-fixed-dim": "#ffb785", "secondary": "#765a00" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-lg": "3.5rem", "margin": "2rem", "space-xs": "0.25rem", "gutter-lg": "2rem", "space-xl": "2.5rem", "space-md": "1rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "margin-sm": "1rem", "gutter-sm": "1rem", "gutter": "1.5rem" }, "fontFamily": { "body-lg": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "mono-data": ["JetBrains Mono"], "display-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"] }, "fontSize": { "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "mono-data": ["0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "display-lg": ["3.5rem", { "lineHeight": "4.25rem", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-sm": ["0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" }], "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["0.9375rem", { "lineHeight": "1.5rem", "fontWeight": "400" }], "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.03em", "fontWeight": "600" }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-full"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 min-h-0"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container-low shrink-0"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">Secura <span class="text-primary">AI</span></span><span class="font-mono-data text-[0.6875rem] px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant font-medium">ENTERPRISE</span></div><div class="flex-1 overflow-y-auto px-space-md py-space-sm space-y-space-md"><div class="space-y-space-xs"><div class="px-space-sm py-1 font-label-sm text-label-sm uppercase tracking-wider text-outline">Core Forensics</div><nav class="space-y-0.5" data-active-classes="bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(36,35,33,0.04)] font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="overview" href="#"><span class="material-symbols-outlined text-lg leading-none">dashboard</span><span>Overview</span></a><div class="space-y-0.5"><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="detect-media" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-lg leading-none">document_scanner</span><span>Detect Media</span></div><span class="material-symbols-outlined text-sm leading-none text-outline">expand_more</span></a><div class="pl-8 pr-space-xs space-y-0.5"><a aria-current="page" class="block px-space-sm py-1.5 transition-colors bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(36,35,33,0.04)] font-semibold rounded-lg" data-path="image-detection" href="#">Image Detection</a><a class="block px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="video-detection" href="#">Video Detection</a><a class="block px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="forensic-evidence" href="#">Forensic Evidence</a><a class="block px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="detection-history" href="#">Detection History</a></div></div></nav></div><div class="space-y-space-xs"><div class="px-space-sm py-1 font-label-sm text-label-sm uppercase tracking-wider text-outline">Social &amp; Community</div><nav class="space-y-0.5" data-active-classes="bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(36,35,33,0.04)] font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="social-feed" href="#"><span class="material-symbols-outlined text-lg leading-none">dynamic_feed</span><span>Social Feed</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="messages" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-lg leading-none">chat</span><span>Messages</span></div><span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant font-mono-data text-[0.625rem]">Verified</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="communities" href="#"><span class="material-symbols-outlined text-lg leading-none">groups</span><span>Communities</span></a></nav></div><div class="space-y-space-xs"><div class="px-space-sm py-1 font-label-sm text-label-sm uppercase tracking-wider text-outline">Intelligence &amp; Safety</div><nav class="space-y-0.5" data-active-classes="bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(36,35,33,0.04)] font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="policy-intelligence" href="#"><span class="material-symbols-outlined text-lg leading-none">policy</span><span>Policy Intelligence</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="moderation-center" href="#"><span class="material-symbols-outlined text-lg leading-none">gavel</span><span>Moderation Center</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="reports-analytics" href="#"><span class="material-symbols-outlined text-lg leading-none">analytics</span><span>Reports &amp; Analytics</span></a></nav></div><div class="space-y-space-xs"><div class="flex items-center justify-between px-space-sm py-1"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Administration</span><span class="px-1.5 py-0.5 rounded font-mono-data text-[0.625rem] bg-secondary-fixed text-on-secondary-fixed font-semibold">ADMIN</span></div><nav class="space-y-0.5" data-active-classes="bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(36,35,33,0.04)] font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="admin-overview" href="#"><span class="material-symbols-outlined text-lg leading-none">admin_panel_settings</span><span>Admin Overview</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="users-roles" href="#"><span class="material-symbols-outlined text-lg leading-none">manage_accounts</span><span>Users &amp; Roles</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="audit-logs" href="#"><span class="material-symbols-outlined text-lg leading-none">receipt_long</span><span>Audit Logs</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="system-model-health" href="#"><span class="material-symbols-outlined text-lg leading-none">monitor_heart</span><span>System &amp; Model Health</span></a></nav></div></div></div><div class="p-space-md bg-surface-container-low shrink-0 space-y-space-sm"><nav data-active-classes="bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(36,35,33,0.04)] font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="settings-privacy" href="#"><span class="material-symbols-outlined text-lg leading-none">settings</span><span>Settings &amp; Privacy</span></a></nav><div class="p-space-sm rounded-lg bg-surface-container-lowest shadow-[0_1px_3px_rgba(36,35,33,0.04)]"><div class="flex items-center gap-2"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="font-mono-data text-[0.6875rem] text-on-surface font-medium truncate">Cluster: Operational (v4.2)</span></div></div></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-gutter shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md flex-1 max-w-lg"><div class="relative w-full flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline text-lg">search</span><input class="w-full h-10 pl-10 pr-12 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container shadow-[0_1px_3px_rgba(36,35,33,0.04)]" placeholder="Search analyses, users, cases, policies..." type="text"/><kbd class="absolute right-2.5 font-mono-data text-[0.6875rem] px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-medium">⌘K</kbd></div></div><div class="flex items-center gap-space-md"><div class="relative flex items-center"><button class="flex items-center gap-space-xs h-10 px-space-md rounded-lg bg-primary-container text-on-primary font-label-md text-label-md font-semibold hover:bg-primary transition-colors shadow-[0_1px_3px_rgba(36,35,33,0.04)]" type="button"><span class="material-symbols-outlined text-lg">biotech</span><span>Analyze Media</span><span class="material-symbols-outlined text-base">arrow_drop_down</span></button></div><button aria-label="Forensic Alerts" class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-xl leading-none">notifications</span><span class="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-error text-on-error font-mono-data text-[0.5625rem] font-bold">3</span></button><button aria-label="Documentation &amp; Help" class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-xl leading-none">help_outline</span></button><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WKjupt0RD_z_KOE_0nTvgWlC-P1anPi9xFAYKbqn6bDPvAYnyxrtuno0NF8jomGWJPjvAWAglLYbS5w3vvFvuyuoPhyG6AZ7ApIa6lmChc2J9s-qeCgnc6Sh59QR2IGWpmxncYgzY_LEUPix3lnUGAhwk7K085QfB0rx_KVVpw_vVfGfDN_nAmeoEu22VZLdS5Yu6K5Rd4R4lYE3preOhFOOBrRVTWUYyxw9c49VcknA-Mo6Re-LCV-do"/><div class="hidden xl:flex flex-col text-left"><span class="font-label-sm text-label-sm text-on-surface font-semibold leading-tight">Dr. Elena Vance</span><span class="font-mono-data text-[0.6875rem] text-on-surface-variant leading-tight">Head of Digital Trust</span></div></div></div></header><main class="relative pt-16 bg-background flex-1 w-full"><div class="flex flex-col w-full">
+<div class="px-gutter-lg py-space-md bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="space-y-1">
+<nav class="flex items-center gap-space-xs font-mono-data text-body-sm text-outline">
+<a class="hover:text-on-surface transition-colors" href="#">Detect Media</a>
+<span>/</span>
+<a class="hover:text-on-surface transition-colors" href="#">Image Detection</a>
+<span>/</span>
+<span class="text-on-surface font-semibold">Case #IMG-2024-8841</span>
+</nav>
+<div class="flex flex-wrap items-center gap-space-sm pt-1">
+<h1 class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">diplomatic_summit_keynote.png</h1>
+<span class="font-mono-data text-label-sm px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant">PNG</span>
+<span class="font-mono-data text-label-sm px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant">3840 × 2160</span>
+<span class="font-mono-data text-label-sm px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant">4.2 MB</span>
+<span class="inline-flex items-center gap-1 font-mono-data text-label-sm px-space-xs py-0.5 rounded bg-error-container text-on-error-container font-semibold">
+<span class="material-symbols-outlined text-xs">gavel</span> Flagged High Priority
+        </span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-highest transition-colors font-label-md text-label-md shadow-sm" id="copySummaryBtn" type="button">
+<span class="material-symbols-outlined text-base">content_copy</span>
+<span>Copy Summary</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-highest transition-colors font-label-md text-label-md shadow-sm" type="button">
+<span class="material-symbols-outlined text-base">refresh</span>
+<span>Re-analyze</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest text-error hover:bg-error-container transition-colors font-label-md text-label-md shadow-sm" type="button">
+<span class="material-symbols-outlined text-base">security</span>
+<span>Send to Moderation</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-primary-container text-on-primary hover:bg-primary transition-colors font-label-md text-label-md font-semibold shadow-sm" type="button">
+<span class="material-symbols-outlined text-base">picture_as_pdf</span>
+<span>Forensic Report (PDF)</span>
+</button>
+</div>
+</div>
+<div class="px-gutter-lg py-space-lg grid grid-cols-1 xl:grid-cols-12 gap-gutter-lg">
+<div class="xl:col-span-8 flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-md flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-xl">biotech</span>
+<span class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider">Multi-Spectral Media Inspector</span>
+<span class="font-mono-data text-label-sm text-outline ml-2">Zoom: 100% | Spectral Grid Active</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-low p-1 rounded-lg" id="layerSelector">
+<button class="layer-toggle active px- space-sm py-1 rounded font-mono-data text-label-sm bg-surface-container-lowest text-on-surface font-semibold shadow-sm transition-all" data-layer="rgb" type="button">
+              Original RGB
+            </button>
+<button class="layer-toggle px-space-sm py-1 rounded font-mono-data text-label-sm text-on-surface-variant hover:text-on-surface transition-all" data-layer="ela" type="button">
+              ELA Gradient
+            </button>
+<button class="layer-toggle px-space-sm py-1 rounded font-mono-data text-label-sm text-on-surface-variant hover:text-on-surface transition-all" data-layer="dct" type="button">
+              DCT Artifacts
+            </button>
+<button class="layer-toggle px-space-sm py-1 rounded font-mono-data text-label-sm text-on-surface-variant hover:text-on-surface transition-all" data-layer="noise" type="button">
+              Noise Residuals
+            </button>
+</div>
+</div>
+<div class="relative w-full aspect-[16/10] bg-surface-container-highest rounded-lg overflow-hidden select-none" id="viewportContainer">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="High detailed forensic view of a diplomatic podium keynote scene with subtle visual artifacts on facial contours and studio lights, photographic style with warm tones and forensic clean fidelity" id="baseImage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMVMwJVpnuRAc5UYWqpxMGq_hzXYCvrehC47WG4w_9PXwXkZ9Ld64_0sNP2IQ_fOCj5_4zis8Qs0azLf7-RqVigPE4WdzCAY5-yKL2pDw3_l0OdUYlIn0qZIXytv4x8bvbP9hdqHWEY2bVXHMCQAs8l6_vZYNTs4GKeDVlyGP3z4OlYAsAsX9_CJfJl7DCe-9ctWQdOsnu96YTUc0rWC51iFas5oY5Cn7pn8OVL-aXyrXA_QqrU24r"/>
+</div>
+<div class="absolute inset-0 z-10 transition-opacity duration-300 pointer-events-none opacity-0" id="elaOverlay">
+<div class="w-full h-full bg-gradient-to-tr from-error/30 via-tertiary-container/30 to-transparent mix-blend-color-dodge backdrop-contrast-150"></div>
+</div>
+<div class="absolute inset-0 z-10 transition-opacity duration-300 pointer-events-none opacity-0" id="dctOverlay">
+<div class="w-full h-full bg-[radial-gradient(#954a00_1.5px,transparent_1.5px)] [background-size:16px_16px] mix-blend-difference opacity-70"></div>
+</div>
+<div class="absolute inset-0 z-10 transition-opacity duration-300 pointer-events-none opacity-0" id="noiseOverlay">
+<div class="w-full h-full bg-gradient-to-b from-primary/20 via-outline/40 to-surface-dim mix-blend-overlay backdrop-brightness-125"></div>
+</div>
+<div class="absolute top-4 left-4 z-20 flex flex-col gap-1.5">
+<div class="px-2 py-1 rounded bg-surface-container-lowest/90 backdrop-blur-md shadow-sm flex items-center gap-1.5 font-mono-data text-label-sm text-on-surface">
+<span class="h-2 w-2 rounded-full bg-error animate-pulse"></span>
+<span>Layer: <strong id="activeLayerLabel">Original RGB (Unfiltered)</strong></span>
+</div>
+<div class="px-2 py-1 rounded bg-surface-container-lowest/90 backdrop-blur-md shadow-sm font-mono-data text-[0.6875rem] text-outline">
+              Target: Latent Diffusion Grid 512x512
+            </div>
+</div>
+<div class="absolute bottom-4 right-4 z-20 flex items-center gap-2 bg-surface-container-lowest/95 backdrop-blur-md px-3 py-1.5 rounded-lg shadow-md font-mono-data text-label-sm">
+<button class="hover:text-primary transition-colors" title="Zoom Out" type="button">
+<span class="material-symbols-outlined text-lg leading-none">remove</span>
+</button>
+<span class="text-on-surface font-semibold px-1">100%</span>
+<button class="hover:text-primary transition-colors" title="Zoom In" type="button">
+<span class="material-symbols-outlined text-lg leading-none">add</span>
+</button>
+<span class="h-3 w-px bg-surface-container-highest mx-1"></span>
+<button class="hover:text-primary transition-colors" title="Fit to Viewport" type="button">
+<span class="material-symbols-outlined text-lg leading-none">fit_screen</span>
+</button>
+<button class="hover:text-primary transition-colors" title="Expand Fullscreen" type="button">
+<span class="material-symbols-outlined text-lg leading-none">fullscreen</span>
+</button>
+</div>
+<div class="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 z-20 group cursor-pointer pointer-events-auto">
+<div class="relative flex items-center justify-center">
+<div class="w-24 h-24 rounded-full bg-error/10 border-2 border-dashed border-error animate-spin" style="animation-duration: 20s;"></div>
+<div class="absolute w-4 h-4 rounded-full bg-error flex items-center justify-center text-on-error shadow-md">
+<span class="material-symbols-outlined text-xs">priority_high</span>
+</div>
+<div class="absolute left-8 top-8 w-48 bg-surface-container-lowest p-2 rounded-lg shadow-xl opacity-90 group-hover:opacity-100 transition-opacity">
+<p class="font-label-sm text-label-sm text-error font-bold leading-none mb-1">Inconsistent Latent Noise</p>
+<p class="font-mono-data text-[0.6875rem] text-on-surface-variant leading-tight">Facial micro-pores show repeated 8px patch patterns indicative of generator sampling.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-outline font-mono-data text-body-sm px-1 pt-1">
+<div class="flex items-center gap-space-sm">
+<span>Color Profile: sRGB IEC61966-2.1</span>
+<span>•</span>
+<span>Bit Depth: 8-bit truecolor</span>
+<span>•</span>
+<span>Channels: RGB (Alpha stripped)</span>
+</div>
+<div>SHA-256: 7f8c92a...e041</div>
+</div>
+</div>
+</div>
+<div class="xl:col-span-4 flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
+<div class="p-space-md rounded-lg bg-error-container text-on-error-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-mono-data text-label-sm uppercase tracking-wider font-semibold">Algorithmic Verdict</span>
+<span class="font-mono-data text-label-sm px-2 py-0.5 rounded bg-error text-on-error font-bold uppercase">Critical</span>
+</div>
+<div class="font-display-lg text-headline-lg font-black tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-3xl">smart_toy</span>
+<span>AI GENERATED</span>
+</div>
+<p class="font-body-sm text-body-sm opacity-90">
+            Unnatural frequency distributions and diffusion residual patterns confirm synthetic origin.
+          </p>
+</div>
+<div class="space-y-space-xs">
+<div class="flex justify-between items-baseline">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Synthetic Probability</span>
+<span class="font-mono-data text-headline-sm font-bold text-error">98.6%</span>
+</div>
+<div class="grid grid-cols-10 gap-1.5 py-1" title="Confidence: 98.6%">
+<div class="h-3 rounded-sm bg-secondary-container"></div>
+<div class="h-3 rounded-sm bg-secondary-container"></div>
+<div class="h-3 rounded-sm bg-secondary-container"></div>
+<div class="h-3 rounded-sm bg-secondary-container"></div>
+<div class="h-3 rounded-sm bg-secondary-container"></div>
+<div class="h-3 rounded-sm bg-secondary-container"></div>
+<div class="h-3 rounded-sm bg-primary-container"></div>
+<div class="h-3 rounded-sm bg-primary-container"></div>
+<div class="h-3 rounded-sm bg-error"></div>
+<div class="h-3 rounded-sm bg-error"></div>
+</div>
+<div class="flex justify-between font-mono-data text-label-sm text-outline">
+<span>0% Authentic</span>
+<span class="font-semibold text-on-surface-variant">Threshold: 75.0%</span>
+<span>100% Synthetic</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-md space-y-space-sm font-body-sm text-body-sm">
+<div class="flex justify-between items-center py-1">
+<span class="text-on-surface-variant">Confidence Rating</span>
+<span class="font-mono-data font-semibold text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary">verified</span>
+              High (4/4 Ensemble)
+            </span>
+</div>
+<div class="flex justify-between items-center py-1">
+<span class="text-on-surface-variant">Core Engine</span>
+<span class="font-mono-data font-semibold text-on-surface">Secura-Vision v4.2.0</span>
+</div>
+<div class="flex justify-between items-center py-1">
+<span class="text-on-surface-variant">Inference Latency</span>
+<span class="font-mono-data font-semibold text-on-surface">1.42s</span>
+</div>
+<div class="flex justify-between items-center py-1">
+<span class="text-on-surface-variant">Completed</span>
+<span class="font-mono-data font-semibold text-on-surface">2 mins ago</span>
+</div>
+</div>
+<div class="space-y-space-xs">
+<div class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Detector Consensus Matrix</div>
+<div class="space-y-1.5 font-mono-data text-label-sm">
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface">Spatial Diffusion Net</span>
+<span class="font-semibold text-error">99.1% Positive</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface">Fourier Domain ResNet</span>
+<span class="font-semibold text-error">97.8% Positive</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface">Semantic Coherence LLM</span>
+<span class="font-semibold text-error">96.4% Positive</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface">PRNU Sensor Pattern Net</span>
+<span class="font-semibold text-error">99.9% Synthesized</span>
+</div>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container text-on-surface-variant font-body-sm text-body-sm flex gap-2">
+<span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">info</span>
+<span>Calibrated against 14 state-of-the-art diffusion benchmarks including FLUX.1, Midjourney v6.1, and SDXL.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-gutter-lg pb-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="space-y-0.5">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Forensic Evidence &amp; Deep Artifacts</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Multimodal breakdown corroborating generative anomalies across optical, spectral, and semantic layers.</p>
+</div>
+<button class="font-label-md text-label-md text-primary font-semibold hover:underline" id="expandAllBtn" type="button">
+        Expand All Sections
+      </button>
+</div>
+<div class="space-y-space-sm">
+<details class="group bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden" open="">
+<summary class="flex items-center justify-between p-space-md cursor-pointer hover:bg-surface-container-low transition-colors select-none">
+<div class="flex items-center gap-space-md">
+<span class="h-8 w-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">grain</span>
+</span>
+<div>
+<span class="font-headline-sm text-body-lg font-bold text-on-surface">1. Diffusion &amp; GAN Architecture Signatures</span>
+<div class="font-body-sm text-body-sm text-outline">High-frequency noise clustering in structural transitions and facial geometries</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-mono-data text-label-sm px-2 py-0.5 rounded bg-error-container text-on-error-container font-semibold">Anomaly Index: 0.94</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+</div>
+</summary>
+<div class="p-space-lg pt-0 flex flex-col md:flex-row gap-gutter-lg">
+<div class="flex-1 space-y-space-sm font-body-md text-body-md text-on-surface-variant">
+<p>
+              Iterative denoising steps employed in contemporary diffusion processes imprint unique mathematical residuals. The facial perimeter and earlobes display an unnaturally smooth spatial auto-correlation with periodic 4-pixel sampling variance.
+            </p>
+<div class="grid grid-cols-2 gap-space-sm font-mono-data text-label-sm pt-2">
+<div class="bg-surface-container-low p-space-sm rounded-lg">
+<span class="text-outline block">Latent Scale Deviation</span>
+<span class="font-bold text-on-surface text-body-md">+4.82 Sigma</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg">
+<span class="text-outline block">UNet Inversion Residual</span>
+<span class="font-bold text-on-surface text-body-md">Match: Stable Diffusion XL</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-72 bg-surface-container rounded-lg p-space-md flex flex-col justify-between">
+<span class="font-mono-data text-label-sm text-outline uppercase tracking-wider">Spatial Residual Density</span>
+<div class="h-28 w-full flex items-end gap-1.5 pt-4">
+<div class="flex-1 bg-surface-container-highest rounded-t h-[20%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t h-[35%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t h-[25%]"></div>
+<div class="flex-1 bg-secondary-container rounded-t h-[55%]"></div>
+<div class="flex-1 bg-primary-container rounded-t h-[80%]"></div>
+<div class="flex-1 bg-error rounded-t h-[95%]"></div>
+<div class="flex-1 bg-error rounded-t h-[92%]"></div>
+</div>
+<div class="flex justify-between font-mono-data text-[0.6875rem] text-outline pt-2">
+<span>Low Band</span>
+<span>Mid Res</span>
+<span>High Band (Anomalous)</span>
+</div>
+</div>
+</div>
+</details>
+<details class="group bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden" open="">
+<summary class="flex items-center justify-between p-space-md cursor-pointer hover:bg-surface-container-low transition-colors select-none">
+<div class="flex items-center gap-space-md">
+<span class="h-8 w-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">view_quilt</span>
+</span>
+<div>
+<span class="font-headline-sm text-body-lg font-bold text-on-surface">2. Error Level Analysis (ELA)</span>
+<div class="font-body-sm text-body-sm text-outline">Localized recompression degradation inconsistencies across target boundaries</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-mono-data text-label-sm px-2 py-0.5 rounded bg-error-container text-on-error-container font-semibold">Localized Synthesis Detected</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+</div>
+</summary>
+<div class="p-space-lg pt-0 grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="md:col-span-2 space-y-space-sm font-body-md text-body-md text-on-surface-variant">
+<p>
+              When compressed under a standardized 95% JPEG quantization baseline, authentic camera frames display relatively uniform dissipation across high-contrast edges. In this asset, the region surrounding the podium microphone and hands exhibits sharp variance (ΔE &gt; 38.4), proving localized composite generation or full-frame inpainting.
+            </p>
+<ul class="list-disc list-inside space-y-1 font-body-sm text-body-sm">
+<li>Podium boundary demonstrates zero digital camera compression grain.</li>
+<li>Microphone rim presents hyper-saturated error levels incompatible with ambient lens light.</li>
+<li>Hand anatomy contains fragmented edge artifacts characteristic of synthetic generation.</li>
+</ul>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col justify-between font-mono-data text-label-sm">
+<span class="text-outline uppercase tracking-wider">Quantization Delta Map</span>
+<div class="py-2 space-y-1.5">
+<div class="flex justify-between">
+<span class="text-on-surface">Global Average Δ</span>
+<span class="font-bold text-on-surface">12.1</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface">Target ROIs Δ</span>
+<span class="font-bold text-error">42.8 (Extreme)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface">Confidence Margin</span>
+<span class="font-bold text-on-surface">99.4%</span>
+</div>
+</div>
+<div class="text-[0.6875rem] text-outline leading-tight">
+              Calculated via Secura Error Level Matrix (95% standard pass).
+            </div>
+</div>
+</div>
+</details>
+<details class="group bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden" open="">
+<summary class="flex items-center justify-between p-space-md cursor-pointer hover:bg-surface-container-low transition-colors select-none">
+<div class="flex items-center gap-space-md">
+<span class="h-8 w-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">graphic_eq</span>
+</span>
+<div>
+<span class="font-headline-sm text-body-lg font-bold text-on-surface">3. DCT &amp; Frequency Block Analysis</span>
+<div class="font-body-sm text-body-sm text-outline">Fourier 2D spectrum grid peak anomalies and latent upscaler signatures</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-mono-data text-label-sm px-2 py-0.5 rounded bg-error-container text-on-error-container font-semibold">Grid Periodic Spike: Confirmed</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+</div>
+</summary>
+<div class="p-space-lg pt-0 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="font-body-md text-body-md text-on-surface-variant space-y-space-sm">
+<p>
+              Two-dimensional Discrete Cosine Transform (DCT) reveals distinct, unnatural periodic crosshairs in the high-frequency spectrum. Such grid artifacts do not occur with physical CMOS or CCD sensors, but are textbook signatures of neural super-resolution and transposed convolutional layers.
+            </p>
+<div class="p-space-sm rounded bg-surface-container-low font-mono-data text-label-sm text-on-surface">
+<code>Spectral Radial Anomaly: r=128, θ=45° (p &lt; 0.0001)</code>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg flex items-center justify-center">
+<div class="w-full flex items-center justify-around font-mono-data text-label-sm text-center">
+<div>
+<span class="text-outline block mb-1">Expected Sensor FFT</span>
+<div class="w-20 h-20 rounded bg-surface-container-highest mx-auto flex items-center justify-center">
+<div class="w-8 h-8 rounded-full bg-surface-dim blur-sm"></div>
+</div>
+<span class="text-on-surface-variant text-[0.6875rem] mt-1 block">Uniform decay</span>
+</div>
+<span class="material-symbols-outlined text-outline">arrow_forward</span>
+<div>
+<span class="text-error font-semibold block mb-1">Observed FFT Pattern</span>
+<div class="w-20 h-20 rounded bg-surface-container-highest mx-auto flex items-center justify-center relative overflow-hidden">
+<div class="w-16 h-0.5 bg-error/60 absolute"></div>
+<div class="h-16 w-0.5 bg-error/60 absolute"></div>
+<div class="w-3 h-3 rounded-full bg-error absolute animate-ping"></div>
+</div>
+<span class="text-error text-[0.6875rem] font-bold mt-1 block">Cross-lattice spike</span>
+</div>
+</div>
+</div>
+</div>
+</details>
+<details class="group bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden" open="">
+<summary class="flex items-center justify-between p-space-md cursor-pointer hover:bg-surface-container-low transition-colors select-none">
+<div class="flex items-center gap-space-md">
+<span class="h-8 w-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">fingerprint</span>
+</span>
+<div>
+<span class="font-headline-sm text-body-lg font-bold text-on-surface">4. EXIF &amp; Provenance Metadata Inspection</span>
+<div class="font-body-sm text-body-sm text-outline">Cryptographic signatures, camera serials, and C2PA Content Credentials scan</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-mono-data text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-semibold">Provenance Absent</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+</div>
+</summary>
+<div class="p-space-lg pt-0 space-y-space-md">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md font-mono-data text-label-sm">
+<div class="p-space-md rounded-lg bg-surface-container-low space-y-1">
+<span class="text-outline block text-[0.6875rem] uppercase">C2PA / Content Credentials</span>
+<div class="flex items-center gap-1.5 text-error font-bold">
+<span class="material-symbols-outlined text-base">cancel</span>
+<span>None Found in Header</span>
+</div>
+<p class="text-body-sm text-on-surface-variant font-body-sm pt-1">No signed manifest JUMBF blocks detected in binary stream.</p>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low space-y-1">
+<span class="text-outline block text-[0.6875rem] uppercase">Camera Hardware Tag</span>
+<div class="flex items-center gap-1.5 text-on-surface font-bold">
+<span class="material-symbols-outlined text-base text-outline">help</span>
+<span>Undetected (Tag 0x0110)</span>
+</div>
+<p class="text-body-sm text-on-surface-variant font-body-sm pt-1">Shutter, ISO, focal length, and aperture headers stripped or non-existent.</p>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low space-y-1">
+<span class="text-outline block text-[0.6875rem] uppercase">Software / Processing Tag</span>
+<div class="flex items-center gap-1.5 text-on-surface font-bold">
+<span class="material-symbols-outlined text-base text-outline">code_off</span>
+<span>Unspecified / Null</span>
+</div>
+<p class="text-body-sm text-on-surface-variant font-body-sm pt-1">Typical of browser-based generative UI downloads or raw tensor exports.</p>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container text-on-surface-variant font-body-sm text-body-sm flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">policy</span>
+<span>
+<strong>Archival Note:</strong> Absence of EXIF metadata indicates stripped provenance but does not independently establish synthetic generation. Verified in conjunction with optical frequency anomalies.
+            </span>
+</div>
+</div>
+</details>
+<div class="p-space-md rounded-xl bg-surface-container-low text-on-surface-variant font-body-sm text-body-sm flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-outline text-lg shrink-0 mt-0.5">verified_user</span>
+<div class="space-y-0.5">
+<span class="font-label-md text-label-md text-on-surface font-bold">Evidence Limitations &amp; Probabilistic Disclaimer</span>
+<p>
+            This forensic report represents probabilistic algorithmic evaluation based on statistical image artifacts, frequency spectra, and neural network consensus. Synthetic classification does not legally constitute malicious intent or intentional disinformation. Artifacts must be corroborated with original source chains of custody and qualified human expert review prior to formal adjudication.
+          </p>
+</div>
+</div>
+</div>
+</div>
+<div class="px-gutter-lg pb-space-xl">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-xl">upload_file</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Inspect New Asset</h3>
+</div>
+<span class="font-mono-data text-label-sm text-outline">Supported: PNG, JPG, WEBP, TIFF, HEIC (Max 50MB)</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="md:col-span-2 rounded-xl p-space-xl bg-surface-container-low flex flex-col items-center justify-center text-center cursor-pointer hover:bg-surface-container transition-colors group">
+<div class="h-14 w-14 rounded-full bg-surface-container-highest group-hover:bg-primary-container group-hover:text-on-primary text-on-surface-variant transition-colors flex items-center justify-center mb-space-sm">
+<span class="material-symbols-outlined text-2xl">add_photo_alternate</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface font-bold mb-1">
+            Drag and drop forensic candidate file here
+          </p>
+<p class="font-body-sm text-body-sm text-outline max-w-sm">
+            Drop raw uncompressed images for highest accuracy spectrum analysis and PRNU fingerprinting.
+          </p>
+<div class="mt-space-md">
+<span class="px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md font-semibold group-hover:bg-primary group-hover:text-on-primary transition-colors shadow-sm">
+              Browse Local Storage
+            </span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between">
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-bold">Live Sensor Capture</span>
+<span class="font-mono-data text-[0.6875rem] px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant">HW READY</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Perform direct camera hardware capture with hardware sensor noise extraction to generate ground-truth authentic baseline.
+            </p>
+<div class="p-space-sm rounded bg-surface-container-lowest flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-outline text-lg">videocam</span>
+<div class="flex-1 min-w-0">
+<span class="block font-mono-data text-label-sm text-on-surface truncate">Integrated Sensor 0 (1080p)</span>
+<span class="block font-body-sm text-[0.6875rem] text-outline">Camera Permission: Granted</span>
+</div>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-highest transition-colors font-label-md text-label-md font-semibold shadow-sm mt-space-md" type="button">
+<span class="material-symbols-outlined text-base">photo_camera</span>
+<span>Initiate Authenticated Capture</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed bottom-6 right-6 z-50 bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm rounded-lg shadow-xl font-mono-data text-body-sm flex items-center gap-2 transform translate-y-16 opacity-0 transition-all duration-200 pointer-events-none" id="toastMessage">
+<span class="material-symbols-outlined text-tertiary-fixed text-lg">check_circle</span>
+<span id="toastText">Evidence summary copied to clipboard.</span>
+</div>
+</div>
+<script>
+  (function () {
+    const layerButtons = document.querySelectorAll('.layer-toggle');
+    const elaOverlay = document.getElementById('elaOverlay');
+    const dctOverlay = document.getElementById('dctOverlay');
+    const noiseOverlay = document.getElementById('noiseOverlay');
+    const activeLayerLabel = document.getElementById('activeLayerLabel');
+    const toast = document.getElementById('toastMessage');
+    const toastText = document.getElementById('toastText');
+    const copyBtn = document.getElementById('copySummaryBtn');
+    const expandAllBtn = document.getElementById('expandAllBtn');
+
+    function resetOverlays() {
+      if (elaOverlay) elaOverlay.classList.add('opacity-0');
+      if (dctOverlay) dctOverlay.classList.add('opacity-0');
+      if (noiseOverlay) noiseOverlay.classList.add('opacity-0');
+      layerButtons.forEach(btn => {
+        btn.classList.remove('active', 'bg-surface-container-lowest', 'text-on-surface', 'font-semibold', 'shadow-sm');
+        btn.classList.add('text-on-surface-variant');
+      });
+    }
+
+    layerButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        resetOverlays();
+        const layer = button.getAttribute('data-layer');
+        button.classList.add('active', 'bg-surface-container-lowest', 'text-on-surface', 'font-semibold', 'shadow-sm');
+        button.classList.remove('text-on-surface-variant');
+
+        if (layer === 'rgb') {
+          activeLayerLabel.textContent = 'Original RGB (Unfiltered)';
+        } else if (layer === 'ela') {
+          if (elaOverlay) elaOverlay.classList.remove('opacity-0');
+          activeLayerLabel.textContent = 'Error Level Analysis (ELA 95%)';
+        } else if (layer === 'dct') {
+          if (dctOverlay) dctOverlay.classList.remove('opacity-0');
+          activeLayerLabel.textContent = 'Discrete Cosine Transform (DCT) Lattice';
+        } else if (layer === 'noise') {
+          if (noiseOverlay) noiseOverlay.classList.remove('opacity-0');
+          activeLayerLabel.textContent = 'High-Pass Spatial Noise Residuals';
+        }
+      });
+    });
+
+    function showToast(message) {
+      if (!toast) return;
+      toastText.textContent = message;
+      toast.classList.remove('translate-y-16', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-16', 'opacity-0');
+      }, 2500);
+    }
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const summary = "Secura AI Forensic Verdict: AI GENERATED (98.6% Synthetic Probability). Case #IMG-2024-8841. Model: Secura-Vision-Forensics v4.2.0. Status: Flagged High Priority.";
+        navigator.clipboard ? navigator.clipboard.writeText(summary) : null;
+        showToast("Forensic case summary copied to clipboard.");
+      });
+    }
+
+    if (expandAllBtn) {
+      let expanded = true;
+      expandAllBtn.addEventListener('click', () => {
+        const detailsList = document.querySelectorAll('details');
+        expanded = !expanded;
+        detailsList.forEach(detail => {
+          detail.open = expanded;
+        });
+        expandAllBtn.textContent = expanded ? 'Collapse All Sections' : 'Expand All Sections';
+      });
+    }
+  })();
+</script></main></div></body></html>

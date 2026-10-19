@@ -1,0 +1,167 @@
+{
+  "version": "2.0.0",
+  "created_at": "2026-10-18T12:40:00Z",
+  "models": {
+    "UniversalFakeDetect_probe": {
+      "type": "linear_probe",
+      "file": "fc_weights.pth",
+      "size_bytes": 4083,
+      "sha256": "477100745713bcc957beb2b40859536859b6483fd6301b3b9293151b194c7847",
+      "expected_sha256": "477100745713bcc957beb2b40859536859b6483fd6301b3b9293151b194c7847",
+      "verified": true,
+      "description": "UniversalFakeDetect CVPR 2023 linear classification probe (dim: 768)"
+    },
+    "SecuraCustom_probe": {
+      "type": "linear_probe",
+      "file": "custom_fc_weights.pth",
+      "size_bytes": 3318,
+      "sha256": "85bd1cf7d6c61ea851a28d5098e8b7d1187aeb8654deb5a183be8e1df7cc8259",
+      "verified": true,
+      "description": "SecuraCustom experimental adaptation probe"
+    },
+    "clip-vit-large-patch14": {
+      "type": "transformer_backbone",
+      "directory": "clip-vit-large-patch14",
+      "architecture": "CLIPVisionModelWithProjection (ViT-L/14)",
+      "license": "MIT",
+      "task": "Visual Representation Embedding Extraction",
+      "files": {
+        "config.json": {
+          "size_bytes": 4519,
+          "sha256": "8a09b467700c58138c29d53c605b34ebc69beaadd13274a8a2af8ad2c2f4032a"
+        },
+        "merges.txt": {
+          "size_bytes": 524619,
+          "sha256": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a"
+        },
+        "model.safetensors": {
+          "size_bytes": 1710540580,
+          "sha256": "a2bf730a0c7debf160f7a6b50b3aaf3703e7e88ac73de7a314903141db026dcb"
+        },
+        "preprocessor_config.json": {
+          "size_bytes": 316,
+          "sha256": "910e70b3956ac9879ebc90b22fb3bc8a75b6a0677814500101a4c072bd7857bd"
+        },
+        "special_tokens_map.json": {
+          "size_bytes": 389,
+          "sha256": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf"
+        },
+        "tokenizer.json": {
+          "size_bytes": 2224003,
+          "sha256": "a83e0809aa4c3af7208b2df632a7a69668c6d48775b3c3fe4e1b1199d1f8b8f4"
+        },
+        "tokenizer_config.json": {
+          "size_bytes": 905,
+          "sha256": "deef455e52fa5e8151e339add0582e4235f066009601360999d3a9cda83b1129"
+        },
+        "vocab.json": {
+          "size_bytes": 961143,
+          "sha256": "3f0c4f7d2086b61b38487075278ea9ed04edb53a03cbb045b86c27190fa8fb69"
+        }
+      },
+      "verified": true
+    },
+    "swin-ai-image-detector": {
+      "type": "transformer_backbone",
+      "directory": "swin-ai-image-detector",
+      "architecture": "SwinForImageClassification",
+      "license": "Apache-2.0",
+      "task": "Synthetic Image Artifact Detection",
+      "files": {
+        "model.safetensors": {
+          "size_bytes": 347498816,
+          "sha256": "aea31f822cb76aee2ee60950bc602dd4bf5ba5c4a444a27946a7da0017da72be"
+        },
+        "config.json": {
+          "size_bytes": 937,
+          "sha256": "481309324b2be14985f234183590c904ae650511b21356814cc52aebee96893f"
+        },
+        "preprocessor_config.json": {
+          "size_bytes": 240,
+          "sha256": "63ae741f85ba4dfcb1917ef808968baaad3a395dd8067e970c872d0e6ac05f3b"
+        }
+      },
+      "verified": true
+    },
+    "all-MiniLM-L6-v2": {
+      "type": "transformer_backbone",
+      "directory": "all-MiniLM-L6-v2",
+      "architecture": "BertModel",
+      "license": "Apache-2.0",
+      "task": "Government Policy Semantic Retrieval Embedding",
+      "files": {
+        "config.json": {
+          "size_bytes": 612,
+          "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41"
+        },
+        "config_sentence_transformers.json": {
+          "size_bytes": 116,
+          "sha256": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3"
+        },
+        "model.safetensors": {
+          "size_bytes": 90868376,
+          "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db"
+        },
+        "modules.json": {
+          "size_bytes": 349,
+          "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+        },
+        "README.md": {
+          "size_bytes": 10502,
+          "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0"
+        },
+        "sentence_bert_config.json": {
+          "size_bytes": 53,
+          "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7"
+        },
+        "special_tokens_map.json": {
+          "size_bytes": 112,
+          "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3"
+        },
+        "tokenizer.json": {
+          "size_bytes": 466247,
+          "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+        },
+        "tokenizer_config.json": {
+          "size_bytes": 350,
+          "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b"
+        },
+        "vocab.txt": {
+          "size_bytes": 231508,
+          "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+        },
+        "1_Pooling/config.json": {
+          "size_bytes": 190,
+          "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23"
+        }
+      },
+      "verified": true
+    },
+    "ReStraV_temporal_classifier": {
+      "type": "temporal_sequence_classifier",
+      "directory": "restrav_temporal",
+      "architecture": "ReStraVMLP (DINOv2 ViT-S/14 temporal geometry classifier)",
+      "license": "CC-BY-NC-4.0 (NeurIPS 2025 ReStraV)",
+      "task": "AI-Generated Video Sequence Classification",
+      "files": {
+        "calibration.json": {
+          "size_bytes": 451,
+          "sha256": "c312a53f197360e40fbb9668068ea9508eecb04f650d1cbdbfc6d75ea36aabdf"
+        },
+        "mean.npy": {
+          "size_bytes": 212,
+          "sha256": "a34e2ec1d47e3dbe24f5efa2d7b62c45616e5608d30ba87532347c5be887a660"
+        },
+        "restrav_mlp.pt": {
+          "size_bytes": 5509,
+          "sha256": "5f6481cc03aae484864fd1c796fbf16636f27b51c12c96857c7209eb9e9f3bca"
+        },
+        "std.npy": {
+          "size_bytes": 212,
+          "sha256": "dc92aae8da75d1aa297df15a1acb0b888e2c70fc0d50301b50021cbee596e8e8"
+        }
+      },
+      "verified": true
+    }
+  }
+}

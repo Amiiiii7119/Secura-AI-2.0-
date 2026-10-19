@@ -26,8 +26,11 @@ from app.services.video_forensics import analyze_video_stream
 
 logger = logging.getLogger(__name__)
 
-DB_PATH = Path("D:/SecuraAI2/data/secura_social.db")
-MEDIA_UPLOAD_DIR = Path("D:/SecuraAI2/data/media_uploads")
+# Portable data directory: SECURA_DATA_DIR env override (e.g. Railway volume) or repo-level data/ folder
+_BASE_DATA_DIR = Path(os.getenv("SECURA_DATA_DIR") or (Path(__file__).resolve().parent.parent.parent / "data"))
+DB_PATH = _BASE_DATA_DIR / "secura_social.db"
+MEDIA_UPLOAD_DIR = _BASE_DATA_DIR / "media_uploads"
+BASE_DATA_DIR = _BASE_DATA_DIR
 MEDIA_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 # Shared Policy Config

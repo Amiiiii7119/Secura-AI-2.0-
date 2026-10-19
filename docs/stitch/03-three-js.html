@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+<!-- STITCH_THREEJS_START:ANIMATION_20 class="fixed inset-0 w-full h-full bg-transparent" -->
+<div class="fixed inset-0 w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_20" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_20');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const width = container.clientWidth || 340;
+const height = container.clientHeight || 340;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
+// Camera placed at comfortable distance so geometry is contained cleanly within bounds without clipping or protruding
+camera.position.set(0, 0, 16.5);
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+container.appendChild(renderer.domElement);
+
+// Smooth, disciplined Cardioid curve shape
+const heartShape = new THREE.Shape();
+const x = 0, y = 0;
+heartShape.moveTo(x + 2.5, y + 2.5);
+heartShape.bezierCurveTo(x + 2.5, y + 2.5, x + 2.0, y, x, y);
+heartShape.bezierCurveTo(x - 3.0, y, x - 3.0, y + 3.5, x - 3.0, y + 3.5);
+heartShape.bezierCurveTo(x - 3.0, y + 5.5, x - 1.0, y + 7.7, x + 2.5, y + 9.5);
+heartShape.bezierCurveTo(x + 6.0, y + 7.7, x + 8.0, y + 5.5, x + 8.0, y + 3.5);
+heartShape.bezierCurveTo(x + 8.0, y + 3.5, x + 8.0, y, x + 5.0, y);
+heartShape.bezierCurveTo(x + 3.5, y, x + 2.5, y + 2.5, x + 2.5, y + 2.5);
+
+const points = heartShape.getSpacedPoints(180);
+const centeredPoints = points.map(p => new THREE.Vector3((p.x - 2.5), -(p.y - 4.8), 0));
+
+// Subtle, elegant extruded glass cardiac core
+const extrudeSettings = { 
+  depth: 0.85, 
+  bevelEnabled: true, 
+  bevelSegments: 6, 
+  steps: 2, 
+  bevelSize: 0.4, 
+  bevelThickness: 0.4 
+};
+const heartGeometry = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
+heartGeometry.center();
+
+const glassMaterial = new THREE.MeshPhysicalMaterial({
+  color: 0xfaf5ee,
+  metalness: 0.04,
+  roughness: 0.16,
+  transmission: 0.94,
+  thickness: 1.8,
+  transparent: true,
+  opacity: 0.85,
+  ior: 1.45,
+  reflectivity: 0.6,
+  clearcoat: 0.8,
+  clearcoatRoughness: 0.12
+});
+
+const heartGroup = new THREE.Group();
+// Scaled appropriately so it fits perfectly inside the canvas boundary without overflowing
+heartGroup.scale.set(0.68, 0.68, 0.68);
+scene.add(heartGroup);
+
+const heartMesh = new THREE.Mesh(heartGeometry, glassMaterial);
+heartMesh.rotation.z = Math.PI;
+heartGroup.add(heartMesh);
+
+// Function to create sleek, high-precision luminous optic ribbons
+function createSpectralRibbon(pts, offsetZ, hexColor, emissiveColor, radius, opacity) {
+  const curvePts = pts.map(p => new THREE.Vector3(p.x * 0.96, p.y * 0.96, offsetZ));
+  const curve = new THREE.CatmullRomCurve3(curvePts, true);
+  const geo = new THREE.TubeGeometry(curve, 180, radius, 12, true);
+  const mat = new THREE.MeshPhysicalMaterial({
+    color: hexColor,
+    emissive: emissiveColor,
+    emissiveIntensity: 0.7,
+    roughness: 0.25,
+    metalness: 0.1,
+    clearcoat: 0.8,
+    transparent: true,
+    opacity: opacity
+  });
+  return new THREE.Mesh(geo, mat);
+}
+
+// 3 RGB Spectral Harmonic Waveguides (R: Crimson 660nm, G: Bio Emerald 525nm, B: Studio Cyan 470nm)
+const redBand = createSpectralRibbon(centeredPoints, 0.32, 0xe04338, 0xd4382e, 0.07, 0.92);
+const greenBand = createSpectralRibbon(centeredPoints, 0.0, 0x22a053, 0x1d8a47, 0.08, 0.95);
+const blueBand = createSpectralRibbon(centeredPoints, -0.32, 0x0284c7, 0x0369a1, 0.07, 0.90);
+heartGroup.add(redBand);
+heartGroup.add(greenBand);
+heartGroup.add(blueBand);
+
+// Subdued optical data particles contained within orbit
+const particleCount = 42;
+const pGeo = new THREE.BufferGeometry();
+const pPos = new Float32Array(particleCount * 3);
+const pColors = new Float32Array(particleCount * 3);
+
+const appleRgbPalette = [
+  [0.88, 0.25, 0.22],
+  [0.13, 0.65, 0.35],
+  [0.08, 0.52, 0.85]
+];
+
+for(let i = 0; i < particleCount; i++) {
+  const theta = (i / particleCount) * Math.PI * 2;
+  const rad = 3.8 + (Math.sin(i * 3.1) * 0.4);
+  pPos[i*3] = Math.cos(theta) * rad;
+  pPos[i*3+1] = Math.sin(theta) * rad;
+  pPos[i*3+2] = (Math.cos(i * 2.1)) * 0.9;
+
+  const col = appleRgbPalette[i % 3];
+  pColors[i*3] = col[0];
+  pColors[i*3+1] = col[1];
+  pColors[i*3+2] = col[2];
+}
+pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+pGeo.setAttribute('color', new THREE.BufferAttribute(pColors, 3));
+
+const pMat = new THREE.PointsMaterial({
+  size: 0.12,
+  vertexColors: true,
+  transparent: true,
+  opacity: 0.65,
+  blending: THREE.AdditiveBlending
+});
+const particles = new THREE.Points(pGeo, pMat);
+heartGroup.add(particles);
+
+// Natural studio illumination
+const keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+keyLight.position.set(5, 7, 7);
+scene.add(keyLight);
+
+const rimLightWarm = new THREE.DirectionalLight(0xf59e0b, 1.2);
+rimLightWarm.position.set(-6, -4, 4);
+scene.add(rimLightWarm);
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
+scene.add(ambientLight);
+
+// Interactive smooth inertia pointer tracking
+let mouseX = 0, mouseY = 0;
+let targetX = 0, targetY = 0;
+
+function handleMove(e) {
+  const rect = container.getBoundingClientRect();
+  const clX = e.clientX || (e.touches && e.touches[0].clientX) || (rect.left + rect.width / 2);
+  const clY = e.clientY || (e.touches && e.touches[0].clientY) || (rect.top + rect.height / 2);
+  mouseX = ((clX - rect.left) / (rect.width || 1) - 0.5) * 2;
+  mouseY = ((clY - rect.top) / (rect.height || 1) - 0.5) * 2;
+}
+window.addEventListener('mousemove', handleMove, { passive: true });
+
+// Animation Loop: Subtle systolic/diastolic pulsation without bursting outward
+let clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  const bpm = 1.0;
+  const phase = (t * bpm) % 1.0;
+  let pulse = 0;
+  if (phase < 0.16) {
+    pulse = Math.sin((phase / 0.16) * Math.PI) * 0.05;
+  } else if (phase > 0.22 && phase < 0.36) {
+    pulse = Math.sin(((phase - 0.22) / 0.14) * Math.PI) * 0.02;
+  }
+
+  targetX += (mouseX * 0.25 - targetX) * 0.05;
+  targetY += (mouseY * 0.25 - targetY) * 0.05;
+
+  heartGroup.rotation.y = Math.sin(t * 0.35) * 0.16 + targetX;
+  heartGroup.rotation.x = Math.cos(t * 0.3) * 0.08 - targetY;
+  heartGroup.rotation.z = Math.sin(t * 0.25) * 0.03;
+
+  const currentScale = 0.68 * (1.0 + pulse);
+  heartMesh.scale.set(currentScale, currentScale, currentScale * (1.0 + pulse * 1.1));
+
+  redBand.scale.set(1.0 + pulse * 1.05, 1.0 + pulse * 1.05, 1.0);
+  greenBand.scale.set(1.0 + pulse * 1.15, 1.0 + pulse * 1.15, 1.0);
+  blueBand.scale.set(1.0 + pulse * 0.95, 1.0 + pulse * 0.95, 1.0);
+
+  particles.rotation.z = t * 0.12;
+  particles.rotation.y = t * 0.08;
+
+  renderer.render(scene, camera);
+}
+animate();
+
+const ro = new ResizeObserver(() => {
+  const w = container.clientWidth || 340;
+  const h = container.clientHeight || 340;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+});
+ro.observe(container);
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_20 -->
+</body>
+</html>
