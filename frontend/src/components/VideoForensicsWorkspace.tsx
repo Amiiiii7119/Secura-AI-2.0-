@@ -249,7 +249,27 @@ export const VideoForensicsWorkspace: React.FC<VideoForensicsWorkspaceProps> = (
     setIsDeepAnalyzingFrame(true);
     try {
       const videoVerdict = fusion?.final_classification || (videoResult.canonical_verdict?.predicted_label === "AI_GENERATED" ? "AI_GENERATED_VIDEO" : "REAL_CAPTURE");
-      const report = await analyzeVideoFrame(videoFile, timestamp, videoVerdict);
+      
+      let frameFile: File = videoFile;
+      if (videoRef.current) {
+        try {
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.min(1920, videoRef.current.videoWidth || 1280);
+          canvas.height = Math.round((canvas.width * (videoRef.current.videoHeight || 720)) / (videoRef.current.videoWidth || 1280));
+          const ctx = canvas.getContext("2d");
+          if (ctx) {
+            ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+            const blob = await new Promise<Blob | null>((res) => canvas.toBlob(res, "image/jpeg", 0.92));
+            if (blob) {
+              frameFile = new File([blob], `frame_${timestamp.toFixed(2)}s.jpg`, { type: "image/jpeg" });
+            }
+          }
+        } catch {
+          // fallback to videoFile
+        }
+      }
+      
+      const report = await analyzeVideoFrame(frameFile, timestamp, videoVerdict);
       setFrameAnalysisResult(report);
     } catch (err: any) {
       alert("Failed deep image analysis on selected frame: " + err.message);
@@ -930,28 +950,32 @@ export const VideoForensicsWorkspace: React.FC<VideoForensicsWorkspaceProps> = (
                     className={`filmstrip-tile ${isSelected ? "selected" : ""}`}
                     onClick={() => seekToSample(frame)}
                   >
-                    {frame.thumbnail_data_url ? (
-                      <img
-                        src={frame.thumbnail_data_url}
-                        alt={`Frame ${idx}`}
-                        style={{ width: "100%", height: 64, objectFit: "cover" }}
-                      />
-                    ) : (
-                      <div
-                        style={{
-                          width: "100%",
-                          height: 64,
-                          backgroundColor: "var(--bg-surface-secondary)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontSize: 10,
-                          color: "var(--text-secondary)",
-                        }}
-                      >
-                        #{idx}
-                      </div>
-                    )}
+                    {(() => {
+                      const thumbSrc = frame.thumbnail_data_url || (frame as any).thumbnail_b64;
+                      return thumbSrc ? (
+                        <img
+                          src={thumbSrc}
+                          alt={`Frame ${idx}`}
+                          style={{ width: "100%", height: 64, objectFit: "cover", display: "block", borderRadius: 4 }}
+                        />
+                      ) : (
+                        <div
+                          style={{
+                            width: "100%",
+                            height: 64,
+                            backgroundColor: "var(--bg-surface-secondary)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: 11,
+                            fontWeight: 600,
+                            color: "var(--text-secondary)",
+                          }}
+                        >
+                          Frame #{idx}
+                        </div>
+                      );
+                    })()}
                     <div style={{ padding: "6px 8px", display: "flex", flexDirection: "column", gap: 2 }}>
                       <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--text-secondary)" }}>
                         {frameTime.toFixed(2)}s

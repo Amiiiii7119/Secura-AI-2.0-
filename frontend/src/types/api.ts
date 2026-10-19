@@ -397,6 +397,8 @@ export interface RGBFrameSample {
   b_std: number;
   delta_prev_frame: number;
   thumbnail_data_url?: string | null;
+  thumbnail_b64?: string | null;
+  heart_rate_bpm?: number | null;
   ai_probability?: number | null;
   ai_class?: string | null;
   sensor_noise_variance?: number | null;
@@ -410,6 +412,8 @@ export interface RGBSummary {
   gb_correlation: number;
   temporal_jitter_index: number;
   dominant_pulse_hz?: number | null;
+  estimated_heart_rate_bpm?: number | null;
+  spectral_entropy?: number | null;
 }
 
 export interface VideoAIVerdict {

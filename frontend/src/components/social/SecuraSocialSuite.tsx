@@ -1282,7 +1282,7 @@ const RealInstagramClient: React.FC<{
 
                   {/* Pre-publication scan note */}
                   <div style={{ fontSize: "0.74rem", color: "#94A3B8", display: "flex", alignItems: "center", gap: "6px" }}>
-                    <span>🛡️</span> Content will be inspected by {selectedFile && (selectedFile.type.startsWith("video/") || selectedFile.name.match(/\.(mp4|webm|avi|mov|mkv)$/i)) ? "Secura Multi-Branch Video Forensics (v2.0.0-video)" : "UniversalFakeDetect-CLIP-ViT-L/14 (v2.0.0)"} before publishing.
+                    <span>🛡️</span> Content will be inspected by {selectedFile && (selectedFile.type.startsWith("video/") || selectedFile.name.match(/\.(mp4|webm|avi|mov|mkv)$/i)) ? "Secura Multi-Branch Video Forensics" : "UniversalFakeDetect-CLIP-ViT-L/14"} before publishing.
                   </div>
                 </div>
               )}

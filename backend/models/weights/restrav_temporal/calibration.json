@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "architecture": "ReStraVMLP(in_dim=21, h=32, out_dim=1)",
+  "backbone": "facebook/dinov2-small",
+  "feature_dim": 21,
+  "target_semantics": "P(AI) [1=AI, 0=REAL]",
+  "input_normalization": "StandardScaler(mean.npy, std.npy)",
+  "operating_threshold_ai": 0.5,
+  "operating_threshold_real": 0.5,
+  "training": {
+    "train_val_samples": 18,
+    "test_samples": 7,
+    "train_val_accuracy": 1.0,
+    "test_accuracy": 1.0
+  }
+}
